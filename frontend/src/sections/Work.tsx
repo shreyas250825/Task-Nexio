@@ -1,137 +1,88 @@
 import { ArrowUpRight } from 'lucide-react';
 import { PRODUCTS } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
-import { SectionLabel } from '../components/SectionLabel';
 
-// ─── Valen Labs large showcase ─────────────────────────────────────────────
+const INK   = '#171717';
+const BLUE  = '#294FFF';
+const TEAL  = '#0D9488';
+const MUTED = '#737373';
+const RULE  = '#D8D4CC';
+const IVORY = '#F6F3EC';
+const CHART = '#D6FF66';
+
+/* ─── Valen Labs showcase ────────────────────────────────────────── */
 function ValenLabsShowcase() {
   return (
     <div
-      className="relative w-full rounded-2xl overflow-hidden shadow-product card-lift"
-      style={{ background: '#0A0D14', minHeight: 500 }}
+      className="bracket-frame card-lift"
+      style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 32px 80px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.08)' }}
       aria-hidden="true"
     >
       {/* Chrome */}
-      <div
-        className="flex items-center gap-1.5 px-5 py-3.5 border-b"
-        style={{ borderColor: 'rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}
-      >
-        {['rgba(255,68,58,0.7)', 'rgba(255,189,46,0.7)', 'rgba(40,200,64,0.7)'].map((c, i) => (
-          <div key={i} className="w-3 h-3 rounded-full" style={{ background: c }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '11px 16px', background: '#0E1020', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        {['rgba(255,68,58,0.75)', 'rgba(255,189,46,0.75)', 'rgba(40,200,64,0.75)'].map((c, i) => (
+          <div key={i} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
         ))}
-        <div
-          className="flex-1 mx-4 h-6 rounded flex items-center gap-2 px-3"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />
-          <span className="text-[10px] font-mono" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            valenlabs.in
-          </span>
-        </div>
-        <div className="flex gap-1.5">
-          <div className="w-5 h-5 rounded" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <div className="w-5 h-5 rounded" style={{ background: 'rgba(255,255,255,0.06)' }} />
+        <div style={{ flex: 1, marginLeft: 8, height: 24, borderRadius: 4, background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 12px', gap: 6 }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ADE80' }} />
+          <span style={{ fontFamily: 'monospace', fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>valenlabs.in</span>
         </div>
       </div>
 
-      {/* Page content */}
-      <div className="px-8 pt-10 pb-12">
+      {/* Page */}
+      <div style={{ background: '#0A0D17', padding: '28px 28px 32px' }}>
         {/* Nav */}
-        <div className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-md" style={{ background: '#2563EB' }} />
-            <div className="h-3 w-24 rounded" style={{ background: 'rgba(255,255,255,0.25)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 26, height: 26, borderRadius: 6, background: BLUE }} />
+            <div style={{ height: 11, width: 88, borderRadius: 3, background: 'rgba(255,255,255,0.24)' }} />
           </div>
-          <div className="hidden sm:flex items-center gap-6">
-            {[52, 44, 56, 40, 48].map((w, i) => (
-              <div key={i} className="h-2 rounded" style={{ width: w, background: 'rgba(255,255,255,0.12)' }} />
+          <div style={{ display: 'flex', gap: 20 }}>
+            {[52, 44, 58, 40, 48].map((w, i) => (
+              <div key={i} style={{ height: 8, width: w, borderRadius: 3, background: 'rgba(255,255,255,0.11)' }} />
             ))}
           </div>
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-20 rounded-md" style={{ border: '1px solid rgba(255,255,255,0.12)' }} />
-            <div className="h-8 w-24 rounded-md" style={{ background: '#2563EB' }} />
+          <div style={{ display: 'flex', gap: 8 }}>
+            <div style={{ height: 32, width: 72, borderRadius: 5, border: '1px solid rgba(255,255,255,0.12)' }} />
+            <div style={{ height: 32, width: 96, borderRadius: 5, background: BLUE }} />
           </div>
         </div>
 
-        {/* Hero area */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-5">
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full"
-              style={{ background: 'rgba(37,99,235,0.12)', border: '1px solid rgba(37,99,235,0.25)' }}
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-              <span className="text-[10px] font-semibold tracking-wide" style={{ color: '#60A5FA' }}>
-                AI & Technology Platform
-              </span>
+        {/* Hero content */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 0.55fr', gap: 24, alignItems: 'start' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '5px 12px', borderRadius: 20, background: 'rgba(41,79,255,0.14)', border: '1px solid rgba(41,79,255,0.28)', width: 'fit-content' }}>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#6B86FF' }} />
+              <span style={{ fontSize: 10, fontWeight: 600, color: '#6B86FF', letterSpacing: '0.06em' }}>AI & Engineering Platform</span>
             </div>
-
-            {/* Headline */}
-            <div className="space-y-3">
-              <div className="h-10 rounded-md" style={{ width: '90%', background: 'rgba(255,255,255,0.8)' }} />
-              <div className="h-10 rounded-md" style={{ width: '75%', background: 'rgba(255,255,255,0.65)' }} />
-              <div className="h-10 rounded-md" style={{ width: '55%', background: 'rgba(255,255,255,0.45)' }} />
-            </div>
-
-            {/* Body */}
-            <div className="space-y-2">
-              <div className="h-3 rounded" style={{ width: '95%', background: 'rgba(255,255,255,0.15)' }} />
-              <div className="h-3 rounded" style={{ width: '80%', background: 'rgba(255,255,255,0.12)' }} />
-              <div className="h-3 rounded" style={{ width: '65%', background: 'rgba(255,255,255,0.10)' }} />
-            </div>
-
-            {/* CTAs */}
-            <div className="flex gap-3 pt-2">
-              <div className="h-11 w-36 rounded-md" style={{ background: '#2563EB' }} />
-              <div className="h-11 w-28 rounded-md" style={{ border: '1px solid rgba(255,255,255,0.15)' }} />
+            <div style={{ height: 34, width: '92%', borderRadius: 5, background: 'rgba(255,255,255,0.78)' }} />
+            <div style={{ height: 34, width: '72%', borderRadius: 5, background: 'rgba(255,255,255,0.58)' }} />
+            <div style={{ height: 34, width: '52%', borderRadius: 5, background: 'rgba(255,255,255,0.38)' }} />
+            <div style={{ height: 11, width: '88%', borderRadius: 3, background: 'rgba(255,255,255,0.14)', marginTop: 4 }} />
+            <div style={{ height: 11, width: '66%', borderRadius: 3, background: 'rgba(255,255,255,0.10)' }} />
+            <div style={{ display: 'flex', gap: 10, marginTop: 12 }}>
+              <div style={{ height: 40, width: 120, borderRadius: 6, background: BLUE }} />
+              <div style={{ height: 40, width: 96, borderRadius: 6, border: '1px solid rgba(255,255,255,0.14)' }} />
             </div>
           </div>
-
-          {/* Right side abstract visual */}
-          <div className="hidden md:block">
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { h: 80, label: 'AI Products', accent: '#2563EB' },
-                { h: 60, label: 'Integrations', accent: '#60A5FA' },
-                { h: 70, label: 'Deployments', accent: '#3B82F6' },
-                { h: 55, label: 'Platforms',   accent: '#93C5FD' },
-              ].map((card) => (
-                <div
-                  key={card.label}
-                  className="rounded-xl p-4 space-y-3"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-                >
-                  <div
-                    className="w-8 h-8 rounded-lg"
-                    style={{ background: `${card.accent}25` }}
-                  />
-                  <div>
-                    <div className="h-5 rounded" style={{ width: `${card.h}%`, background: `${card.accent}60` }} />
-                    <div className="h-2 w-20 rounded mt-2" style={{ background: 'rgba(255,255,255,0.12)' }} />
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {[BLUE, '#5870FF', '#3D5AFF', '#6B86FF'].map((c, i) => (
+              <div key={i} style={{ borderRadius: 8, padding: '12px 14px', background: `${c}16`, border: `1px solid ${c}28` }}>
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: `${c}30`, marginBottom: 8 }} />
+                <div style={{ height: 9, width: '72%', borderRadius: 3, background: `${c}70`, marginBottom: 5 }} />
+                <div style={{ height: 7, width: '55%', borderRadius: 3, background: `${c}40` }} />
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Stats strip */}
-        <div
-          className="mt-10 grid grid-cols-3 gap-px rounded-xl overflow-hidden"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
-        >
-          {[
-            ['Digital', 'Solutions'],
-            ['AI-first', 'Architecture'],
-            ['Production', 'Deployments'],
-          ].map(([a, b], i) => (
-            <div key={i} className="px-5 py-4" style={{ background: '#0A0D14' }}>
-              <div className="h-3 w-20 rounded mb-1.5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-              <div className="h-2 w-24 rounded" style={{ background: 'rgba(255,255,255,0.12)' }} />
-              <div className="mt-2 text-[8px]" style={{ color: 'rgba(255,255,255,0.15)' }}>
-                {a} · {b}
-              </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, marginTop: 20, background: 'rgba(255,255,255,0.05)', borderRadius: 8, overflow: 'hidden' }}>
+          {['Digital Solutions', 'AI Architecture', 'Production Ready'].map((label) => (
+            <div key={label} style={{ padding: '12px 14px', background: '#0A0D17' }}>
+              <div style={{ height: 11, width: '68%', borderRadius: 3, background: 'rgba(255,255,255,0.28)', marginBottom: 5 }} />
+              <div style={{ height: 8, width: '80%', borderRadius: 3, background: 'rgba(255,255,255,0.12)', marginBottom: 4 }} />
+              <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.18)', fontFamily: 'monospace' }}>{label}</div>
             </div>
           ))}
         </div>
@@ -140,134 +91,88 @@ function ValenLabsShowcase() {
   );
 }
 
-// ─── Valen Live showcase ───────────────────────────────────────────────────────
+/* ─── Valen Live showcase ─────────────────────────────────────────── */
 function ValenLiveShowcase() {
   return (
     <div
-      className="w-full rounded-2xl overflow-hidden shadow-product card-lift"
-      style={{ background: '#FAFFFE', border: '1px solid #E0F2F0', minHeight: 460 }}
+      style={{ borderRadius: 12, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)', border: '1px solid #E0F2F0' }}
       aria-hidden="true"
     >
       {/* Chrome */}
-      <div className="flex items-center gap-1.5 px-5 py-3 border-b" style={{ borderColor: '#E0F2F0', background: '#F0FDFA' }}>
-        {['rgba(255,68,58,0.6)', 'rgba(255,189,46,0.6)', 'rgba(40,200,64,0.6)'].map((c, i) => (
-          <div key={i} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 14px', background: '#F0FDFA', borderBottom: '1px solid #E0F2F0' }}>
+        {['rgba(255,68,58,0.65)', 'rgba(255,189,46,0.65)', 'rgba(40,200,64,0.65)'].map((c, i) => (
+          <div key={i} style={{ width: 11, height: 11, borderRadius: '50%', background: c }} />
         ))}
-        <div
-          className="flex-1 mx-4 h-5 rounded flex items-center gap-1.5 px-3"
-          style={{ background: 'rgba(0,0,0,0.04)' }}
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />
-          <span className="text-[9px] font-mono text-ink-40">valen.live</span>
+        <div style={{ flex: 1, marginLeft: 8, height: 22, borderRadius: 3, background: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', padding: '0 10px', gap: 5 }}>
+          <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#4ADE80' }} />
+          <span style={{ fontFamily: 'monospace', fontSize: 9, color: MUTED }}>valen.live</span>
         </div>
       </div>
 
       {/* App shell */}
-      <div className="flex h-[400px]">
+      <div style={{ display: 'flex', background: '#FFFFFF', minHeight: 360 }}>
         {/* Sidebar */}
-        <div className="w-52 border-r flex-shrink-0 p-4" style={{ borderColor: '#E0F2F0', background: '#F0FDFA' }}>
-          {/* Brand */}
-          <div className="flex items-center gap-2 mb-6 px-1">
-            <div className="w-6 h-6 rounded-md" style={{ background: '#0D9488' }} />
-            <div className="h-2.5 w-20 rounded bg-teal-800/20" />
+        <div style={{ width: 196, borderRight: '1px solid #F0F0EE', background: '#FAFDF9', padding: '16px 12px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '0 4px', marginBottom: 20 }}>
+            <div style={{ width: 22, height: 22, borderRadius: 5, background: TEAL }} />
+            <div style={{ height: 10, width: 64, borderRadius: 3, background: 'rgba(13,148,136,0.3)' }} />
           </div>
-          {/* Navigation items */}
           {[
-            { label: 'Dashboard',      active: true,  w: 64 },
-            { label: 'Interview Prep', active: false, w: 80 },
-            { label: 'Code Practice',  active: false, w: 72 },
-            { label: 'Assessments',    active: false, w: 68 },
-            { label: 'Progress',       active: false, w: 52 },
-            { label: 'Resources',      active: false, w: 60 },
+            { l: 'Dashboard',      a: true },
+            { l: 'Interview Prep', a: false },
+            { l: 'Code Practice',  a: false },
+            { l: 'Assessments',    a: false },
+            { l: 'Progress',       a: false },
           ].map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg mb-1 cursor-default"
-              style={{
-                background:   item.active ? 'rgba(13,148,136,0.12)' : 'transparent',
-                border:       item.active ? '1px solid rgba(13,148,136,0.2)' : '1px solid transparent',
-              }}
-            >
-              <div
-                className="w-3.5 h-3.5 rounded-sm flex-shrink-0"
-                style={{ background: item.active ? '#0D9488' : '#C8C8C6' }}
-              />
-              <div
-                className="h-2 rounded-sm"
-                style={{
-                  width: item.w,
-                  background: item.active ? '#0D9488' : '#C8C8C6',
-                  opacity: item.active ? 1 : 0.7,
-                }}
-              />
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 10px', borderRadius: 6, marginBottom: 2, background: item.a ? 'rgba(13,148,136,0.1)' : 'transparent', border: item.a ? '1px solid rgba(13,148,136,0.18)' : '1px solid transparent' }}>
+              <div style={{ width: 14, height: 14, borderRadius: 3, background: item.a ? TEAL : '#D8D4CC', flexShrink: 0 }} />
+              <div style={{ height: 9, flex: 1, borderRadius: 3, background: item.a ? TEAL : '#D8D4CC', opacity: item.a ? 1 : 0.65 }} />
             </div>
           ))}
         </div>
 
-        {/* Main content */}
-        <div className="flex-1 p-5 space-y-4 overflow-hidden bg-white">
+        {/* Main */}
+        <div style={{ flex: 1, padding: '20px 20px', overflow: 'hidden' }}>
           {/* Header */}
-          <div className="flex items-start justify-between">
-            <div className="space-y-1.5">
-              <div className="h-2.5 w-28 rounded bg-ink-10" />
-              <div className="h-6 w-52 rounded bg-ink-80" />
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
+            <div>
+              <div style={{ height: 10, width: 96, borderRadius: 3, background: '#E2E2E0', marginBottom: 8 }} />
+              <div style={{ height: 18, width: 180, borderRadius: 4, background: INK }} />
             </div>
-            <div className="flex gap-2">
-              <div className="h-8 w-24 rounded-md" style={{ border: '1px solid #E0E0DE' }} />
-              <div className="h-8 w-28 rounded-md" style={{ background: '#0D9488' }} />
+            <div style={{ display: 'flex', gap: 8 }}>
+              <div style={{ height: 32, width: 80, borderRadius: 5, border: `1px solid ${RULE}` }} />
+              <div style={{ height: 32, width: 100, borderRadius: 5, background: TEAL }} />
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-3">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginBottom: 14 }}>
             {[
-              { v: '24', l: 'Sessions',    bg: '#F0FDFA', border: '#99F6E4', tc: '#0D9488' },
-              { v: '7d', l: 'Day Streak',  bg: '#EFF6FF', border: '#BFDBFE', tc: '#2563EB' },
-              { v: '84%',l: 'Avg. Score',  bg: '#FFFBEB', border: '#FDE68A', tc: '#D97706' },
+              { v: '24', l: 'Sessions', bg: '#F0FDFA', bd: '#99F6E4', c: TEAL },
+              { v: '7d', l: 'Streak',   bg: '#EFF6FF', bd: '#BFDBFE', c: BLUE },
+              { v: '84%',l: 'Score',    bg: '#FFFBEB', bd: '#FDE68A', c: '#D97706' },
             ].map((s) => (
-              <div
-                key={s.l}
-                className="rounded-xl p-3.5"
-                style={{ background: s.bg, border: `1px solid ${s.border}` }}
-              >
-                <div className="text-lg font-bold tracking-tight" style={{ color: s.tc }}>{s.v}</div>
-                <div className="text-[9px] mt-0.5 text-ink-40">{s.l}</div>
+              <div key={s.l} style={{ borderRadius: 10, padding: '12px 14px', background: s.bg, border: `1px solid ${s.bd}` }}>
+                <div style={{ fontSize: 18, fontWeight: 700, color: s.c, fontFamily: 'Inter, sans-serif' }}>{s.v}</div>
+                <div style={{ fontSize: 9, color: MUTED, marginTop: 2 }}>{s.l}</div>
               </div>
             ))}
           </div>
 
-          {/* Recent sessions */}
-          <div className="rounded-xl border overflow-hidden" style={{ borderColor: '#E8E8E6' }}>
-            <div className="px-4 py-2.5 border-b bg-ink-5" style={{ borderColor: '#E8E8E6' }}>
-              <div className="h-2.5 w-28 rounded bg-ink-20" />
+          {/* Sessions list */}
+          <div style={{ borderRadius: 10, border: '1px solid #EAEAE8', overflow: 'hidden', background: '#FFF' }}>
+            <div style={{ padding: '10px 14px', background: '#F8F8F6', borderBottom: '1px solid #EAEAE8' }}>
+              <div style={{ height: 10, width: 112, borderRadius: 3, background: '#D8D4CC' }} />
             </div>
-            {[
-              { score: 90, width: 80 },
-              { score: 76, width: 68 },
-              { score: 83, width: 74 },
-              { score: 68, width: 60 },
-            ].map((row, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 px-4 py-3 border-b last:border-0"
-                style={{ borderColor: '#F0EFED' }}
-              >
-                <div
-                  className="w-7 h-7 rounded-lg flex-shrink-0"
-                  style={{ background: `rgba(13,148,136,${0.06 + i * 0.03})` }}
-                />
-                <div className="flex-1 space-y-1 min-w-0">
-                  <div className="h-2 rounded bg-ink-10" style={{ width: `${row.width}%` }} />
-                  <div className="h-1.5 rounded bg-ink-10" style={{ width: `${row.width - 15}%`, opacity: 0.6 }} />
+            {[90, 76, 83, 68].map((score, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderBottom: i < 3 ? '1px solid #F4F4F2' : 'none' }}>
+                <div style={{ width: 28, height: 28, borderRadius: 7, background: `rgba(13,148,136,${0.07 + i * 0.03})`, flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ height: 9, width: `${58 + i * 9}%`, borderRadius: 3, background: '#E2E2E0', marginBottom: 4 }} />
+                  <div style={{ height: 7, width: `${42 + i * 7}%`, borderRadius: 3, background: '#EAEAE8' }} />
                 </div>
-                <div
-                  className="text-[9px] font-semibold px-2 py-1 rounded-md flex-shrink-0 tabular"
-                  style={{
-                    color:      row.score >= 80 ? '#0D9488' : '#D97706',
-                    background: row.score >= 80 ? '#F0FDFA' : '#FFFBEB',
-                  }}
-                >
-                  {row.score}%
+                <div style={{ fontSize: 10, fontWeight: 700, padding: '3px 7px', borderRadius: 4, color: score >= 80 ? TEAL : '#D97706', background: score >= 80 ? '#F0FDFA' : '#FFFBEB', fontFamily: 'monospace' }}>
+                  {score}%
                 </div>
               </div>
             ))}
@@ -278,144 +183,106 @@ function ValenLiveShowcase() {
   );
 }
 
-// ─── Work section ─────────────────────────────────────────────────────────────
+const visuals = [ValenLabsShowcase, ValenLiveShowcase];
+
+/* ─── Work section ───────────────────────────────────────────────── */
 export function Work() {
   return (
-    <section id="work" className="bg-canvas py-28 md:py-36" aria-labelledby="work-heading">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="work" style={{ background: IVORY, paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="work-heading">
+      <div className="container">
 
         {/* Header */}
         <RevealWrapper>
-          <div className="mb-20">
-            <SectionLabel>Our Work</SectionLabel>
-            <h2
-              id="work-heading"
-              className="mt-4 font-display text-balance text-ink"
-              style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', lineHeight: 1.1, letterSpacing: '-0.035em' }}
-            >
-              Real products.{' '}
-              <span className="text-ink-40">Real engineering.</span>
+          <div style={{ marginBottom: '4rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.25rem' }}>
+              <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
+              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>Our Work</span>
+            </div>
+            <h2 className="text-section" style={{ margin: '0 0 1rem' }}>
+              Ideas are only<br />the beginning.
             </h2>
-            <p className="mt-4 text-lg text-ink-60 max-w-2xl leading-relaxed">
-              Our work reflects how we approach technology: understand the problem, design
-              the experience, and engineer the product. These are live Valen Labs properties.
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.0625rem', lineHeight: 1.7, color: '#525252', maxWidth: 520, margin: 0 }}>
+              We build real products. These are live properties from Valen Labs — designed,
+              engineered, and shipped.
             </p>
           </div>
         </RevealWrapper>
 
-        {/* Product 01 — Valen Labs */}
-        <RevealWrapper>
-          <article className="mb-28">
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-              {/* Window — 3 cols */}
-              <div className="lg:col-span-3">
-                <ValenLabsShowcase />
-              </div>
+        {/* Products */}
+        {PRODUCTS.map((product, i) => {
+          const Visual = visuals[i];
+          const isOdd  = i % 2 !== 0;
+          const accent = i === 0 ? BLUE : TEAL;
 
-              {/* Copy — 2 cols */}
-              <div className="lg:col-span-2 space-y-6">
-                <div className="flex items-baseline gap-4">
-                  <span
-                    className="font-display tabular"
-                    style={{ fontSize: '4rem', lineHeight: 1, letterSpacing: '-0.05em', color: '#E2E2E0' }}
-                  >
-                    01
-                  </span>
-                  <div className="h-px flex-1 bg-ink-10" />
-                </div>
-                <div>
-                  <p className="text-2xs font-semibold tracking-widest uppercase text-blue-600 mb-2">
-                    {PRODUCTS[0].category}
-                  </p>
-                  <h3
-                    className="font-display text-ink"
-                    style={{ fontSize: '2.25rem', lineHeight: 1.15, letterSpacing: '-0.03em' }}
-                  >
-                    {PRODUCTS[0].title}
-                  </h3>
-                </div>
-                <p className="text-ink-60 leading-relaxed">{PRODUCTS[0].description}</p>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-ink-20 border border-ink-10 rounded px-2 py-1">
-                    {PRODUCTS[0].displayUrl}
-                  </span>
-                  <span className="text-xs text-green-500 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-                    Live
-                  </span>
-                </div>
-                <a
-                  href={PRODUCTS[0].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 group transition-colors"
+          return (
+            <RevealWrapper key={product.id} delay={60}>
+              <article style={{ marginBottom: i < PRODUCTS.length - 1 ? '5rem' : 0 }}>
+                <hr className="rule-x" style={{ marginBottom: '5rem' }} />
+
+                <div
+                  style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(2rem, 5vw, 5rem)', alignItems: 'center' }}
+                  className={`work-grid${i}`}
                 >
-                  {PRODUCTS[0].cta}
-                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
-          </article>
-        </RevealWrapper>
+                  {/* Visual */}
+                  <div style={{ order: isOdd ? 2 : 1 }}>
+                    <Visual />
+                  </div>
 
-        {/* Divider */}
-        <div className="divider-x mb-28" />
+                  {/* Copy */}
+                  <div style={{ order: isOdd ? 1 : 2, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                    {/* Index number — signature motif */}
+                    <div className="index-num">{product.index}</div>
 
-        {/* Product 02 — Valen Live */}
-        <RevealWrapper>
-          <article>
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center lg:grid-flow-dense">
-              {/* Copy — 2 cols, starts col 1 on desktop */}
-              <div className="lg:col-span-2 lg:col-start-1 space-y-6">
-                <div className="flex items-baseline gap-4">
-                  <span
-                    className="font-display tabular"
-                    style={{ fontSize: '4rem', lineHeight: 1, letterSpacing: '-0.05em', color: '#E2E2E0' }}
-                  >
-                    02
-                  </span>
-                  <div className="h-px flex-1 bg-ink-10" />
-                </div>
-                <div>
-                  <p className="text-2xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0D9488' }}>
-                    {PRODUCTS[1].category}
-                  </p>
-                  <h3
-                    className="font-display text-ink"
-                    style={{ fontSize: '2.25rem', lineHeight: 1.15, letterSpacing: '-0.03em' }}
-                  >
-                    {PRODUCTS[1].title}
-                  </h3>
-                </div>
-                <p className="text-ink-60 leading-relaxed">{PRODUCTS[1].description}</p>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-ink-20 border border-ink-10 rounded px-2 py-1">
-                    {PRODUCTS[1].displayUrl}
-                  </span>
-                  <span className="text-xs text-green-500 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-                    Live
-                  </span>
-                </div>
-                <a
-                  href={PRODUCTS[1].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold group transition-colors"
-                  style={{ color: '#0D9488' }}
-                >
-                  {PRODUCTS[1].cta}
-                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
+                    <div>
+                      <span style={{ display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '0.75rem' }}>
+                        {product.category}
+                      </span>
+                      <h3 className="font-display" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '-0.025em', color: INK, margin: 0 }}>
+                        {product.title}
+                      </h3>
+                    </div>
 
-              {/* Window — 3 cols, starts col 3 */}
-              <div className="lg:col-span-3 lg:col-start-3">
-                <ValenLiveShowcase />
-              </div>
-            </div>
-          </article>
-        </RevealWrapper>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', lineHeight: 1.7, color: '#525252', margin: 0 }}>
+                      {product.description}
+                    </p>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <code style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: MUTED, background: '#EDE9DF', padding: '3px 8px', borderRadius: 3 }}>
+                        {product.displayUrl}
+                      </code>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#22C55E', fontFamily: 'Inter, sans-serif' }}>
+                        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block' }} />
+                        Live
+                      </span>
+                    </div>
+
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'Inter, sans-serif', fontSize: '0.9375rem', fontWeight: 600, color: accent, textDecoration: 'none', transition: 'gap 0.15s ease' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '10px'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = '6px'; }}
+                    >
+                      {product.cta}
+                      <ArrowUpRight size={16} />
+                    </a>
+                  </div>
+                </div>
+              </article>
+              {/* Mobile layout */}
+              <style>{`
+                @media (max-width: 767px) {
+                  .work-grid${i} {
+                    grid-template-columns: 1fr !important;
+                  }
+                  .work-grid${i} > *:first-child { order: 1 !important; }
+                  .work-grid${i} > *:last-child  { order: 2 !important; }
+                }
+              `}</style>
+            </RevealWrapper>
+          );
+        })}
       </div>
     </section>
   );

@@ -1,114 +1,90 @@
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowUpRight, ArrowDown } from 'lucide-react';
 
-// ─── Valen Labs dark window ───────────────────────────────────────────────────
+const INK     = '#171717';
+const BLUE    = '#294FFF';
+const MUTED   = '#737373';
+const FAINT   = '#A0A0A0';
+const IVORY   = '#F6F3EC';
+const CHART   = '#D6FF66';
+const RULE    = '#D8D4CC';
+
+/* ─── Valen Labs dark window ───────────────────────────────────────── */
 function ValenLabsWindow() {
   return (
     <div
-      className="relative w-full rounded-2xl overflow-hidden card-lift shadow-product"
-      style={{ background: '#0A0D14' }}
+      className="bracket-frame card-lift"
+      style={{
+        borderRadius: 12,
+        overflow: 'hidden',
+        background: '#0C0E17',
+        boxShadow: '0 24px 64px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.12)',
+      }}
       aria-hidden="true"
     >
-      {/* Chrome */}
-      <div
-        className="flex items-center gap-1.5 px-5 py-3.5 border-b"
-        style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-      >
-        <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255,68,58,0.7)' }} />
-        <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255,189,46,0.7)' }} />
-        <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(40,200,64,0.7)' }} />
-        <div
-          className="flex-1 mx-4 flex items-center gap-2 h-6 rounded px-3"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
-        >
-          <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#4ADE80' }} />
-          <span
-            className="text-[9px] font-mono"
-            style={{ color: 'rgba(255,255,255,0.35)' }}
-          >
-            valenlabs.in
-          </span>
+      {/* Chrome bar */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 14px', background: 'rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,68,58,0.75)' }} />
+        <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(255,189,46,0.75)' }} />
+        <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'rgba(40,200,64,0.75)' }} />
+        <div style={{ flex: 1, marginLeft: 8, height: 22, borderRadius: 4, background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', padding: '0 10px', gap: 6 }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ADE80' }} />
+          <span style={{ fontFamily: 'monospace', fontSize: 9, color: 'rgba(255,255,255,0.3)' }}>valenlabs.in</span>
         </div>
       </div>
 
-      {/* Body */}
-      <div className="px-6 pt-8 pb-10">
-        {/* Navbar */}
-        <div className="flex items-center justify-between mb-10">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-md" style={{ background: '#2563EB' }} />
-            <div className="h-3 w-20 rounded-sm" style={{ background: 'rgba(255,255,255,0.25)' }} />
+      {/* Page */}
+      <div style={{ padding: '20px 22px 24px' }}>
+        {/* Nav */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 22, height: 22, borderRadius: 5, background: BLUE }} />
+            <div style={{ height: 10, width: 72, borderRadius: 3, background: 'rgba(255,255,255,0.22)' }} />
           </div>
-          <div className="hidden sm:flex items-center gap-5">
-            {[52, 44, 56, 40].map((w, i) => (
-              <div key={i} className="h-2 rounded" style={{ width: w, background: 'rgba(255,255,255,0.12)' }} />
+          <div style={{ display: 'flex', gap: 16 }}>
+            {[48, 38, 52, 36].map((w, i) => (
+              <div key={i} style={{ height: 8, width: w, borderRadius: 3, background: 'rgba(255,255,255,0.1)' }} />
             ))}
           </div>
-          <div className="flex gap-2">
-            <div className="h-8 w-20 rounded-md" style={{ border: '1px solid rgba(255,255,255,0.12)' }} />
-            <div className="h-8 w-24 rounded-md" style={{ background: '#2563EB' }} />
-          </div>
+          <div style={{ height: 28, width: 80, borderRadius: 5, background: BLUE }} />
         </div>
 
-        {/* Hero content */}
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div className="space-y-5">
-            <div
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full"
-              style={{ background: 'rgba(37,99,235,0.15)', border: '1px solid rgba(37,99,235,0.3)' }}
-            >
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#60A5FA' }} />
-              <span className="text-[10px] font-semibold" style={{ color: '#60A5FA', letterSpacing: '0.05em' }}>
-                AI & Technology Platform
-              </span>
+        {/* Hero zone */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 0.6fr', gap: 16, alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {/* Badge */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 20, background: 'rgba(41,79,255,0.15)', border: '1px solid rgba(41,79,255,0.3)', width: 'fit-content' }}>
+              <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#6B86FF' }} />
+              <span style={{ fontSize: 9, fontWeight: 600, color: '#6B86FF', letterSpacing: '0.05em' }}>AI & Technology</span>
             </div>
-            <div className="space-y-2.5">
-              <div className="h-9 rounded-md" style={{ width: '88%', background: 'rgba(255,255,255,0.8)' }} />
-              <div className="h-9 rounded-md" style={{ width: '70%', background: 'rgba(255,255,255,0.6)' }} />
-              <div className="h-9 rounded-md" style={{ width: '52%', background: 'rgba(255,255,255,0.4)' }} />
+            <div style={{ height: 28, width: '88%', borderRadius: 4, background: 'rgba(255,255,255,0.75)' }} />
+            <div style={{ height: 28, width: '65%', borderRadius: 4, background: 'rgba(255,255,255,0.55)' }} />
+            <div style={{ height: 28, width: '48%', borderRadius: 4, background: 'rgba(255,255,255,0.35)' }} />
+            <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+              <div style={{ height: 10, width: '90%', borderRadius: 3, background: 'rgba(255,255,255,0.12)' }} />
             </div>
-            <div className="space-y-1.5">
-              <div className="h-3 rounded" style={{ width: '90%', background: 'rgba(255,255,255,0.14)' }} />
-              <div className="h-3 rounded" style={{ width: '72%', background: 'rgba(255,255,255,0.10)' }} />
-            </div>
-            <div className="flex gap-3 pt-1">
-              <div className="h-11 w-32 rounded-md" style={{ background: '#2563EB' }} />
-              <div className="h-11 w-28 rounded-md" style={{ border: '1px solid rgba(255,255,255,0.15)' }} />
+            <div style={{ height: 10, width: '72%', borderRadius: 3, background: 'rgba(255,255,255,0.08)' }} />
+            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+              <div style={{ height: 32, width: 100, borderRadius: 5, background: BLUE }} />
+              <div style={{ height: 32, width: 80, borderRadius: 5, border: '1px solid rgba(255,255,255,0.15)' }} />
             </div>
           </div>
-
           {/* Right cards */}
-          <div className="hidden md:grid grid-cols-2 gap-3">
-            {[
-              { label: 'AI Products',  accent: '#2563EB' },
-              { label: 'Integrations', accent: '#60A5FA' },
-              { label: 'Deployments',  accent: '#3B82F6' },
-              { label: 'Platforms',    accent: '#93C5FD' },
-            ].map((card) => (
-              <div
-                key={card.label}
-                className="rounded-xl p-4 space-y-3"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-              >
-                <div className="w-8 h-8 rounded-lg" style={{ background: `${card.accent}25` }} />
-                <div>
-                  <div className="h-5 rounded" style={{ width: '70%', background: `${card.accent}60` }} />
-                  <div className="h-2 w-16 rounded mt-2" style={{ background: 'rgba(255,255,255,0.12)' }} />
-                </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {[BLUE, '#6B86FF', '#4F6FFF'].map((c, i) => (
+              <div key={i} style={{ borderRadius: 8, padding: '10px 12px', background: `${c}18`, border: `1px solid ${c}30` }}>
+                <div style={{ height: 8, width: '70%', borderRadius: 3, background: `${c}80`, marginBottom: 5 }} />
+                <div style={{ height: 6, width: '55%', borderRadius: 3, background: `${c}40` }} />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Stats strip */}
-        <div
-          className="mt-8 grid grid-cols-3 gap-px rounded-xl overflow-hidden"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
-        >
-          {['Digital Solutions', 'AI Architecture', 'Production Ready'].map((label) => (
-            <div key={label} className="px-5 py-4" style={{ background: '#0A0D14' }}>
-              <div className="h-3 w-20 rounded mb-1.5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-              <div className="h-2 w-24 rounded" style={{ background: 'rgba(255,255,255,0.12)' }} />
-              <div className="mt-1.5 text-[8px]" style={{ color: 'rgba(255,255,255,0.2)' }}>{label}</div>
+        {/* Feature strip */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, marginTop: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 6, overflow: 'hidden' }}>
+          {['AI Products', 'Integrations', 'Platforms'].map((label) => (
+            <div key={label} style={{ padding: '10px 12px', background: '#0C0E17' }}>
+              <div style={{ height: 9, width: '70%', borderRadius: 3, background: 'rgba(255,255,255,0.28)', marginBottom: 4 }} />
+              <div style={{ fontSize: 7, color: 'rgba(255,255,255,0.2)', fontFamily: 'monospace' }}>{label}</div>
             </div>
           ))}
         </div>
@@ -117,320 +93,155 @@ function ValenLabsWindow() {
   );
 }
 
-// ─── Valen Live window ────────────────────────────────────────────────────────
+/* ─── Valen Live light window ──────────────────────────────────────── */
 function ValenLiveWindow() {
   return (
     <div
-      className="relative w-full rounded-xl overflow-hidden shadow-product-sm card-lift"
-      style={{ background: '#FFFFFF', border: '1px solid #E0F2F0' }}
+      style={{
+        borderRadius: 10,
+        overflow: 'hidden',
+        background: '#FAFFFE',
+        boxShadow: '0 12px 40px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06)',
+        border: '1px solid #E0F2F0',
+      }}
       aria-hidden="true"
     >
       {/* Chrome */}
-      <div
-        className="flex items-center gap-1.5 px-4 py-2.5 border-b"
-        style={{ borderColor: '#E0F2F0', background: '#F0FDFA' }}
-      >
-        <div className="w-2 h-2 rounded-full" style={{ background: 'rgba(255,68,58,0.6)' }} />
-        <div className="w-2 h-2 rounded-full" style={{ background: 'rgba(255,189,46,0.6)' }} />
-        <div className="w-2 h-2 rounded-full" style={{ background: 'rgba(40,200,64,0.6)' }} />
-        <div
-          className="flex-1 mx-3 h-5 rounded flex items-center gap-1.5 px-2.5"
-          style={{ background: 'rgba(0,0,0,0.04)' }}
-        >
-          <div className="w-1 h-1 rounded-full" style={{ background: '#4ADE80' }} />
-          <span className="text-[8px] font-mono" style={{ color: '#8A8A8A' }}>valen.live</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 12px', background: '#F0FDFA', borderBottom: '1px solid #E0F2F0' }}>
+        {['rgba(255,68,58,0.6)', 'rgba(255,189,46,0.6)', 'rgba(40,200,64,0.6)'].map((c, i) => (
+          <div key={i} style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
+        ))}
+        <div style={{ flex: 1, marginLeft: 6, height: 18, borderRadius: 3, background: 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', padding: '0 8px', gap: 4 }}>
+          <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#4ADE80' }} />
+          <span style={{ fontFamily: 'monospace', fontSize: 8, color: '#737373' }}>valen.live</span>
         </div>
       </div>
 
-      {/* App shell */}
-      <div className="flex" style={{ minHeight: 220 }}>
-        {/* Sidebar */}
-        <div
-          className="w-40 border-r p-3 space-y-1 flex-shrink-0"
-          style={{ borderColor: '#E0F2F0', background: '#F0FDFA' }}
-        >
-          <div className="flex items-center gap-2 px-1 mb-3">
-            <div className="w-4 h-4 rounded" style={{ background: '#0D9488' }} />
-            <div className="h-2.5 w-14 rounded" style={{ background: 'rgba(13,148,136,0.3)' }} />
+      {/* Stats row */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 6, padding: '12px 14px 8px' }}>
+        {[
+          { v: '24', l: 'Sessions', bg: '#F0FDFA', bd: '#99F6E4', c: '#0D9488' },
+          { v: '7d', l: 'Streak',   bg: '#EFF6FF', bd: '#BFDBFE', c: '#294FFF' },
+          { v: '84%',l: 'Score',    bg: '#FFFBEB', bd: '#FDE68A', c: '#D97706' },
+        ].map((s) => (
+          <div key={s.l} style={{ borderRadius: 6, padding: '8px 10px', background: s.bg, border: `1px solid ${s.bd}` }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: s.c, fontFamily: 'Inter, sans-serif' }}>{s.v}</div>
+            <div style={{ fontSize: 7, color: '#737373', marginTop: 2 }}>{s.l}</div>
           </div>
-          {[true, false, false, false, false].map((active, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 px-2.5 py-2 rounded-md"
-              style={{ background: active ? 'rgba(13,148,136,0.12)' : 'transparent' }}
-            >
-              <div className="w-3 h-3 rounded-sm" style={{ background: active ? '#0D9488' : '#D4D4D2' }} />
-              <div
-                className="h-2 rounded-sm"
-                style={{ width: [56, 72, 64, 48, 60][i], background: active ? '#0D9488' : '#D4D4D2', opacity: active ? 1 : 0.6 }}
-              />
-            </div>
-          ))}
-        </div>
+        ))}
+      </div>
 
-        {/* Dashboard */}
-        <div className="flex-1 p-4 space-y-3 bg-white">
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-2">
-            {[
-              { v: '24',  l: 'Sessions', bg: '#F0FDFA', bd: '#99F6E4', tc: '#0D9488' },
-              { v: '7d',  l: 'Streak',   bg: '#EFF6FF', bd: '#BFDBFE', tc: '#2563EB' },
-              { v: '84%', l: 'Score',    bg: '#FFFBEB', bd: '#FDE68A', tc: '#D97706' },
-            ].map((s) => (
-              <div key={s.l} className="rounded-xl p-3" style={{ background: s.bg, border: `1px solid ${s.bd}` }}>
-                <div className="text-sm font-bold" style={{ color: s.tc }}>{s.v}</div>
-                <div className="text-[8px] mt-0.5" style={{ color: '#8A8A8A' }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Sessions list */}
-          <div className="rounded-xl border overflow-hidden" style={{ borderColor: '#E8E8E6' }}>
-            <div className="px-3 py-2 border-b" style={{ borderColor: '#E8E8E6', background: '#F8F8F6' }}>
-              <div className="h-2.5 w-24 rounded" style={{ background: '#E2E2E0' }} />
+      {/* Activity list */}
+      <div style={{ margin: '0 14px 14px', borderRadius: 6, border: '1px solid #E8E8E6', overflow: 'hidden', background: '#FFF' }}>
+        {[90, 76, 83].map((score, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px', borderBottom: i < 2 ? '1px solid #F4F4F2' : 'none' }}>
+            <div style={{ width: 22, height: 22, borderRadius: 5, background: `rgba(13,148,136,${0.08 + i * 0.04})`, flexShrink: 0 }} />
+            <div style={{ flex: 1 }}>
+              <div style={{ height: 7, borderRadius: 3, background: '#E8E8E6', width: `${60 + i * 10}%`, marginBottom: 3 }} />
+              <div style={{ height: 5, borderRadius: 3, background: '#F0EFED', width: `${45 + i * 7}%` }} />
             </div>
-            {[90, 76, 83].map((score, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2.5 px-3 py-2.5 border-b last:border-0"
-                style={{ borderColor: '#F0EFED' }}
-              >
-                <div className="w-6 h-6 rounded-lg" style={{ background: `rgba(13,148,136,${0.08 + i * 0.04})` }} />
-                <div className="flex-1 space-y-1">
-                  <div className="h-2 rounded" style={{ width: `${60 + i * 8}%`, background: '#E2E2E0' }} />
-                  <div className="h-1.5 rounded" style={{ width: `${45 + i * 6}%`, background: '#EDEDED' }} />
-                </div>
-                <div
-                  className="text-[9px] font-semibold px-1.5 py-0.5 rounded-md"
-                  style={{
-                    color:      score >= 80 ? '#0D9488' : '#D97706',
-                    background: score >= 80 ? '#F0FDFA' : '#FFFBEB',
-                  }}
-                >
-                  {score}%
-                </div>
-              </div>
-            ))}
+            <div style={{ fontSize: 8, fontWeight: 700, padding: '2px 5px', borderRadius: 3, color: score >= 80 ? '#0D9488' : '#D97706', background: score >= 80 ? '#F0FDFA' : '#FFFBEB', fontFamily: 'monospace' }}>
+              {score}%
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-// ─── Hero section ─────────────────────────────────────────────────────────────
+/* ─── Hero ─────────────────────────────────────────────────────────── */
 export function Hero() {
   const go = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <section
-      id="hero"
-      className="relative bg-canvas overflow-hidden"
-      aria-label="Hero"
-    >
-      {/* Subtle dot grid */}
-      <div
-        className="absolute top-0 left-0 right-0 dot-grid pointer-events-none"
-        style={{ height: 560, opacity: 0.2 }}
-      />
-      {/* Fade out dot grid */}
-      <div
-        className="absolute top-0 left-0 right-0 pointer-events-none"
-        style={{ height: 560, background: 'linear-gradient(180deg, transparent 40%, #FAFAF8 100%)' }}
-      />
+    <section id="hero" aria-label="Hero" style={{ background: IVORY, overflow: 'hidden', position: 'relative' }}>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-28 pb-16 md:pt-32 md:pb-20">
+      {/* Thin top accent line — brand motif */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, ${BLUE} 0%, ${CHART} 100%)` }} />
 
-        {/* ── Copy ── */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+      <div className="container" style={{ paddingTop: 'clamp(6rem, 12vw, 8rem)', paddingBottom: 'clamp(3rem, 6vw, 5rem)' }}>
 
-          {/* Eyebrow — explicit colour, no inheritance */}
-          <p
-            style={{
-              fontSize: '0.625rem',
-              fontWeight: 600,
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              color: '#8A8A8A',
-              marginBottom: '1.5rem',
-            }}
-          >
-            A Valen Labs Product
-          </p>
+        {/* ── Desktop: asymmetric two-column ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(2rem, 5vw, 5rem)', alignItems: 'center' }} className="hero-grid">
 
-          {/* Headline — DM Serif with system serif fallback */}
-          <h1
-            className="font-display text-balance"
-            style={{
-              fontSize: 'clamp(3rem, 8vw, 6rem)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.035em',
-              color: '#0F0F0F',
-              marginBottom: '1.25rem',
-            }}
-          >
-            From Vision
-            <br />
-            <span style={{ color: '#2563EB' }}>to Reality.</span>
-          </h1>
+          {/* Left — copy */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-          {/* Sub-headline */}
-          <p
-            style={{
-              fontSize: 'clamp(1.125rem, 2.5vw, 1.375rem)',
-              fontWeight: 600,
-              letterSpacing: '-0.015em',
-              color: '#2D2D2D',
-              marginBottom: '1rem',
-            }}
-          >
-            We turn ambitious ideas into impactful digital products.
-          </p>
+            {/* Eyebrow */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ display: 'inline-block', width: 24, height: 3, background: CHART, borderRadius: 9999 }} />
+              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>
+                A Valen Labs Product
+              </span>
+            </div>
 
-          {/* Body */}
-          <p
-            style={{
-              fontSize: '1.0625rem',
-              lineHeight: 1.7,
-              color: '#525252',
-              maxWidth: '680px',
-              margin: '0 auto 2.5rem',
-            }}
-          >
-            From beautifully crafted websites to sophisticated business platforms
-            and AI-powered applications — we help businesses transform possibilities
-            into products people can use.
-          </p>
+            {/* Headline — Playfair Display */}
+            <h1 className="text-hero" style={{ margin: 0 }}>
+              From Vision<br />
+              <em style={{ fontStyle: 'italic', color: BLUE }}>to Reality.</em>
+            </h1>
 
-          {/* CTAs */}
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '1rem',
-            }}
-          >
-            {/* Primary — explicit bg + text colours, always visible */}
-            <button
-              onClick={() => go('#contact')}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                background: '#2563EB',
-                color: '#FFFFFF',
-                borderRadius: '8px',
-                padding: '0.875rem 1.75rem',
-                fontSize: '0.9375rem',
-                fontWeight: 500,
-                letterSpacing: '-0.01em',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: '0 4px 16px rgba(37,99,235,0.3)',
-                transition: 'background 0.15s ease, box-shadow 0.15s ease',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = '#1D4ED8';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = '#2563EB';
-              }}
-            >
-              Bring Your Idea to Life
-              <ArrowRight size={16} strokeWidth={2.5} />
-            </button>
+            {/* Supporting line */}
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 2vw, 1.25rem)', fontWeight: 600, color: INK, margin: 0, letterSpacing: '-0.015em' }}>
+              From Ideas to Impact.
+            </p>
 
-            {/* Secondary */}
-            <button
-              onClick={() => go('#work')}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                background: 'transparent',
-                color: '#2D2D2D',
-                borderRadius: '8px',
-                padding: '0.875rem 1.75rem',
-                fontSize: '0.9375rem',
-                fontWeight: 500,
-                letterSpacing: '-0.01em',
-                border: '1px solid #E2E2E0',
-                cursor: 'pointer',
-                transition: 'border-color 0.15s ease, background 0.15s ease',
-              }}
-              onMouseEnter={(e) => {
-                const b = e.currentTarget as HTMLButtonElement;
-                b.style.borderColor = '#B8B8B8';
-                b.style.background = '#F0EFED';
-              }}
-              onMouseLeave={(e) => {
-                const b = e.currentTarget as HTMLButtonElement;
-                b.style.borderColor = '#E2E2E0';
-                b.style.background = 'transparent';
-              }}
-            >
-              Explore Our Work
-              <ArrowDown size={15} strokeWidth={2} />
-            </button>
-          </div>
-        </div>
+            {/* Body */}
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(0.9375rem, 1.5vw, 1.0625rem)', lineHeight: 1.7, color: '#525252', margin: 0, maxWidth: 460 }}>
+              We transform ambitious business ideas into beautifully designed websites,
+              custom applications, and intelligent digital products.
+            </p>
 
-        {/* ── Product windows ── */}
-        <div aria-label="Representative previews of live Valen Labs products">
-          {/* Valen Labs — main window */}
-          <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative' }}>
-            <ValenLabsWindow />
+            {/* CTAs */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 8 }}>
+              <button className="btn-primary" onClick={() => go('#contact')} aria-label="Start a project">
+                Let's Build Something
+                <ArrowUpRight size={16} />
+              </button>
+              <button className="btn-secondary" onClick={() => go('#work')} aria-label="Explore our work">
+                Explore Our Work
+                <ArrowDown size={15} />
+              </button>
+            </div>
 
-            {/* Valen Live — floating bottom-right on desktop */}
-            <div
-              className="hidden lg:block absolute"
-              style={{ bottom: -28, right: -20, width: 340, zIndex: 10 }}
-            >
-              <ValenLiveWindow />
+            {/* Live indicator */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
+              <span className="status-dot" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', color: MUTED }}>
+                Now accepting project enquiries
+              </span>
             </div>
           </div>
 
-          {/* Mobile — Valen Live below */}
-          <div className="mt-6 lg:hidden">
-            <ValenLiveWindow />
-          </div>
+          {/* Right — product windows */}
+          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {/* Valen Labs — primary */}
+            <ValenLabsWindow />
 
-          {/* Caption */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-5 mt-8 lg:mt-14"
-          >
-            <a
-              href="https://valenlabs.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.75rem', color: '#8A8A8A', textDecoration: 'none' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#2563EB'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#8A8A8A'; }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ADE80', display: 'inline-block' }} />
-              valenlabs.in
-            </a>
-            <a
-              href="https://valen.live"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '0.75rem', color: '#8A8A8A', textDecoration: 'none' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#0D9488'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = '#8A8A8A'; }}
-            >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ADE80', display: 'inline-block' }} />
-              valen.live
-            </a>
-            <span style={{ fontSize: '0.6875rem', color: '#B8B8B8' }}>
-              Representative interface previews
-            </span>
+            {/* Valen Live — offset card */}
+            <div style={{ marginLeft: '8%', marginRight: '-4%' }}>
+              <ValenLiveWindow />
+            </div>
+
+            {/* Caption */}
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', color: FAINT, textAlign: 'center', margin: 0 }}>
+              Representative previews of live Valen Labs properties
+            </p>
           </div>
         </div>
       </div>
+
+      {/* Mobile layout styles */}
+      <style>{`
+        @media (max-width: 767px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

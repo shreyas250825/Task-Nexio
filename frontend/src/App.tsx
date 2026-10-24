@@ -12,7 +12,7 @@ import { Footer }     from './sections/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-canvas text-ink font-sans antialiased">
+    <>
       <Navigation />
       <main id="main-content">
         <Hero />
@@ -26,6 +26,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

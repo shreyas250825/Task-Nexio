@@ -4,6 +4,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 interface RevealWrapperProps {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   delay?: number;
   direction?: 'up' | 'fade' | 'left' | 'right';
 }
@@ -11,31 +12,29 @@ interface RevealWrapperProps {
 export function RevealWrapper({
   children,
   className = '',
+  style = {},
   delay = 0,
   direction = 'up',
 }: RevealWrapperProps) {
   const { ref, visible } = useScrollReveal<HTMLDivElement>();
 
-  // Hidden states per direction
-  const hiddenStyle: Record<string, React.CSSProperties> = {
-    up:    { opacity: 0, transform: 'translateY(28px)' },
+  const hiddenStyles: Record<string, React.CSSProperties> = {
+    up:    { opacity: 0, transform: 'translateY(24px)' },
     fade:  { opacity: 0, transform: 'none' },
-    left:  { opacity: 0, transform: 'translateX(-20px)' },
-    right: { opacity: 0, transform: 'translateX(20px)' },
+    left:  { opacity: 0, transform: 'translateX(-18px)' },
+    right: { opacity: 0, transform: 'translateX(18px)' },
   };
 
-  const shownStyle: React.CSSProperties = {
-    opacity: 1,
-    transform: 'none',
-  };
-
-  const style: React.CSSProperties = {
+  const computedStyle: React.CSSProperties = {
     transition: `opacity 0.65s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-    ...(visible ? shownStyle : hiddenStyle[direction]),
+    ...(visible
+      ? { opacity: 1, transform: 'none' }
+      : hiddenStyles[direction]),
+    ...style,
   };
 
   return (
-    <div ref={ref} className={className} style={style}>
+    <div ref={ref} className={className} style={computedStyle}>
       {children}
     </div>
   );

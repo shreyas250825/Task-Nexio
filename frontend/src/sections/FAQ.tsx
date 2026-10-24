@@ -3,33 +3,31 @@ import { Plus, Minus } from 'lucide-react';
 import { FAQ_ITEMS, CONTACT_EMAIL } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
 
+const INK   = '#171717';
+const IVORY = '#F6F3EC';
+const BLUE  = '#294FFF';
+const MUTED = '#737373';
+const RULE  = '#D8D4CC';
+const CHART = '#D6FF66';
+
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
-
   return (
-    <div className="border-t border-ink-10 last:border-b">
+    <div style={{ borderTop: `1px solid ${RULE}` }}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-start justify-between gap-6 py-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm"
         aria-expanded={open}
+        style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1.5rem', padding: '1.25rem 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
       >
-        <span
-          className="font-medium text-ink group-hover:text-blue-600 transition-colors leading-snug"
-          style={{ fontSize: '0.9375rem', letterSpacing: '-0.01em' }}
-        >
+        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9375rem', fontWeight: 500, lineHeight: 1.5, color: INK, letterSpacing: '-0.01em' }}>
           {q}
         </span>
-        <span className="flex-shrink-0 mt-0.5 text-ink-40 group-hover:text-blue-600 transition-colors">
-          {open ? <Minus size={15} /> : <Plus size={15} />}
+        <span style={{ flexShrink: 0, color: MUTED, marginTop: 2, transition: 'color 0.15s ease' }}>
+          {open ? <Minus size={16} /> : <Plus size={16} />}
         </span>
       </button>
-
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? 'max-h-80 opacity-100 pb-6' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <p className="text-sm text-ink-60 leading-relaxed pr-8">{a}</p>
+      <div style={{ overflow: 'hidden', maxHeight: open ? 320 : 0, opacity: open ? 1 : 0, transition: 'max-height 0.3s ease, opacity 0.3s ease', paddingBottom: open ? '1.25rem' : 0 }}>
+        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9375rem', lineHeight: 1.7, color: MUTED, margin: 0 }}>{a}</p>
       </div>
     </div>
   );
@@ -37,42 +35,43 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export function FAQ() {
   return (
-    <section id="faq" className="bg-canvas py-28 md:py-32" aria-labelledby="faq-heading">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="divider-x mb-20" />
+    <section id="faq" style={{ background: '#EDE9DF', paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="faq-heading">
+      <div className="container">
+        <div style={{ borderTop: `1px solid ${RULE}`, paddingTop: '4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.8fr', gap: '4rem' }} className="faq-grid">
 
-        <div className="grid lg:grid-cols-3 gap-16">
-          {/* Left */}
-          <RevealWrapper className="lg:sticky lg:top-24 h-fit space-y-5">
-            <p className="text-2xs font-semibold tracking-widest uppercase text-ink-40">
-              FAQ
-            </p>
-            <h2
-              id="faq-heading"
-              className="font-display text-ink text-balance"
-              style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', lineHeight: 1.15, letterSpacing: '-0.03em' }}
-            >
-              Common questions.
-            </h2>
-            <p className="text-sm text-ink-60 leading-relaxed">
-              Something else on your mind?{' '}
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="text-blue-600 font-medium hover:underline underline-offset-2"
-              >
-                Email us directly.
-              </a>
-            </p>
-          </RevealWrapper>
+            <RevealWrapper>
+              <div style={{ position: 'sticky', top: '6rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
+                  <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
+                  <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>FAQ</span>
+                </div>
+                <h2 id="faq-heading" className="font-display" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '-0.025em', color: INK, margin: '0 0 1rem' }}>
+                  Common questions.
+                </h2>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9375rem', lineHeight: 1.65, color: MUTED, margin: 0 }}>
+                  Something else?{' '}
+                  <a href={`mailto:${CONTACT_EMAIL}`} style={{ color: BLUE, fontWeight: 500, textDecoration: 'underline', textUnderlineOffset: 3 }}>Email us.</a>
+                </p>
+              </div>
+            </RevealWrapper>
 
-          {/* Right — accordion */}
-          <RevealWrapper className="lg:col-span-2" delay={80}>
-            {FAQ_ITEMS.map((item) => (
-              <FAQItem key={item.q} q={item.q} a={item.a} />
-            ))}
-          </RevealWrapper>
+            <RevealWrapper delay={80}>
+              <div>
+                {FAQ_ITEMS.map((item) => (
+                  <FAQItem key={item.q} q={item.q} a={item.a} />
+                ))}
+                <div style={{ borderTop: `1px solid ${RULE}` }} />
+              </div>
+            </RevealWrapper>
+          </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          .faq-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

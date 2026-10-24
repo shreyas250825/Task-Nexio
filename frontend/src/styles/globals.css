@@ -2,121 +2,258 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --canvas: #FAFAF8;
-    --paper:  #FFFFFF;
-    --ink:    #0F0F0F;
-    --blue:   #2563EB;
-    /* Font stack that works even if Google Fonts doesn't load */
-    --font-display: 'DM Serif Display', 'Georgia', 'Times New Roman', serif;
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  }
+/* ─── Design tokens ───────────────────────────────────────────────── */
+:root {
+  --ivory:      #F6F3EC;
+  --ivory-dark: #EDE9DF;
+  --ink:        #171717;
+  --ink-soft:   #444444;
+  --ink-muted:  #737373;
+  --ink-faint:  #A0A0A0;
+  --rule:       #D8D4CC;
+  --blue:       #294FFF;
+  --blue-dark:  #1A3AE0;
+  --blue-light: #6B86FF;
+  --chartreuse: #D6FF66;
+  --paper:      #FFFFFF;
 
-  html {
-    background-color: var(--canvas);
-    color: var(--ink);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: var(--canvas);
-    overflow-x: hidden;
-  }
-
-  /* Ensure text is always visible — critical */
-  h1, h2, h3, h4, h5, h6, p, span, div, a, button, label {
-    color: inherit;
-  }
-
-  :focus-visible {
-    outline: 2px solid #2563EB;
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar       { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--canvas); }
-  ::-webkit-scrollbar-thumb { background: #D4D4D2; border-radius: 9999px; }
-  ::-webkit-scrollbar-thumb:hover { background: #A8A8A6; }
+  --font-display: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --font-sans:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', Menlo, monospace;
 }
 
-@layer components {
-  /* Display font class — always has a visible serif fallback */
-  .font-display {
-    font-family: var(--font-display);
-    font-weight: 400;
-  }
+/* ─── Base reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-  /* Nav CTA — always high contrast */
-  .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    background: #0F0F0F;
-    color: #FFFFFF;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    transition: background 0.15s ease;
-    cursor: pointer;
-    border: none;
-  }
-  .nav-cta:hover { background: #2563EB; }
-  .nav-cta:active { transform: scale(0.98); }
+html {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
-  /* Product card hover lift */
-  .card-lift {
-    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
-                box-shadow 0.35s cubic-bezier(0.16,1,0.3,1);
-  }
-  .card-lift:hover {
-    transform: translateY(-5px) scale(1.005);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.13), 0 8px 24px rgba(0,0,0,0.06);
+body {
+  background: var(--ivory);
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+::selection {
+  background: var(--chartreuse);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+
+/* ─── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-@layer utilities {
-  /* Reduced-motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+/* ─── Typography utilities ────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: normal;
+}
+.font-display-italic {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+}
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
 
-  /* Tabular numbers */
-  .tabular { font-variant-numeric: tabular-nums; }
+/* Fluid display headline — primary hero size */
+.text-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.25rem, 8.5vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
 
-  /* Section horizontal divider */
-  .divider-x {
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #E2E2E0 20%, #E2E2E0 80%, transparent 100%);
-  }
+/* Section heading */
+.text-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
 
-  /* Dot grid pattern */
-  .dot-grid {
-    background-image: radial-gradient(circle, #C8C8C6 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
+/* ─── Brand motif — signature corner bracket ──────────────────────── */
+/* Used as a recurring framing device on product showcases */
+.bracket-frame {
+  position: relative;
+}
+.bracket-frame::before,
+.bracket-frame::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--blue);
+  border-style: solid;
+}
+.bracket-frame::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.bracket-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
 
-  /* Text balance for headlines */
-  .text-balance { text-wrap: balance; }
+/* ─── Chartreuse dot status marker ───────────────────────────────── */
+.status-dot::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--chartreuse);
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
 
-  /* Stat value — large serif number */
-  .stat-value {
-    font-family: var(--font-display);
-    font-size: 3.5rem;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: #0F0F0F;
-  }
+/* ─── Thin horizontal rule ────────────────────────────────────────── */
+.rule-x {
+  height: 1px;
+  background: var(--rule);
+  border: none;
+  margin: 0;
+}
+
+/* ─── Nav CTA — always high contrast ────────────────────────────── */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.5625rem 1.125rem;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease, transform 0.1s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--blue); }
+.nav-cta:active { transform: scale(0.97); }
+
+/* ─── Primary button ─────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--blue);
+  color: #fff;
+  padding: 0.875rem 1.75rem;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 48px;
+}
+.btn-primary:hover { background: var(--blue-dark); }
+.btn-primary:active { transform: scale(0.98); }
+
+/* ─── Secondary button ───────────────────────────────────────────── */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--ink);
+  padding: 0.875rem 1.75rem;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border: 1.5px solid var(--rule);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 48px;
+}
+.btn-secondary:hover { border-color: var(--ink-muted); background: var(--ivory-dark); }
+
+/* ─── Card lift ──────────────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px) scale(1.004);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* ─── Oversized index number ─────────────────────────────────────── */
+.index-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5rem, 10vw, 9rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--ivory-dark);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── Section container ──────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+@media (min-width: 768px) {
+  .container { padding: 0 2.5rem; }
+}
+@media (min-width: 1024px) {
+  .container { padding: 0 3rem; }
+}
+
+/* ─── Chartreuse accent line ─────────────────────────────────────── */
+.accent-line {
+  display: inline-block;
+  width: 2rem;
+  height: 3px;
+  background: var(--chartreuse);
+  border-radius: 9999px;
+  vertical-align: middle;
 }

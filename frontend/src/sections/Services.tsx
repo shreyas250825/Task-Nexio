@@ -2,264 +2,194 @@ import { ArrowUpRight } from 'lucide-react';
 import { SERVICES } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
 
-// ─── Per-service interface compositions ──────────────────────────────────────
-function WebsiteComposition() {
+const INK   = '#171717';
+const IVORY = '#F6F3EC';
+const IVORY_D = '#EDE9DF';
+const BLUE  = '#294FFF';
+const MUTED = '#737373';
+const RULE  = '#D8D4CC';
+const CHART = '#D6FF66';
+
+/* Small SVG illustrations — one per service */
+function WebsiteIllo() {
   return (
-    <div
-      className="w-full rounded-xl overflow-hidden"
-      style={{ background: '#0A0D14', aspectRatio: '16/9' }}
-      aria-hidden="true"
-    >
-      <div className="p-5 h-full flex flex-col">
-        {/* Nav */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded" style={{ background: '#2563EB' }} />
-            <div className="h-2 w-16 rounded" style={{ background: 'rgba(255,255,255,0.2)' }} />
-          </div>
-          <div className="flex gap-2">
-            {[40, 32, 36, 44].map((w, i) => (
-              <div key={i} className="h-1.5 rounded" style={{ width: w, background: 'rgba(255,255,255,0.1)' }} />
-            ))}
-          </div>
-          <div className="h-6 w-16 rounded-md" style={{ background: '#2563EB' }} />
-        </div>
-        {/* Hero */}
-        <div className="flex-1 flex flex-col justify-center space-y-3">
-          <div className="h-1.5 w-24 rounded-full" style={{ background: 'rgba(37,99,235,0.6)' }} />
-          <div className="h-7 w-3/4 rounded-md" style={{ background: 'rgba(255,255,255,0.7)' }} />
-          <div className="h-7 w-1/2 rounded-md" style={{ background: 'rgba(255,255,255,0.45)' }} />
-          <div className="h-3 w-4/5 rounded mt-1" style={{ background: 'rgba(255,255,255,0.15)' }} />
-          <div className="h-3 w-2/3 rounded" style={{ background: 'rgba(255,255,255,0.10)' }} />
-          <div className="flex gap-2 mt-2">
-            <div className="h-8 w-24 rounded-md" style={{ background: '#2563EB' }} />
-            <div className="h-8 w-20 rounded-md" style={{ border: '1px solid rgba(255,255,255,0.15)' }} />
-          </div>
-        </div>
-      </div>
-    </div>
+    <svg viewBox="0 0 120 80" fill="none" style={{ width: '100%', height: 'auto' }}>
+      <rect width="120" height="80" rx="6" fill="#171717"/>
+      <rect x="0" y="0" width="120" height="16" rx="6" fill="#1E2030"/>
+      <circle cx="10" cy="8" r="3" fill="rgba(255,68,58,0.7)"/>
+      <circle cx="20" cy="8" r="3" fill="rgba(255,189,46,0.7)"/>
+      <circle cx="30" cy="8" r="3" fill="rgba(40,200,64,0.7)"/>
+      <rect x="38" y="4" width="50" height="8" rx="3" fill="rgba(255,255,255,0.07)"/>
+      <rect x="10" y="24" width="60" height="10" rx="2" fill="rgba(255,255,255,0.7)"/>
+      <rect x="10" y="38" width="48" height="7" rx="2" fill="rgba(255,255,255,0.45)"/>
+      <rect x="10" y="49" width="70" height="5" rx="2" fill="rgba(255,255,255,0.15)"/>
+      <rect x="10" y="56" width="55" height="5" rx="2" fill="rgba(255,255,255,0.10)"/>
+      <rect x="10" y="65" width="30" height="9" rx="3" fill={BLUE}/>
+      <rect x="45" y="65" width="24" height="9" rx="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5"/>
+      <circle cx="100" cy="50" r="16" fill={`${BLUE}20`} stroke={`${BLUE}40`} strokeWidth="1"/>
+      <circle cx="100" cy="50" r="8" fill={`${BLUE}50`}/>
+    </svg>
   );
 }
 
-function PortalComposition() {
+function PortalIllo() {
   return (
-    <div
-      className="w-full rounded-xl overflow-hidden border"
-      style={{ background: 'white', borderColor: '#E8E8E6', aspectRatio: '16/9' }}
-      aria-hidden="true"
-    >
-      <div className="flex h-full">
-        {/* Sidebar */}
-        <div className="w-32 border-r p-3 space-y-2 flex-shrink-0" style={{ borderColor: '#F0EFED', background: '#F8F8F6' }}>
-          <div className="h-6 w-20 rounded bg-ink-10 mb-4" />
-          {[true, false, false, false, false].map((active, i) => (
-            <div
-              key={i}
-              className="h-7 rounded-md flex items-center gap-2 px-2"
-              style={{ background: active ? '#2563EB' : 'transparent' }}
-            >
-              <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: active ? 'rgba(255,255,255,0.7)' : '#C8C8C6' }} />
-              <div className="h-1.5 flex-1 rounded" style={{ background: active ? 'rgba(255,255,255,0.5)' : '#D8D8D6' }} />
-            </div>
-          ))}
-        </div>
-        {/* Content */}
-        <div className="flex-1 p-4 space-y-3">
-          <div className="h-4 w-40 rounded bg-ink-80" />
-          <div className="grid grid-cols-3 gap-2">
-            {['#2563EB', '#0D9488', '#D97706'].map((c) => (
-              <div key={c} className="rounded-lg p-3" style={{ background: c + '10', border: `1px solid ${c}25` }}>
-                <div className="h-4 w-8 rounded font-bold" style={{ background: c + '80' }} />
-                <div className="h-2 w-12 rounded mt-1" style={{ background: c + '40' }} />
-              </div>
-            ))}
-          </div>
-          <div className="rounded-lg border overflow-hidden" style={{ borderColor: '#F0EFED' }}>
-            {[70, 85, 60, 90].map((w, i) => (
-              <div key={i} className="flex items-center gap-2 px-3 py-2 border-b last:border-0" style={{ borderColor: '#F0EFED' }}>
-                <div className="w-5 h-5 rounded bg-ink-10 flex-shrink-0" />
-                <div className="h-2 rounded bg-ink-10 flex-1" style={{ width: `${w}%` }} />
-                <div className="h-4 w-8 rounded" style={{ background: '#2563EB', opacity: 0.3 }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    <svg viewBox="0 0 120 80" fill="none" style={{ width: '100%', height: 'auto' }}>
+      <rect width="120" height="80" rx="6" fill="#FAFAF8" stroke="#D8D4CC" strokeWidth="0.5"/>
+      <rect x="0" y="0" width="28" height="80" rx="6" fill="#F0EFED"/>
+      <rect x="6" y="10" width="16" height="4" rx="2" fill="#294FFF" opacity="0.8"/>
+      <rect x="6" y="18" width="16" height="3" rx="1.5" fill="#D8D4CC"/>
+      <rect x="6" y="24" width="16" height="3" rx="1.5" fill="#D8D4CC"/>
+      <rect x="6" y="30" width="16" height="3" rx="1.5" fill="#D8D4CC"/>
+      <rect x="6" y="36" width="16" height="3" rx="1.5" fill="#D8D4CC"/>
+      <rect x="34" y="8" width="36" height="6" rx="2" fill="#171717"/>
+      <rect x="34" y="18" width="28" height="14" rx="3" fill="#EFF6FF" stroke="#BFDBFE" strokeWidth="0.5"/>
+      <rect x="36" y="21" width="12" height="5" rx="1.5" fill="#294FFF" opacity="0.8"/>
+      <rect x="66" y="18" width="28" height="14" rx="3" fill="#F0FDFA" stroke="#99F6E4" strokeWidth="0.5"/>
+      <rect x="68" y="21" width="12" height="5" rx="1.5" fill="#0D9488" opacity="0.8"/>
+      <rect x="34" y="36" width="60" height="36" rx="3" fill="white" stroke="#E8E8E6" strokeWidth="0.5"/>
+      {[46, 54, 62].map((y, i) => (
+        <rect key={i} x="38" y={y} width={`${45 + i * 5}%`} height="4" rx="2" fill="#E8E8E6"/>
+      ))}
+    </svg>
   );
 }
 
-function AIComposition() {
+function AIIllo() {
   return (
-    <div
-      className="w-full rounded-xl overflow-hidden border"
-      style={{ background: '#FAFAFA', borderColor: '#E8E8E6', aspectRatio: '16/9' }}
-      aria-hidden="true"
-    >
-      <div className="p-5 h-full flex flex-col gap-3">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded-md" style={{ background: '#7C3AED' }} />
-            <div className="h-2 w-24 rounded bg-ink-20" />
-          </div>
-          <div
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[8px] font-medium"
-            style={{ background: 'rgba(124,58,237,0.1)', color: '#7C3AED', border: '1px solid rgba(124,58,237,0.2)' }}
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-            AI Active
-          </div>
-        </div>
-
-        {/* Chat / doc area */}
-        <div className="flex-1 flex flex-col gap-2 justify-end">
-          {/* Document card */}
-          <div className="flex items-start gap-2 justify-end">
-            <div className="max-w-[70%] space-y-1 rounded-xl rounded-tr-sm p-2.5" style={{ background: '#F0EDF8' }}>
-              {[90, 75, 60].map((w, i) => (
-                <div key={i} className="h-2 rounded" style={{ width: `${w}%`, background: '#C4B5FD' }} />
-              ))}
-            </div>
-          </div>
-          {/* AI response */}
-          <div className="flex items-start gap-2">
-            <div className="w-6 h-6 rounded-full flex-shrink-0" style={{ background: '#7C3AED' }} />
-            <div className="max-w-[75%] space-y-1.5 rounded-xl rounded-tl-sm p-2.5 border border-purple-100" style={{ background: 'white' }}>
-              {[100, 85, 70, 55].map((w, i) => (
-                <div key={i} className="h-2 rounded bg-ink-10" style={{ width: `${w}%` }} />
-              ))}
-              <div className="flex gap-1 pt-1">
-                <div className="h-4 w-12 rounded" style={{ background: '#7C3AED', opacity: 0.8 }} />
-                <div className="h-4 w-16 rounded" style={{ background: '#F0EDF8' }} />
-              </div>
-            </div>
-          </div>
-          {/* Input */}
-          <div className="flex gap-2 items-center rounded-xl border px-3 py-2.5" style={{ borderColor: '#E0D9F0', background: 'white' }}>
-            <div className="flex-1 h-2 rounded bg-ink-10" />
-            <div className="w-6 h-6 rounded-md flex-shrink-0" style={{ background: '#7C3AED' }} />
-          </div>
-        </div>
-      </div>
-    </div>
+    <svg viewBox="0 0 120 80" fill="none" style={{ width: '100%', height: 'auto' }}>
+      <rect width="120" height="80" rx="6" fill="#FAFAFA" stroke="#D8D4CC" strokeWidth="0.5"/>
+      <rect x="8" y="8" width="104" height="20" rx="4" fill="#F5F0FF" stroke="#E9D5FF" strokeWidth="0.5"/>
+      <circle cx="18" cy="18" r="6" fill="#7C3AED" opacity="0.8"/>
+      <rect x="28" y="13" width="60" height="4" rx="2" fill="#D8B4FE" opacity="0.8"/>
+      <rect x="28" y="19" width="44" height="3" rx="1.5" fill="#EDE9FE" opacity="0.8"/>
+      {/* AI thinking dots */}
+      {[86, 94, 102].map((x, i) => (
+        <circle key={i} cx={x} cy="18" r="3" fill="#7C3AED" opacity={0.4 + i * 0.2}/>
+      ))}
+      <rect x="24" y="34" width="88" height="18" rx="4" fill="white" stroke="#E8E8E6" strokeWidth="0.5"/>
+      <rect x="30" y="39" width="52" height="3.5" rx="1.75" fill="#E2E2E0"/>
+      <rect x="30" y="45" width="38" height="3" rx="1.5" fill="#EAEAE8"/>
+      <rect x="8" y="58" width="80" height="14" rx="3" fill="white" stroke="#E8E8E6" strokeWidth="0.5"/>
+      <rect x="14" y="63" width="50" height="3" rx="1.5" fill="#D8D4CC"/>
+      <rect x="96" y="58" width="16" height="14" rx="3" fill={BLUE}/>
+    </svg>
   );
 }
 
-function SaaSComposition() {
+function SaaSIllo() {
   return (
-    <div
-      className="w-full rounded-xl overflow-hidden border font-mono"
-      style={{ background: '#0F1117', borderColor: '#2D2D35', aspectRatio: '16/9' }}
-      aria-hidden="true"
-    >
-      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b" style={{ borderColor: '#2D2D35' }}>
-        {['rgba(255,68,58,0.7)', 'rgba(255,189,46,0.7)', 'rgba(40,200,64,0.7)'].map((c, i) => (
-          <div key={i} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
-        ))}
-        <span className="ml-3 text-[9px]" style={{ color: 'rgba(255,255,255,0.25)' }}>main.ts</span>
-      </div>
-      <div className="p-4 space-y-1.5">
-        {[
-          { text: 'import { createApp } from',  c: '#C792EA' },
-          { text: '  "./server"',                c: '#C3E88D' },
-          { text: '',                            c: '' },
-          { text: 'const app = createApp({',    c: '#82AAFF' },
-          { text: '  database: postgres,',       c: '#F78C6C' },
-          { text: '  auth: {',                   c: '#F78C6C' },
-          { text: '    provider: "oauth2",',     c: '#C3E88D' },
-          { text: '    roles: ["admin","user"]', c: '#C3E88D' },
-          { text: '  },',                        c: '#F78C6C' },
-          { text: '  ai: { model: "gpt-4o" }',  c: '#89DDFF' },
-          { text: '})',                           c: '#82AAFF' },
-          { text: '',                            c: '' },
-          { text: 'app.listen(3000)',            c: '#C792EA' },
-        ].map((line, i) => (
-          <div key={i} className="text-[9px] leading-5 tabular" style={{ color: line.c || 'transparent', height: '1.25rem' }}>
-            {line.text}
-          </div>
-        ))}
-      </div>
-    </div>
+    <svg viewBox="0 0 120 80" fill="none" style={{ width: '100%', height: 'auto' }}>
+      <rect width="120" height="80" rx="6" fill="#0F1117"/>
+      <rect x="0" y="0" width="120" height="14" rx="6" fill="#1A1D2E"/>
+      <circle cx="8" cy="7" r="2.5" fill="rgba(255,68,58,0.7)"/>
+      <circle cx="16" cy="7" r="2.5" fill="rgba(255,189,46,0.7)"/>
+      <circle cx="24" cy="7" r="2.5" fill="rgba(40,200,64,0.7)"/>
+      <text x="32" y="10" fontSize="7" fill="rgba(255,255,255,0.25)" fontFamily="monospace">index.ts</text>
+      {[
+        { y: 22, text: 'import { createApp }', c: '#C792EA' },
+        { y: 30, text: "  from './server'",    c: '#C3E88D' },
+        { y: 38, text: 'const app = createApp({', c: '#82AAFF' },
+        { y: 46, text: '  db: postgres,',      c: '#F78C6C' },
+        { y: 54, text: "  auth: 'oauth2',",    c: '#C3E88D' },
+        { y: 62, text: "  ai: { model: 'gpt' }", c: '#89DDFF' },
+        { y: 70, text: '})',                   c: '#82AAFF' },
+      ].map((line, i) => (
+        <text key={i} x="8" y={line.y} fontSize="7.5" fill={line.c} fontFamily="monospace">{line.text}</text>
+      ))}
+      {/* Chartreuse accent dot */}
+      <circle cx="112" cy="22" r="4" fill={CHART} opacity="0.9"/>
+    </svg>
   );
 }
 
-const visuals = [WebsiteComposition, PortalComposition, AIComposition, SaaSComposition];
+const illustrations = [WebsiteIllo, PortalIllo, AIIllo, SaaSIllo];
 
 export function Services() {
-  const go = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const go = () => {
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="services" className="bg-ink-5 py-28 md:py-36" aria-labelledby="services-heading">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="services" style={{ background: IVORY_D, paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="services-heading">
+      <div className="container">
 
         {/* Header */}
-        <RevealWrapper className="mb-20">
-          <h2
-            id="services-heading"
-            className="font-display text-ink text-balance"
-            style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', lineHeight: 1.1, letterSpacing: '-0.035em' }}
-          >
-            What will you
-            <br />
-            build next?
-          </h2>
-          <p className="mt-4 text-lg text-ink-60 max-w-xl leading-relaxed">
-            Four practice areas. Every one focused on delivering digital products that create
-            real outcomes for the businesses we work with.
-          </p>
+        <RevealWrapper>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'end', marginBottom: '4rem' }} className="services-header">
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
+                <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>Services</span>
+              </div>
+              <h2 id="services-heading" className="text-section" style={{ margin: 0 }}>
+                What will you<br />build next?
+              </h2>
+            </div>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', lineHeight: 1.7, color: '#525252', margin: 0 }}>
+              Four practice areas. Every engagement focused on delivering digital products
+              that create measurable outcomes for your business.
+            </p>
+          </div>
         </RevealWrapper>
 
-        {/* Services — alternating layout */}
-        <div className="space-y-20">
-          {SERVICES.map((service, i) => {
-            const Visual = visuals[i];
-            const isEven = i % 2 === 0;
+        {/* Service rows — alternating text/visual */}
+        {SERVICES.map((service, i) => {
+          const Illo = illustrations[i];
+          const isOdd = i % 2 !== 0;
 
-            return (
-              <RevealWrapper key={service.number} delay={60}>
-                <article
-                  className={[
-                    'grid lg:grid-cols-2 gap-12 lg:gap-16 items-center',
-                    !isEven ? 'lg:grid-flow-dense' : '',
-                  ].join(' ')}
+          return (
+            <RevealWrapper key={service.number} delay={i * 50}>
+              <div style={{ borderTop: `1px solid ${RULE}`, paddingTop: '3rem', paddingBottom: '3rem' }}>
+                <div
+                  style={{ display: 'grid', gridTemplateColumns: '0.4fr 1fr 0.6fr', gap: '2.5rem', alignItems: 'center' }}
+                  className={`svc-row-${i}`}
                 >
-                  {/* Visual */}
-                  <div className={!isEven ? 'lg:col-start-2' : ''}>
-                    <Visual />
+                  {/* Index number */}
+                  <div className="index-num" style={{ fontSize: 'clamp(3.5rem, 7vw, 6rem)', textAlign: 'center' }}>
+                    {service.number}
                   </div>
 
                   {/* Copy */}
-                  <div className={`space-y-5 ${!isEven ? 'lg:col-start-1' : ''}`}>
-                    <span
-                      className="font-display text-ink-10 tabular select-none"
-                      style={{ fontSize: '5rem', lineHeight: 1, letterSpacing: '-0.05em' }}
-                    >
-                      {service.number}
-                    </span>
-                    <h3
-                      className="font-semibold text-ink"
-                      style={{ fontSize: '1.625rem', lineHeight: 1.25, letterSpacing: '-0.025em' }}
-                    >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+                    <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)', fontWeight: 600, letterSpacing: '-0.02em', color: INK, margin: 0 }}>
                       {service.title}
                     </h3>
-                    <p className="text-ink-60 leading-relaxed">{service.body}</p>
+                    <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9375rem', lineHeight: 1.7, color: '#525252', margin: 0 }}>
+                      {service.body}
+                    </p>
                     <button
-                      onClick={() => go('#contact')}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded"
+                      onClick={go}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', fontWeight: 600, color: BLUE, transition: 'gap 0.15s ease' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.gap = '8px'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.gap = '5px'; }}
                     >
                       Discuss this service
-                      <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight size={14} />
                     </button>
                   </div>
-                </article>
-              </RevealWrapper>
-            );
-          })}
-        </div>
+
+                  {/* Illustration */}
+                  <div style={{ borderRadius: 8, overflow: 'hidden', border: `1px solid ${RULE}` }}>
+                    <Illo />
+                  </div>
+                </div>
+              </div>
+              <style>{`
+                @media (max-width: 767px) {
+                  .svc-row-${i} {
+                    grid-template-columns: 1fr !important;
+                    gap: 1.25rem !important;
+                  }
+                }
+                @media (max-width: 1023px) {
+                  .services-header { grid-template-columns: 1fr !important; }
+                }
+              `}</style>
+            </RevealWrapper>
+          );
+        })}
+        <div style={{ borderTop: `1px solid ${RULE}` }} />
       </div>
     </section>
   );

@@ -1,12 +1,8 @@
-import { PRINCIPLES, PARENT_COMPANY } from '../lib/constants';
+import { PRINCIPLES, PARENT_LABEL } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
 
-// Dark section colours — all inline so they never depend on Tailwind purge
-const BG    = '#1A1A1A';
-const TEXT1 = '#FFFFFF';
-const TEXT2 = 'rgba(255,255,255,0.7)';
-const TEXT3 = 'rgba(255,255,255,0.45)';
-const TEXT4 = 'rgba(255,255,255,0.25)';
+const INK   = '#171717';
+const CHART = '#D6FF66';
 const RULE  = 'rgba(255,255,255,0.1)';
 
 export function About() {
@@ -14,163 +10,104 @@ export function About() {
     <section
       id="studio"
       aria-labelledby="studio-heading"
-      style={{
-        background: BG,
-        color: TEXT1,
-        overflow: 'hidden',
-        paddingTop: '7rem',
-        paddingBottom: '7rem',
-      }}
+      style={{ background: INK, paddingTop: '6rem', paddingBottom: '6rem', overflow: 'hidden', position: 'relative' }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      {/* Chartreuse accent shape — top right */}
+      <div
+        aria-hidden="true"
+        style={{ position: 'absolute', top: 0, right: 0, width: 200, height: 200, background: CHART, opacity: 0.06, borderRadius: '0 0 0 200px', pointerEvents: 'none' }}
+      />
 
-          {/* ── Left ── */}
-          <RevealWrapper className="space-y-8">
-            {/* Label */}
-            <p style={{
-              fontSize: '0.625rem',
-              fontWeight: 600,
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              color: TEXT4,
-              marginBottom: '1rem',
-            }}>
-              Studio Philosophy
-            </p>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(2rem, 5vw, 6rem)', alignItems: 'start' }} className="about-grid">
 
-            {/* Headline */}
-            <h2
-              id="studio-heading"
-              className="font-display text-balance"
-              style={{
-                fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.035em',
-                color: TEXT1,
-              }}
-            >
-              Built with intention.
-              <br />
-              <span style={{ color: TEXT3 }}>Engineered for impact.</span>
-            </h2>
+          {/* Left */}
+          <RevealWrapper>
+            <div style={{ position: 'sticky', top: '6rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>Studio Philosophy</span>
+              </div>
 
-            {/* Body 1 */}
-            <p style={{ color: TEXT2, lineHeight: 1.75, fontSize: '1.0625rem', maxWidth: 480 }}>
-              We believe good technology begins with understanding the problem. Every project
-              should have a clear purpose, thoughtful design, sound engineering, and an
-              outcome that matters to the people using it.
-            </p>
+              <h2
+                id="studio-heading"
+                className="font-display"
+                style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#FFFFFF', margin: 0 }}
+              >
+                Built with intention.
+                <br />
+                <em className="font-display-italic" style={{ color: 'rgba(255,255,255,0.35)' }}>Engineered for impact.</em>
+              </h2>
 
-            {/* Body 2 */}
-            <p style={{ color: TEXT3, lineHeight: 1.75, fontSize: '0.9375rem', maxWidth: 480 }}>
-              Task Nexio is a new studio — focused, selective, and direct. We take on a
-              limited number of projects at a time so each one receives the attention it
-              deserves. You work with the people who design and build the product.
-            </p>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.6)', margin: 0, maxWidth: 420 }}>
+                We believe good technology begins with understanding the problem. Every project
+                should have a clear purpose, thoughtful design, sound engineering, and an
+                outcome that matters to the people using it.
+              </p>
 
-            {/* Identity table */}
-            <div style={{ paddingTop: '1.25rem', borderTop: `1px solid ${RULE}` }}>
-              {[
-                { k: 'Studio', v: 'Task Nexio' },
-                { k: 'Parent', v: PARENT_COMPANY },
-                { k: 'Status', v: 'Now accepting project enquiries' },
-              ].map(({ k, v }) => (
-                <div key={k} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <span style={{
-                    fontSize: '0.625rem',
-                    fontFamily: 'monospace',
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: TEXT4,
-                    width: 56,
-                    flexShrink: 0,
-                  }}>
-                    {k}
-                  </span>
-                  <span style={{ fontSize: '0.875rem', color: TEXT2 }}>{v}</span>
-                </div>
-              ))}
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9375rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.38)', margin: 0, maxWidth: 420 }}>
+                Task Nexio is a focused studio. We take on a limited number of projects at a
+                time so each one receives the attention it deserves.
+              </p>
+
+              <div style={{ paddingTop: '1.25rem', borderTop: `1px solid ${RULE}`, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {[
+                  { k: 'Studio', v: 'Task Nexio' },
+                  { k: 'Parent', v: PARENT_LABEL },
+                  { k: 'Status', v: 'Now accepting project enquiries' },
+                ].map(({ k, v }) => (
+                  <div key={k} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: '0.625rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.22)', width: 52, flexShrink: 0 }}>{k}</span>
+                    <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', color: 'rgba(255,255,255,0.65)' }}>{v}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </RevealWrapper>
 
-          {/* ── Right — principles ── */}
+          {/* Right — principles */}
           <div>
             {PRINCIPLES.map((principle, i) => (
               <RevealWrapper key={principle} delay={i * 70}>
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: '1.25rem',
-                    paddingTop: '1.75rem',
-                    paddingBottom: '1.75rem',
-                    borderTop: `1px solid ${RULE}`,
-                  }}
-                >
-                  <span style={{
-                    fontFamily: 'monospace',
-                    fontSize: '0.6875rem',
-                    color: TEXT4,
-                    flexShrink: 0,
-                    marginTop: 3,
-                    width: 24,
-                    letterSpacing: '0.05em',
-                  }}>
+                <div style={{ display: 'flex', gap: '1.5rem', paddingTop: '1.75rem', paddingBottom: '1.75rem', borderTop: `1px solid ${RULE}` }}>
+                  <span style={{ fontFamily: 'monospace', fontSize: '0.6875rem', color: 'rgba(255,255,255,0.2)', flexShrink: 0, width: 24, marginTop: 3, letterSpacing: '0.05em' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p style={{
-                    fontSize: '1.0625rem',
-                    lineHeight: 1.6,
-                    letterSpacing: '-0.01em',
-                    color: TEXT2,
-                  }}>
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1rem, 1.75vw, 1.125rem)', lineHeight: 1.6, letterSpacing: '-0.01em', color: 'rgba(255,255,255,0.78)', margin: 0 }}>
                     {principle}
                   </p>
                 </div>
               </RevealWrapper>
             ))}
-
-            {/* Last border */}
             <div style={{ borderTop: `1px solid ${RULE}` }} />
 
-            {/* Code accent block */}
+            {/* Code block accent */}
             <RevealWrapper delay={320} direction="fade">
-              <div
-                style={{
-                  marginTop: '2rem',
-                  borderRadius: 16,
-                  padding: '1.5rem',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  {[
-                    { c: '#60A5FA', text: '// discovery.ts' },
-                    { c: '#C3E88D', text: 'const brief = await understand(client)' },
-                    { c: '#F78C6C', text: 'const scope = define(brief, goals)' },
-                    { c: '#82AAFF', text: 'const product = build(scope)' },
-                    { c: '#C792EA', text: 'await launch(product)' },
-                  ].map((line, idx) => (
-                    <div key={idx} style={{ marginBottom: '0.5rem' }}>
-                      <span style={{
-                        fontFamily: '"JetBrains Mono", "Fira Code", monospace',
-                        fontSize: '0.8125rem',
-                        color: line.c,
-                        letterSpacing: '-0.01em',
-                      }}>
-                        {line.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+              <div style={{ marginTop: '2rem', borderRadius: 10, padding: '1.25rem 1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                {[
+                  { c: '#60A5FA', t: '// discovery.ts' },
+                  { c: '#C3E88D', t: 'const brief = await understand(client)' },
+                  { c: '#F78C6C', t: 'const scope = define(brief, goals)' },
+                  { c: '#82AAFF', t: 'const product = build(scope)' },
+                  { c: '#C792EA', t: 'await launch(product)' },
+                ].map((line, idx) => (
+                  <div key={idx} style={{ marginBottom: idx < 4 ? '0.5rem' : 0 }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: '0.8125rem', color: line.c, letterSpacing: '-0.01em' }}>
+                      {line.t}
+                    </span>
+                  </div>
+                ))}
               </div>
             </RevealWrapper>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .about-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
