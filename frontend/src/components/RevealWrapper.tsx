@@ -16,23 +16,26 @@ export function RevealWrapper({
 }: RevealWrapperProps) {
   const { ref, visible } = useScrollReveal<HTMLDivElement>();
 
-  const transforms: Record<string, string> = {
-    up:    'opacity-0 translate-y-8',
-    fade:  'opacity-0',
-    left:  'opacity-0 -translate-x-6',
-    right: 'opacity-0 translate-x-6',
+  // Hidden states per direction
+  const hiddenStyle: Record<string, React.CSSProperties> = {
+    up:    { opacity: 0, transform: 'translateY(28px)' },
+    fade:  { opacity: 0, transform: 'none' },
+    left:  { opacity: 0, transform: 'translateX(-20px)' },
+    right: { opacity: 0, transform: 'translateX(20px)' },
   };
 
-  const base   = 'transition-all duration-700 ease-spring';
-  const hidden = transforms[direction];
-  const shown  = 'opacity-100 translate-y-0 translate-x-0';
+  const shownStyle: React.CSSProperties = {
+    opacity: 1,
+    transform: 'none',
+  };
+
+  const style: React.CSSProperties = {
+    transition: `opacity 0.65s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+    ...(visible ? shownStyle : hiddenStyle[direction]),
+  };
 
   return (
-    <div
-      ref={ref}
-      className={`${base} ${visible ? shown : hidden} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
   );

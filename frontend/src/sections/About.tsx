@@ -1,101 +1,166 @@
-import { PRINCIPLES, PARENT_LABEL } from '../lib/constants';
+import { PRINCIPLES, PARENT_COMPANY } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
+
+// Dark section colours — all inline so they never depend on Tailwind purge
+const BG    = '#1A1A1A';
+const TEXT1 = '#FFFFFF';
+const TEXT2 = 'rgba(255,255,255,0.7)';
+const TEXT3 = 'rgba(255,255,255,0.45)';
+const TEXT4 = 'rgba(255,255,255,0.25)';
+const RULE  = 'rgba(255,255,255,0.1)';
 
 export function About() {
   return (
-    <section id="studio" className="bg-ink-90 text-white py-28 md:py-36 overflow-hidden" aria-labelledby="studio-heading">
+    <section
+      id="studio"
+      aria-labelledby="studio-heading"
+      style={{
+        background: BG,
+        color: TEXT1,
+        overflow: 'hidden',
+        paddingTop: '7rem',
+        paddingBottom: '7rem',
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-          {/* Left — headline + intro */}
+          {/* ── Left ── */}
           <RevealWrapper className="space-y-8">
-            <div>
-              <p className="text-2xs font-semibold tracking-widest uppercase text-white/30 mb-4">
-                Studio Philosophy
-              </p>
-              <h2
-                id="studio-heading"
-                className="font-display text-white text-balance"
-                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', lineHeight: 1.1, letterSpacing: '-0.035em' }}
-              >
-                Built with intention.
-                <br />
-                <span style={{ color: 'rgba(255,255,255,0.4)' }}>Engineered for impact.</span>
-              </h2>
-            </div>
+            {/* Label */}
+            <p style={{
+              fontSize: '0.625rem',
+              fontWeight: 600,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: TEXT4,
+              marginBottom: '1rem',
+            }}>
+              Studio Philosophy
+            </p>
 
-            <p className="text-white/60 leading-relaxed text-lg max-w-lg">
+            {/* Headline */}
+            <h2
+              id="studio-heading"
+              className="font-display text-balance"
+              style={{
+                fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.035em',
+                color: TEXT1,
+              }}
+            >
+              Built with intention.
+              <br />
+              <span style={{ color: TEXT3 }}>Engineered for impact.</span>
+            </h2>
+
+            {/* Body 1 */}
+            <p style={{ color: TEXT2, lineHeight: 1.75, fontSize: '1.0625rem', maxWidth: 480 }}>
               We believe good technology begins with understanding the problem. Every project
               should have a clear purpose, thoughtful design, sound engineering, and an
               outcome that matters to the people using it.
             </p>
 
-            <p className="text-white/40 leading-relaxed max-w-lg">
+            {/* Body 2 */}
+            <p style={{ color: TEXT3, lineHeight: 1.75, fontSize: '0.9375rem', maxWidth: 480 }}>
               Task Nexio is a new studio — focused, selective, and direct. We take on a
               limited number of projects at a time so each one receives the attention it
               deserves. You work with the people who design and build the product.
             </p>
 
             {/* Identity table */}
-            <div className="pt-4 border-t border-white/10 space-y-3">
+            <div style={{ paddingTop: '1.25rem', borderTop: `1px solid ${RULE}` }}>
               {[
-                { k: 'Studio',   v: 'Task Nexio' },
-                { k: 'Parent',   v: PARENT_LABEL },
-                { k: 'Status',   v: 'Now accepting project enquiries' },
+                { k: 'Studio', v: 'Task Nexio' },
+                { k: 'Parent', v: PARENT_COMPANY },
+                { k: 'Status', v: 'Now accepting project enquiries' },
               ].map(({ k, v }) => (
-                <div key={k} className="flex items-baseline gap-4">
-                  <span className="text-xs font-mono tracking-wider uppercase text-white/25 w-16 flex-shrink-0">{k}</span>
-                  <span className="text-sm text-white/70">{v}</span>
+                <div key={k} style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', marginBottom: '0.75rem' }}>
+                  <span style={{
+                    fontSize: '0.625rem',
+                    fontFamily: 'monospace',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: TEXT4,
+                    width: 56,
+                    flexShrink: 0,
+                  }}>
+                    {k}
+                  </span>
+                  <span style={{ fontSize: '0.875rem', color: TEXT2 }}>{v}</span>
                 </div>
               ))}
             </div>
           </RevealWrapper>
 
-          {/* Right — principles */}
-          <div className="space-y-0">
+          {/* ── Right — principles ── */}
+          <div>
             {PRINCIPLES.map((principle, i) => (
-              <RevealWrapper key={principle} delay={i * 60}>
-                <div className="flex gap-5 py-7 border-t border-white/8 last:border-b group">
-                  {/* Number */}
-                  <span
-                    className="font-mono text-white/15 tabular flex-shrink-0 mt-0.5 w-6"
-                    style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}
-                  >
+              <RevealWrapper key={principle} delay={i * 70}>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '1.25rem',
+                    paddingTop: '1.75rem',
+                    paddingBottom: '1.75rem',
+                    borderTop: `1px solid ${RULE}`,
+                  }}
+                >
+                  <span style={{
+                    fontFamily: 'monospace',
+                    fontSize: '0.6875rem',
+                    color: TEXT4,
+                    flexShrink: 0,
+                    marginTop: 3,
+                    width: 24,
+                    letterSpacing: '0.05em',
+                  }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  {/* Text */}
-                  <p
-                    className="text-white/80 group-hover:text-white transition-colors duration-200"
-                    style={{ fontSize: '1.125rem', lineHeight: 1.6, letterSpacing: '-0.01em' }}
-                  >
+                  <p style={{
+                    fontSize: '1.0625rem',
+                    lineHeight: 1.6,
+                    letterSpacing: '-0.01em',
+                    color: TEXT2,
+                  }}>
                     {principle}
                   </p>
                 </div>
               </RevealWrapper>
             ))}
 
-            {/* Visual accent */}
-            <RevealWrapper delay={280} direction="fade">
+            {/* Last border */}
+            <div style={{ borderTop: `1px solid ${RULE}` }} />
+
+            {/* Code accent block */}
+            <RevealWrapper delay={320} direction="fade">
               <div
-                className="mt-10 rounded-2xl p-6 overflow-hidden relative"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
+                style={{
+                  marginTop: '2rem',
+                  borderRadius: 16,
+                  padding: '1.5rem',
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
               >
-                {/* Grid dots */}
-                <div className="absolute inset-0 dot-grid opacity-10" />
-                <div className="relative z-10 space-y-3">
-                  {/* Fake code lines */}
+                <div style={{ position: 'relative', zIndex: 1 }}>
                   {[
-                    { c: '#60A5FA', w: '65%', text: '// discovery.ts' },
-                    { c: '#C3E88D', w: '80%', text: 'const brief = await understand(client)' },
-                    { c: '#F78C6C', w: '55%', text: 'const scope = define(brief, goals)' },
-                    { c: '#82AAFF', w: '75%', text: 'const product = build(scope)' },
-                    { c: '#C792EA', w: '50%', text: 'await launch(product)' },
-                  ].map((line, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <span
-                        className="text-[9px] font-mono truncate"
-                        style={{ color: line.c, width: line.w }}
-                      >
+                    { c: '#60A5FA', text: '// discovery.ts' },
+                    { c: '#C3E88D', text: 'const brief = await understand(client)' },
+                    { c: '#F78C6C', text: 'const scope = define(brief, goals)' },
+                    { c: '#82AAFF', text: 'const product = build(scope)' },
+                    { c: '#C792EA', text: 'await launch(product)' },
+                  ].map((line, idx) => (
+                    <div key={idx} style={{ marginBottom: '0.5rem' }}>
+                      <span style={{
+                        fontFamily: '"JetBrains Mono", "Fira Code", monospace',
+                        fontSize: '0.8125rem',
+                        color: line.c,
+                        letterSpacing: '-0.01em',
+                      }}>
                         {line.text}
                       </span>
                     </div>

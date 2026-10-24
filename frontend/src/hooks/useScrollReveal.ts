@@ -7,21 +7,29 @@ interface Options {
 }
 
 export function useScrollReveal<T extends Element>({
-  threshold  = 0.08,
-  rootMargin = '0px 0px -32px 0px',
+  threshold  = 0.05,
+  rootMargin = '0px 0px -20px 0px',
   once       = true,
 }: Options = {}) {
-  const ref               = useRef<T>(null);
-  const [visible, setV]   = useState(false);
+  const ref             = useRef<T>(null);
+  const [visible, setV] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Skip animation for reduced-motion
+    // Always show immediately for reduced-motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setV(true);
       return;
+    }
+
+    // Check if already visible on mount (above the fold)
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      // Small delay so CSS transition has time to register before showing
+      const t = setTimeout(() => setV(true), 50);
+      return () => clearTimeout(t);
     }
 
     const obs = new IntersectionObserver(

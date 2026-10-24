@@ -1,9 +1,10 @@
 // ─── Brand & Contact ────────────────────────────────────────────────────────
-export const BRAND_NAME    = 'Task Nexio';
-export const BRAND_TAGLINE = 'From Vision to Reality.';
-export const PARENT_LABEL  = 'A Valen Labs product.';
-export const CONTACT_EMAIL = 'contact@valenlabs.in';
-export const DOMAIN        = 'tasknexio.com';
+export const BRAND_NAME      = 'Task Nexio';
+export const BRAND_TAGLINE   = 'From Vision to Reality.';
+export const PARENT_LABEL    = 'A Valen Labs product.';
+export const PARENT_COMPANY  = 'Valen Labs Private Limited';
+export const CONTACT_EMAIL   = 'contact@valenlabs.in';
+export const DOMAIN          = 'tasknexio.com';
 
 // ─── Navigation ─────────────────────────────────────────────────────────────
 export const NAV_LINKS = [
