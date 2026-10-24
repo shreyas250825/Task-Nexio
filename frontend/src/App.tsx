@@ -1,7 +1,8 @@
 import { Navigation } from './components/Navigation';
 import { Hero }       from './sections/Hero';
-import { Services }   from './sections/Services';
+import { Statement }  from './sections/Statement';
 import { Work }       from './sections/Work';
+import { Services }   from './sections/Services';
 import { About }      from './sections/About';
 import { Process }    from './sections/Process';
 import { Engage }     from './sections/Engage';
@@ -11,20 +12,19 @@ import { Footer }     from './sections/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#080d1f] text-slate-200 font-sans antialiased">
+    <div className="min-h-screen bg-canvas text-ink font-sans antialiased">
       <Navigation />
-
       <main id="main-content">
         <Hero />
-        <Services />
+        <Statement />
         <Work />
+        <Services />
         <About />
         <Process />
         <Engage />
         <FAQ />
         <Contact />
       </main>
-
       <Footer />
     </div>
   );

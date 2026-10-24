@@ -1,12 +1,18 @@
 interface SectionLabelProps {
   children: React.ReactNode;
   className?: string;
+  light?: boolean;
 }
 
-export function SectionLabel({ children, className = '' }: SectionLabelProps) {
+export function SectionLabel({ children, className = '', light = false }: SectionLabelProps) {
   return (
     <span
-      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase text-brand-400 bg-brand-950/60 border border-brand-800/60 ${className}`}
+      className={[
+        'inline-flex items-center gap-2',
+        'text-2xs font-semibold tracking-widest uppercase',
+        light ? 'text-white/50' : 'text-ink-40',
+        className,
+      ].join(' ')}
     >
       {children}
     </span>

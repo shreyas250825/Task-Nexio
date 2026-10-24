@@ -1,157 +1,259 @@
-import { Monitor, LayoutDashboard, Cpu, Code2, ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { SERVICES } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
-import { SectionLabel } from '../components/SectionLabel';
 
-const iconMap = { Monitor, LayoutDashboard, Cpu, Code2 };
-
-// Per-service interface previews
-function ServiceVisual({ id }: { id: string }) {
-  if (id === 'websites') {
-    return (
-      <div className="rounded-lg overflow-hidden border border-surface-border bg-midnight-950/60 p-4 space-y-2" aria-hidden="true">
-        <div className="h-2 w-1/2 rounded bg-brand-700/50" />
-        <div className="h-1.5 w-3/4 rounded bg-slate-700/50" />
-        <div className="h-1.5 w-2/3 rounded bg-slate-700/40" />
-        <div className="mt-3 flex gap-2">
-          <div className="h-6 w-16 rounded bg-brand-600/50 text-[8px] flex items-center justify-center text-brand-300 font-mono">CTA</div>
+// ─── Per-service interface compositions ──────────────────────────────────────
+function WebsiteComposition() {
+  return (
+    <div
+      className="w-full rounded-xl overflow-hidden"
+      style={{ background: '#0A0D14', aspectRatio: '16/9' }}
+      aria-hidden="true"
+    >
+      <div className="p-5 h-full flex flex-col">
+        {/* Nav */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 rounded" style={{ background: '#2563EB' }} />
+            <div className="h-2 w-16 rounded" style={{ background: 'rgba(255,255,255,0.2)' }} />
+          </div>
+          <div className="flex gap-2">
+            {[40, 32, 36, 44].map((w, i) => (
+              <div key={i} className="h-1.5 rounded" style={{ width: w, background: 'rgba(255,255,255,0.1)' }} />
+            ))}
+          </div>
+          <div className="h-6 w-16 rounded-md" style={{ background: '#2563EB' }} />
         </div>
-        <div className="h-12 w-full rounded bg-gradient-to-br from-brand-900/40 to-transparent border border-surface-border mt-2" />
+        {/* Hero */}
+        <div className="flex-1 flex flex-col justify-center space-y-3">
+          <div className="h-1.5 w-24 rounded-full" style={{ background: 'rgba(37,99,235,0.6)' }} />
+          <div className="h-7 w-3/4 rounded-md" style={{ background: 'rgba(255,255,255,0.7)' }} />
+          <div className="h-7 w-1/2 rounded-md" style={{ background: 'rgba(255,255,255,0.45)' }} />
+          <div className="h-3 w-4/5 rounded mt-1" style={{ background: 'rgba(255,255,255,0.15)' }} />
+          <div className="h-3 w-2/3 rounded" style={{ background: 'rgba(255,255,255,0.10)' }} />
+          <div className="flex gap-2 mt-2">
+            <div className="h-8 w-24 rounded-md" style={{ background: '#2563EB' }} />
+            <div className="h-8 w-20 rounded-md" style={{ border: '1px solid rgba(255,255,255,0.15)' }} />
+          </div>
+        </div>
       </div>
-    );
-  }
-  if (id === 'portals') {
-    return (
-      <div className="rounded-lg border border-surface-border bg-midnight-950/60 p-3 space-y-2" aria-hidden="true">
-        <div className="flex gap-2">
-          <div className="w-14 space-y-1.5">
-            {['Nav', 'Nav', 'Nav'].map((_, i) => (
-              <div key={i} className={`h-4 rounded text-[7px] flex items-center justify-center font-mono ${i === 0 ? 'bg-brand-700/50 text-brand-300' : 'bg-surface-border/40 text-slate-600'}`}>
-                {['Home', 'Data', 'Logs'][i]}
+    </div>
+  );
+}
+
+function PortalComposition() {
+  return (
+    <div
+      className="w-full rounded-xl overflow-hidden border"
+      style={{ background: 'white', borderColor: '#E8E8E6', aspectRatio: '16/9' }}
+      aria-hidden="true"
+    >
+      <div className="flex h-full">
+        {/* Sidebar */}
+        <div className="w-32 border-r p-3 space-y-2 flex-shrink-0" style={{ borderColor: '#F0EFED', background: '#F8F8F6' }}>
+          <div className="h-6 w-20 rounded bg-ink-10 mb-4" />
+          {[true, false, false, false, false].map((active, i) => (
+            <div
+              key={i}
+              className="h-7 rounded-md flex items-center gap-2 px-2"
+              style={{ background: active ? '#2563EB' : 'transparent' }}
+            >
+              <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: active ? 'rgba(255,255,255,0.7)' : '#C8C8C6' }} />
+              <div className="h-1.5 flex-1 rounded" style={{ background: active ? 'rgba(255,255,255,0.5)' : '#D8D8D6' }} />
+            </div>
+          ))}
+        </div>
+        {/* Content */}
+        <div className="flex-1 p-4 space-y-3">
+          <div className="h-4 w-40 rounded bg-ink-80" />
+          <div className="grid grid-cols-3 gap-2">
+            {['#2563EB', '#0D9488', '#D97706'].map((c) => (
+              <div key={c} className="rounded-lg p-3" style={{ background: c + '10', border: `1px solid ${c}25` }}>
+                <div className="h-4 w-8 rounded font-bold" style={{ background: c + '80' }} />
+                <div className="h-2 w-12 rounded mt-1" style={{ background: c + '40' }} />
               </div>
             ))}
           </div>
-          <div className="flex-1 space-y-1.5">
-            <div className="h-6 rounded bg-surface-border/50 flex gap-1 items-center px-2">
-              {[60, 45, 70].map((h, i) => (
-                <div key={i} className="flex-1 rounded-sm bg-brand-600/40" style={{ height: `${h * 0.06}rem` }} />
+          <div className="rounded-lg border overflow-hidden" style={{ borderColor: '#F0EFED' }}>
+            {[70, 85, 60, 90].map((w, i) => (
+              <div key={i} className="flex items-center gap-2 px-3 py-2 border-b last:border-0" style={{ borderColor: '#F0EFED' }}>
+                <div className="w-5 h-5 rounded bg-ink-10 flex-shrink-0" />
+                <div className="h-2 rounded bg-ink-10 flex-1" style={{ width: `${w}%` }} />
+                <div className="h-4 w-8 rounded" style={{ background: '#2563EB', opacity: 0.3 }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AIComposition() {
+  return (
+    <div
+      className="w-full rounded-xl overflow-hidden border"
+      style={{ background: '#FAFAFA', borderColor: '#E8E8E6', aspectRatio: '16/9' }}
+      aria-hidden="true"
+    >
+      <div className="p-5 h-full flex flex-col gap-3">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 rounded-md" style={{ background: '#7C3AED' }} />
+            <div className="h-2 w-24 rounded bg-ink-20" />
+          </div>
+          <div
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[8px] font-medium"
+            style={{ background: 'rgba(124,58,237,0.1)', color: '#7C3AED', border: '1px solid rgba(124,58,237,0.2)' }}
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+            AI Active
+          </div>
+        </div>
+
+        {/* Chat / doc area */}
+        <div className="flex-1 flex flex-col gap-2 justify-end">
+          {/* Document card */}
+          <div className="flex items-start gap-2 justify-end">
+            <div className="max-w-[70%] space-y-1 rounded-xl rounded-tr-sm p-2.5" style={{ background: '#F0EDF8' }}>
+              {[90, 75, 60].map((w, i) => (
+                <div key={i} className="h-2 rounded" style={{ width: `${w}%`, background: '#C4B5FD' }} />
               ))}
             </div>
-            <div className="grid grid-cols-2 gap-1">
-              <div className="h-5 rounded bg-surface-border/40" />
-              <div className="h-5 rounded bg-surface-border/40" />
+          </div>
+          {/* AI response */}
+          <div className="flex items-start gap-2">
+            <div className="w-6 h-6 rounded-full flex-shrink-0" style={{ background: '#7C3AED' }} />
+            <div className="max-w-[75%] space-y-1.5 rounded-xl rounded-tl-sm p-2.5 border border-purple-100" style={{ background: 'white' }}>
+              {[100, 85, 70, 55].map((w, i) => (
+                <div key={i} className="h-2 rounded bg-ink-10" style={{ width: `${w}%` }} />
+              ))}
+              <div className="flex gap-1 pt-1">
+                <div className="h-4 w-12 rounded" style={{ background: '#7C3AED', opacity: 0.8 }} />
+                <div className="h-4 w-16 rounded" style={{ background: '#F0EDF8' }} />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
-  if (id === 'ai') {
-    return (
-      <div className="rounded-lg border border-surface-border bg-midnight-950/60 p-3 space-y-2" aria-hidden="true">
-        <div className="flex items-start gap-2">
-          <div className="w-5 h-5 rounded-full bg-brand-700/50 flex-shrink-0 mt-0.5" />
-          <div className="flex-1 space-y-1">
-            <div className="h-2 w-full rounded bg-slate-700/50" />
-            <div className="h-2 w-3/4 rounded bg-slate-700/40" />
+          {/* Input */}
+          <div className="flex gap-2 items-center rounded-xl border px-3 py-2.5" style={{ borderColor: '#E0D9F0', background: 'white' }}>
+            <div className="flex-1 h-2 rounded bg-ink-10" />
+            <div className="w-6 h-6 rounded-md flex-shrink-0" style={{ background: '#7C3AED' }} />
           </div>
         </div>
-        <div className="flex items-start gap-2 justify-end">
-          <div className="flex-1 space-y-1 text-right">
-            <div className="h-2 w-full rounded bg-brand-700/40" />
-            <div className="h-2 w-2/3 ml-auto rounded bg-brand-700/30" />
-          </div>
-          <div className="w-5 h-5 rounded-full bg-violet-700/50 flex-shrink-0 mt-0.5" />
-        </div>
-        <div className="flex items-center gap-1.5 border border-surface-border rounded px-2 py-1">
-          <div className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
-          <div className="h-1.5 flex-1 rounded bg-surface-border/60" />
-        </div>
       </div>
-    );
-  }
-  // software/mvp
+    </div>
+  );
+}
+
+function SaaSComposition() {
   return (
-    <div className="rounded-lg border border-surface-border bg-midnight-950/60 p-3" aria-hidden="true">
-      <div className="space-y-1.5 font-mono text-[9px]">
+    <div
+      className="w-full rounded-xl overflow-hidden border font-mono"
+      style={{ background: '#0F1117', borderColor: '#2D2D35', aspectRatio: '16/9' }}
+      aria-hidden="true"
+    >
+      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b" style={{ borderColor: '#2D2D35' }}>
+        {['rgba(255,68,58,0.7)', 'rgba(255,189,46,0.7)', 'rgba(40,200,64,0.7)'].map((c, i) => (
+          <div key={i} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
+        ))}
+        <span className="ml-3 text-[9px]" style={{ color: 'rgba(255,255,255,0.25)' }}>main.ts</span>
+      </div>
+      <div className="p-4 space-y-1.5">
         {[
-          { text: 'const app = express()', color: 'text-brand-400' },
-          { text: "app.get('/api/v1/...', auth,", color: 'text-slate-500' },
-          { text: '  async (req, res) => {', color: 'text-slate-500' },
-          { text: '  const data = await db.query()', color: 'text-violet-400' },
-          { text: '  res.json({ data })', color: 'text-green-400/70' },
-          { text: '})', color: 'text-slate-500' },
+          { text: 'import { createApp } from',  c: '#C792EA' },
+          { text: '  "./server"',                c: '#C3E88D' },
+          { text: '',                            c: '' },
+          { text: 'const app = createApp({',    c: '#82AAFF' },
+          { text: '  database: postgres,',       c: '#F78C6C' },
+          { text: '  auth: {',                   c: '#F78C6C' },
+          { text: '    provider: "oauth2",',     c: '#C3E88D' },
+          { text: '    roles: ["admin","user"]', c: '#C3E88D' },
+          { text: '  },',                        c: '#F78C6C' },
+          { text: '  ai: { model: "gpt-4o" }',  c: '#89DDFF' },
+          { text: '})',                           c: '#82AAFF' },
+          { text: '',                            c: '' },
+          { text: 'app.listen(3000)',            c: '#C792EA' },
         ].map((line, i) => (
-          <div key={i} className={`${line.color}`}>{line.text}</div>
+          <div key={i} className="text-[9px] leading-5 tabular" style={{ color: line.c || 'transparent', height: '1.25rem' }}>
+            {line.text}
+          </div>
         ))}
       </div>
     </div>
   );
 }
 
-export function Services() {
-  return (
-    <section id="services" className="py-28 relative overflow-hidden">
-      {/* Subtle top separator */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent to-surface-border" />
+const visuals = [WebsiteComposition, PortalComposition, AIComposition, SaaSComposition];
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+export function Services() {
+  const go = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section id="services" className="bg-ink-5 py-28 md:py-36" aria-labelledby="services-heading">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+
         {/* Header */}
-        <RevealWrapper className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <SectionLabel>What We Build</SectionLabel>
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-            From idea to deployed product.
+        <RevealWrapper className="mb-20">
+          <h2
+            id="services-heading"
+            className="font-display text-ink text-balance"
+            style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', lineHeight: 1.1, letterSpacing: '-0.035em' }}
+          >
+            What will you
+            <br />
+            build next?
           </h2>
-          <p className="text-slate-400 text-lg">
-            Four core practice areas, each focused on delivering outcomes your business can actually use.
+          <p className="mt-4 text-lg text-ink-60 max-w-xl leading-relaxed">
+            Four practice areas. Every one focused on delivering digital products that create
+            real outcomes for the businesses we work with.
           </p>
         </RevealWrapper>
 
-        {/* Service cards */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Services — alternating layout */}
+        <div className="space-y-20">
           {SERVICES.map((service, i) => {
-            const Icon = iconMap[service.icon as keyof typeof iconMap];
+            const Visual = visuals[i];
+            const isEven = i % 2 === 0;
+
             return (
-              <RevealWrapper key={service.id} delay={i * 80}>
-                <article className="group relative h-full rounded-2xl border border-surface-border bg-surface-card p-8 hover:border-brand-800/60 hover:bg-surface-hover transition-all duration-300 overflow-hidden">
-                  {/* Glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(99,102,241,0.06) 0%, transparent 60%)' }}
-                  />
+              <RevealWrapper key={service.number} delay={60}>
+                <article
+                  className={[
+                    'grid lg:grid-cols-2 gap-12 lg:gap-16 items-center',
+                    !isEven ? 'lg:grid-flow-dense' : '',
+                  ].join(' ')}
+                >
+                  {/* Visual */}
+                  <div className={!isEven ? 'lg:col-start-2' : ''}>
+                    <Visual />
+                  </div>
 
-                  <div className="relative z-10 flex flex-col h-full gap-6">
-                    <div className="flex items-start justify-between gap-4">
-                      {/* Icon */}
-                      <div className="w-12 h-12 rounded-xl bg-brand-950 border border-brand-800/50 flex items-center justify-center flex-shrink-0">
-                        <Icon size={22} className="text-brand-400" />
-                      </div>
-                      {/* Outcome badge */}
-                      <span className="text-[10px] font-mono text-slate-600 border border-surface-border rounded-full px-2 py-0.5 whitespace-nowrap">
-                        {service.outcome}
-                      </span>
-                    </div>
-
-                    <div className="space-y-3 flex-1">
-                      <h3 className="text-lg font-semibold text-white group-hover:text-brand-300 transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm text-slate-400 leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-
-                    {/* Interface preview */}
-                    <ServiceVisual id={service.id} />
-
-                    {/* Learn more link */}
-                    <a
-                      href="#contact"
-                      className="flex items-center gap-1.5 text-xs font-medium text-brand-400 hover:text-brand-300 transition-colors group/link mt-1"
-                      aria-label={`Enquire about ${service.title}`}
+                  {/* Copy */}
+                  <div className={`space-y-5 ${!isEven ? 'lg:col-start-1' : ''}`}>
+                    <span
+                      className="font-display text-ink-10 tabular select-none"
+                      style={{ fontSize: '5rem', lineHeight: 1, letterSpacing: '-0.05em' }}
+                    >
+                      {service.number}
+                    </span>
+                    <h3
+                      className="font-semibold text-ink"
+                      style={{ fontSize: '1.625rem', lineHeight: 1.25, letterSpacing: '-0.025em' }}
+                    >
+                      {service.title}
+                    </h3>
+                    <p className="text-ink-60 leading-relaxed">{service.body}</p>
+                    <button
+                      onClick={() => go('#contact')}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded"
                     >
                       Discuss this service
-                      <ArrowRight size={13} className="group-hover/link:translate-x-0.5 transition-transform" />
-                    </a>
+                      <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </button>
                   </div>
                 </article>
               </RevealWrapper>

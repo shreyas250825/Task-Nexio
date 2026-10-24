@@ -1,43 +1,47 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?:    'sm' | 'md' | 'lg';
-  as?:      'button' | 'a';
-  href?:    string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'dark';
+  size?: 'sm' | 'md' | 'lg';
+  as?: 'button' | 'a';
+  href?: string;
+  target?: string;
+  rel?: string;
   children: React.ReactNode;
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:opacity-50 disabled:pointer-events-none select-none';
+  'inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 ease-spring ' +
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 ' +
+  'disabled:opacity-40 disabled:pointer-events-none select-none cursor-pointer';
 
-const variants = {
+const variants: Record<string, string> = {
   primary:
-    'bg-brand-600 text-white hover:bg-brand-500 active:bg-brand-700 shadow-glow-sm hover:shadow-glow-md',
+    'bg-blue-600 text-white rounded-md hover:bg-blue-700 active:scale-[0.98] shadow-sm hover:shadow-md',
   secondary:
-    'bg-transparent text-slate-200 border border-surface-border hover:border-brand-500/60 hover:text-white hover:bg-surface-hover',
+    'bg-transparent text-ink border border-ink-10 rounded-md hover:border-ink-20 hover:bg-ink-5',
+  dark:
+    'bg-ink-90 text-white rounded-md hover:bg-ink active:scale-[0.98] shadow-sm hover:shadow-md',
   ghost:
-    'bg-transparent text-slate-400 hover:text-white hover:bg-surface-hover',
+    'bg-transparent text-ink-60 rounded-md hover:text-ink hover:bg-ink-5',
 };
 
-const sizes = {
+const sizes: Record<string, string> = {
   sm:  'px-4 py-2 text-sm',
-  md:  'px-6 py-3 text-sm',
-  lg:  'px-8 py-4 text-base',
+  md:  'px-5 py-2.5 text-sm',
+  lg:  'px-7 py-3.5 text-[0.9375rem] tracking-snug',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', as: Tag = 'button', href, children, className = '', ...props }, ref) => {
+  ({ variant = 'primary', size = 'md', as: Tag = 'button', href, target, rel, children, className = '', ...props }, ref) => {
     const cls = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
-
     if (Tag === 'a' && href) {
       return (
-        <a href={href} className={cls}>
+        <a href={href} target={target} rel={rel} className={cls}>
           {children}
         </a>
       );
     }
-
     return (
       <button ref={ref} className={cls} {...props}>
         {children}
@@ -45,5 +49,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-
 Button.displayName = 'Button';

@@ -1,39 +1,35 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { FAQ_ITEMS } from '../lib/constants';
+import { Plus, Minus } from 'lucide-react';
+import { FAQ_ITEMS, CONTACT_EMAIL } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
-import { SectionLabel } from '../components/SectionLabel';
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-surface-border last:border-0">
+    <div className="border-t border-ink-10 last:border-b">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-start justify-between gap-6 py-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 rounded-sm"
+        className="w-full flex items-start justify-between gap-6 py-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-sm"
         aria-expanded={open}
       >
-        <span className="text-base font-medium text-slate-200 group-hover:text-white transition-colors leading-snug">
-          {question}
+        <span
+          className="font-medium text-ink group-hover:text-blue-600 transition-colors leading-snug"
+          style={{ fontSize: '0.9375rem', letterSpacing: '-0.01em' }}
+        >
+          {q}
         </span>
-        <ChevronDown
-          size={18}
-          className={`flex-shrink-0 text-slate-600 group-hover:text-slate-400 transition-all duration-300 mt-0.5 ${
-            open ? 'rotate-180 text-brand-400' : ''
-          }`}
-        />
+        <span className="flex-shrink-0 mt-0.5 text-ink-40 group-hover:text-blue-600 transition-colors">
+          {open ? <Minus size={15} /> : <Plus size={15} />}
+        </span>
       </button>
 
-      {/* Answer */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          open ? 'max-h-80 opacity-100 pb-6' : 'max-h-0 opacity-0'
         }`}
       >
-        <p className="pb-6 text-slate-400 leading-relaxed text-sm pr-8">
-          {answer}
-        </p>
+        <p className="text-sm text-ink-60 leading-relaxed pr-8">{a}</p>
       </div>
     </div>
   );
@@ -41,39 +37,39 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-28 relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
+    <section id="faq" className="bg-canvas py-28 md:py-32" aria-labelledby="faq-heading">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="divider-x mb-20" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid lg:grid-cols-3 gap-16">
-          {/* Left label */}
-          <RevealWrapper className="lg:sticky lg:top-28 h-fit space-y-4">
-            <SectionLabel>FAQ</SectionLabel>
-            <h2 className="text-3xl font-bold text-white tracking-tight leading-snug">
+          {/* Left */}
+          <RevealWrapper className="lg:sticky lg:top-24 h-fit space-y-5">
+            <p className="text-2xs font-semibold tracking-widest uppercase text-ink-40">
+              FAQ
+            </p>
+            <h2
+              id="faq-heading"
+              className="font-display text-ink text-balance"
+              style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', lineHeight: 1.15, letterSpacing: '-0.03em' }}
+            >
               Common questions.
             </h2>
-            <p className="text-slate-400 leading-relaxed">
-              Can't find the answer you're looking for? Email us at{' '}
+            <p className="text-sm text-ink-60 leading-relaxed">
+              Something else on your mind?{' '}
               <a
-                href="mailto:contact@valenlabs.in"
-                className="text-brand-400 hover:text-brand-300 transition-colors underline underline-offset-2"
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-blue-600 font-medium hover:underline underline-offset-2"
               >
-                contact@valenlabs.in
+                Email us directly.
               </a>
             </p>
           </RevealWrapper>
 
-          {/* Right accordion */}
-          <RevealWrapper className="lg:col-span-2">
-            <div>
-              {FAQ_ITEMS.map((item) => (
-                <FAQItem
-                  key={item.question}
-                  question={item.question}
-                  answer={item.answer}
-                />
-              ))}
-            </div>
+          {/* Right — accordion */}
+          <RevealWrapper className="lg:col-span-2" delay={80}>
+            {FAQ_ITEMS.map((item) => (
+              <FAQItem key={item.q} q={item.q} a={item.a} />
+            ))}
           </RevealWrapper>
         </div>
       </div>

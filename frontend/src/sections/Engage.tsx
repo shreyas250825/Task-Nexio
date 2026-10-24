@@ -1,44 +1,72 @@
-import { ArrowRight, Rocket } from 'lucide-react';
-import { Button } from '../components/Button';
+import { ArrowUpRight } from 'lucide-react';
+import { CONTACT_EMAIL } from '../lib/constants';
 import { RevealWrapper } from '../components/RevealWrapper';
 
 export function Engage() {
+  const go = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <section className="py-28 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-950/10 to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-border to-transparent" />
+    <section
+      className="relative overflow-hidden py-28 md:py-36"
+      style={{ background: '#0A0D14' }}
+      aria-label="Call to action"
+    >
+      {/* Subtle grid */}
+      <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-6 md:px-12 relative">
-        <RevealWrapper className="text-center space-y-8">
-          <div className="w-14 h-14 rounded-2xl bg-brand-950 border border-brand-800/50 flex items-center justify-center mx-auto">
-            <Rocket size={24} className="text-brand-400" />
-          </div>
+      {/* Blue glow — bottom centre */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        style={{
+          width: 600,
+          height: 300,
+          background: 'radial-gradient(ellipse at center bottom, rgba(37,99,235,0.25) 0%, transparent 70%)',
+        }}
+      />
 
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-            Have an idea? Let's make it real.
+      <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 text-center">
+        <RevealWrapper>
+          <p className="text-2xs font-semibold tracking-widest uppercase text-white/30 mb-8">
+            Let's Build Something
+          </p>
+
+          <h2
+            className="font-display text-white text-balance"
+            style={{
+              fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.04em',
+            }}
+          >
+            Have a vision?
+            <br />
+            <span style={{ color: '#60A5FA' }}>Let's make it real.</span>
           </h2>
 
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Task Nexio works with businesses at different stages — whether you need a new website,
-            a custom internal tool, or a full AI-powered product. No idea is too early to discuss.
+          <p className="mt-6 text-lg text-white/50 max-w-2xl mx-auto leading-relaxed">
+            Tell us what you're imagining. Whether it's a new website, a complex business
+            portal, or an AI-powered product — let's explore what we can build together.
           </p>
 
-          <p className="text-slate-500 leading-relaxed max-w-xl mx-auto">
-            We take a limited number of projects at a time to ensure each one gets the attention it deserves.
-            If you have something in mind, the best first step is a short conversation.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <Button as="a" href="#contact" size="lg">
-              Start a Project
-              <ArrowRight size={16} />
-            </Button>
-            <a
-              href={`mailto:contact@valenlabs.in`}
-              className="text-sm text-slate-400 hover:text-white transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-slate-500"
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Primary CTA — white background, dark text — impossible to miss */}
+            <button
+              onClick={() => go('#contact')}
+              className="inline-flex items-center gap-2 bg-white text-ink-90 rounded-md px-8 py-4 text-[0.9375rem] font-semibold tracking-snug shadow-xl hover:bg-blue-50 hover:text-blue-700 active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0D14]"
             >
-              Or email us directly
+              Start a Project
+              <ArrowUpRight size={17} strokeWidth={2.5} />
+            </button>
+
+            {/* Secondary — email link, clearly readable */}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors border border-white/10 hover:border-white/20 rounded-md px-5 py-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0D14]"
+            >
+              {CONTACT_EMAIL}
             </a>
           </div>
         </RevealWrapper>

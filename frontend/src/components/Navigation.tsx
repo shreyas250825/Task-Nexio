@@ -1,144 +1,132 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { NAV_LINKS, BRAND_NAME } from '../lib/constants';
-import { Button } from './Button';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { BRAND_NAME, NAV_LINKS } from '../lib/constants';
 
 export function Navigation() {
-  const [scrolled,   setScrolled]   = useState(false);
-  const [menuOpen,   setMenuOpen]   = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
+    const h = () => setScrolled(window.scrollY > 32);
+    h();
+    window.addEventListener('scroll', h, { passive: true });
+    return () => window.removeEventListener('scroll', h);
   }, []);
 
-  // Close menu on resize to desktop
   useEffect(() => {
-    const handler = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
-    window.addEventListener('resize', handler);
-    return () => window.removeEventListener('resize', handler);
+    const h = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
   }, []);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const handleNavClick = (href: string) => {
+  const go = (href: string) => {
     setMenuOpen(false);
     const el = document.querySelector(href);
-    if (el) {
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
   };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={[
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-surface/95 backdrop-blur-md border-b border-surface-border shadow-md'
-            : 'bg-transparent'
-        }`}
+            ? 'bg-canvas/90 backdrop-blur-xl border-b border-ink-10 shadow-xs'
+            : 'bg-transparent',
+        ].join(' ')}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-16 md:h-18">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-15 md:h-16">
 
-            {/* Wordmark */}
-            <a
-              href="#"
-              className="flex items-center gap-2 group focus-visible:outline-none"
-              aria-label="Task Nexio — home"
-            >
-              {/* Logo mark */}
-              <div className="relative w-8 h-8 flex-shrink-0">
-                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
-                  <rect width="32" height="32" rx="8" fill="#4338ca" />
-                  <path d="M8 10h10M8 16h16M8 22h12" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-                  <circle cx="23" cy="10" r="3" fill="#818cf8"/>
-                </svg>
-              </div>
-              <span className="text-white font-semibold text-lg tracking-tight group-hover:text-brand-300 transition-colors">
-                {BRAND_NAME}
-              </span>
-            </a>
+          {/* Wordmark */}
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="flex items-center gap-2.5 group focus-visible:outline-none"
+            aria-label="Task Nexio — home"
+          >
+            <svg viewBox="0 0 28 28" fill="none" className="w-7 h-7 flex-shrink-0">
+              <rect width="28" height="28" rx="7" fill="#0F0F0F"/>
+              <path d="M7 9h9M7 14h14M7 19h11" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="20" cy="9" r="2.5" fill="#60A5FA"/>
+            </svg>
+            <span className="text-ink font-semibold text-[0.9375rem] tracking-tight group-hover:text-blue-600 transition-colors duration-150">
+              {BRAND_NAME}
+            </span>
+          </a>
 
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1" aria-label="Primary navigation">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="px-4 py-2 text-sm text-slate-400 hover:text-white rounded-lg hover:bg-surface-hover transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </nav>
-
-            {/* Desktop CTA */}
-            <div className="hidden md:flex items-center">
-              <Button
-                as="a"
-                href="#contact"
-                size="sm"
-                onClick={() => handleNavClick('#contact')}
+          {/* Desktop nav links */}
+          <nav className="hidden md:flex items-center gap-1" aria-label="Primary navigation">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => go(link.href)}
+                className="px-3.5 py-2 text-sm text-ink-60 hover:text-ink rounded-md hover:bg-ink-5 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
               >
-                Start a Project
-              </Button>
-            </div>
+                {link.label}
+              </button>
+            ))}
+          </nav>
 
-            {/* Mobile hamburger */}
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
             <button
-              onClick={() => setMenuOpen((v) => !v)}
-              className="md:hidden p-2 text-slate-400 hover:text-white rounded-lg hover:bg-surface-hover transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
+              onClick={() => go('#contact')}
+              className="nav-cta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 flex items-center gap-1.5"
             >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              Start a Project
+              <ArrowUpRight size={14} />
             </button>
           </div>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden p-2 text-ink-60 hover:text-ink rounded-md hover:bg-ink-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+          >
+            {menuOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
+          </button>
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu */}
       {menuOpen && (
         <div
-          id="mobile-menu"
+          id="mobile-nav"
           role="dialog"
           aria-label="Mobile navigation"
           className="fixed inset-0 z-40 md:hidden"
         >
-          {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-ink/5 backdrop-blur-sm"
             onClick={() => setMenuOpen(false)}
           />
-
-          {/* Panel */}
-          <nav className="absolute top-16 left-0 right-0 bg-surface border-b border-surface-border shadow-xl animate-slide-down">
-            <div className="px-6 py-6 flex flex-col gap-1">
+          <nav className="absolute top-[60px] left-0 right-0 bg-paper border-b border-ink-10 shadow-lg animate-slide-down">
+            <div className="px-6 py-5 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-left px-4 py-3 text-slate-300 hover:text-white hover:bg-surface-hover rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                  onClick={() => go(link.href)}
+                  className="text-left px-4 py-3 text-ink-80 hover:text-ink hover:bg-ink-5 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                 >
                   {link.label}
                 </button>
               ))}
-              <div className="pt-4 border-t border-surface-border mt-2">
-                <Button
-                  as="a"
-                  href="#contact"
-                  className="w-full justify-center"
-                  onClick={() => handleNavClick('#contact')}
+              <div className="pt-3 mt-1 border-t border-ink-10">
+                <button
+                  onClick={() => go('#contact')}
+                  className="w-full nav-cta flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                 >
                   Start a Project
-                </Button>
+                  <ArrowUpRight size={14} />
+                </button>
               </div>
             </div>
           </nav>
