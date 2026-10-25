@@ -275,7 +275,9 @@ export function Work() {
                 @media (max-width: 767px) {
                   .work-grid${i} {
                     grid-template-columns: 1fr !important;
+                    gap: 2rem !important;
                   }
+                  .work-grid${i} > * { order: unset !important; }
                   .work-grid${i} > *:first-child { order: 1 !important; }
                   .work-grid${i} > *:last-child  { order: 2 !important; }
                 }

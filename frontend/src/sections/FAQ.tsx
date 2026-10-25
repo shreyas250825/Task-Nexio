@@ -41,7 +41,7 @@ export function FAQ() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.8fr', gap: '4rem' }} className="faq-grid">
 
             <RevealWrapper>
-              <div style={{ position: 'sticky', top: '6rem' }}>
+              <div className="faq-sticky" style={{ position: 'sticky', top: '6rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
                   <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
                   <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>FAQ</span>
@@ -70,6 +70,7 @@ export function FAQ() {
       <style>{`
         @media (max-width: 767px) {
           .faq-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .faq-sticky { position: static !important; top: auto !important; }
         }
       `}</style>
     </section>

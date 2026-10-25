@@ -23,7 +23,7 @@ export function About() {
 
           {/* Left */}
           <RevealWrapper>
-            <div style={{ position: 'sticky', top: '6rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="about-sticky" style={{ position: 'sticky', top: '6rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
                 <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)' }}>Studio Philosophy</span>
@@ -105,7 +105,14 @@ export function About() {
 
       <style>{`
         @media (max-width: 767px) {
-          .about-grid { grid-template-columns: 1fr !important; }
+          .about-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .about-sticky {
+            position: static !important;
+            top: auto !important;
+          }
         }
       `}</style>
     </section>

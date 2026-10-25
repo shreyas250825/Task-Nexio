@@ -181,6 +181,9 @@ export function Services() {
                     grid-template-columns: 1fr !important;
                     gap: 1.25rem !important;
                   }
+                  .svc-row-${i} .index-num {
+                    display: none !important;
+                  }
                 }
                 @media (max-width: 1023px) {
                   .services-header { grid-template-columns: 1fr !important; }

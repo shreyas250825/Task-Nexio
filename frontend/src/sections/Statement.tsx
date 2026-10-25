@@ -2,7 +2,7 @@ import { RevealWrapper } from '../components/RevealWrapper';
 
 export function Statement() {
   return (
-    <section style={{ background: 'var(--stmt-bg)', padding: '5rem 0' }} aria-label="Statement">
+    <section style={{ background: 'var(--stmt-bg)', paddingTop: '5rem', paddingBottom: '5rem' }} aria-label="Statement">
       <div className="container">
         <RevealWrapper direction="fade">
           <p className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 3.25rem)', lineHeight: 1.2, letterSpacing: '-0.02em', color: 'var(--stmt-text)', margin: 0, maxWidth: 720 }}>

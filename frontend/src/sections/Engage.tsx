@@ -30,7 +30,7 @@ export function Engage() {
             portal, or an AI-powered product — let's explore what we can build together.
           </p>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+          <div className="engage-cta-row" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
             {/* Primary — white bg, blue text */}
             <button
               onClick={go}
@@ -54,6 +54,19 @@ export function Engage() {
           </div>
         </RevealWrapper>
       </div>
+      <style>{`
+        @media (max-width: 767px) {
+          .engage-cta-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+          .engage-cta-row > * {
+            justify-content: center !important;
+            width: 100% !important;
+            text-align: center !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
