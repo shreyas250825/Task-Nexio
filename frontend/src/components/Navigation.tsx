@@ -74,34 +74,36 @@ export function Navigation() {
             aria-label="Task Nexio — home"
           >
             {/*
-              Desktop: full logo PNG from brand reveal image.
-              The PNG has a white/transparent background — works on light header.
-              Height fixed at 36px; width auto-scales to preserve proportions.
+              Desktop: clean light logo at full native resolution.
+              845×220px source → rendered at height 40px.
+              Crisp at 1x and 2x (retina) — no blur.
             */}
             <img
-              src="/brand/Task Nexio Brand Reveal.png"
+              src="/brand/logo-clean-light.png"
               alt="Task Nexio"
               className="tn-logo-full"
+              width={845}
+              height={220}
               style={{
-                height: 36,
+                height: 40,
                 width: 'auto',
                 objectFit: 'contain',
                 display: 'block',
                 flexShrink: 0,
-                /* The PNG has smoke/glow on white — it blends with the ivory bg naturally */
               }}
             />
 
             {/*
-              Mobile: symbol-only PNG to keep the hamburger accessible.
-              Cropped from the identity board "Symbol Only" panel.
+              Mobile: symbol-only PNG — 215×220px source → rendered at height 36px.
             */}
             <img
               src="/brand/symbol-only.png"
               alt="Task Nexio"
               className="tn-logo-symbol"
+              width={215}
+              height={220}
               style={{
-                height: 34,
+                height: 36,
                 width: 'auto',
                 objectFit: 'contain',
                 display: 'none',

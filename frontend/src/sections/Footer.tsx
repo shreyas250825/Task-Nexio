@@ -26,17 +26,20 @@ export function Footer() {
 
             {/*
               Dark-variant logo: cropped from the brand identity board dark panel.
-              White "Task", blue "Nexio", on the dark #171717 footer background.
+              425×118px source → rendered at height 52px.
+              White "Task", blue "Nexio", always readable on dark background.
             */}
             <img
               src="/brand/logo-clean-dark.png"
               alt="Task Nexio"
+              width={425}
+              height={118}
               style={{
-                height: 48,
+                height: 52,
                 width: 'auto',
                 objectFit: 'contain',
                 display: 'block',
-                maxWidth: 220,
+                maxWidth: '100%',
               }}
             />
 
