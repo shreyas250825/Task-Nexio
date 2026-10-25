@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { NAV_LINKS } from '../lib/constants';
-import { NMark, LogoFull } from './Logo';
 
 const INK   = '#0D0D0D';
 const IVORY = '#F6F3EC';
@@ -75,19 +74,41 @@ export function Navigation() {
             aria-label="Task Nexio — home"
           >
             {/*
-              Desktop: full SVG logo — transparent bg, matches any header colour.
-              Light variant: "Task" in #0D0D0D, "Nexio" in #2563EB.
+              Desktop: official logo PNG — white background blends with ivory header.
+              2012×781px source rendered at h=44px → ~113px wide, crisp on retina.
             */}
-            <span className="tn-logo-full">
-              <LogoFull variant="light" size={38} />
-            </span>
+            <img
+              src="/brand/a_clean_white_background_with_a_modern_tech_style.png"
+              alt="Task Nexio"
+              width={2012}
+              height={781}
+              className="tn-logo-full"
+              style={{
+                height: 44,
+                width: 'auto',
+                display: 'block',
+                flexShrink: 0,
+                objectFit: 'contain',
+              }}
+            />
 
             {/*
-              Mobile: symbol only — keeps hamburger accessible on narrow screens.
+              Mobile: same logo but smaller — full wordmark still readable at h=36px.
             */}
-            <span className="tn-logo-symbol" style={{ display: 'none' }}>
-              <NMark size={36} />
-            </span>
+            <img
+              src="/brand/a_clean_white_background_with_a_modern_tech_style.png"
+              alt="Task Nexio"
+              width={2012}
+              height={781}
+              className="tn-logo-symbol"
+              style={{
+                height: 32,
+                width: 'auto',
+                display: 'none',
+                flexShrink: 0,
+                objectFit: 'contain',
+              }}
+            />
           </a>
 
           {/* ── Desktop nav ── */}
