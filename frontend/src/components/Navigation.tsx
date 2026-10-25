@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { NAV_LINKS } from '../lib/constants';
-import { NMark, LogoFull } from './Logo';
 
 const INK   = '#171717';
 const IVORY = '#F6F3EC';
@@ -10,9 +9,9 @@ const BLUE  = '#2563FF';
 const MUTED = '#737373';
 
 export function Navigation() {
-  const [scrolled,   setScrolled]   = useState(false);
-  const [menuOpen,   setMenuOpen]   = useState(false);
-  const hamburgerRef                = useRef<HTMLButtonElement>(null);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const hamburgerRef              = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 40);
@@ -62,26 +61,53 @@ export function Navigation() {
         boxShadow: scrolled ? '0 1px 6px rgba(0,0,0,0.06)' : 'none',
       }}>
         <div style={{
-          maxWidth: 1280, margin: '0 auto', padding: '0 1.25rem',
+          maxWidth: 1280, margin: '0 auto', padding: '0 1.5rem',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           height: 60, gap: 8,
         }}>
 
-          {/* ── Logo — light variant (dark text on ivory/white header) ── */}
+          {/* ── Logo ── */}
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}
             aria-label="Task Nexio — home"
           >
-            {/* Desktop: full logo (symbol + wordmark) */}
-            <span className="tn-logo-full">
-              <LogoFull variant="light" symbolSize={32} />
-            </span>
-            {/* Mobile: symbol only to save space */}
-            <span className="tn-logo-symbol">
-              <NMark size={32} />
-            </span>
+            {/*
+              Desktop: full logo PNG from brand reveal image.
+              The PNG has a white/transparent background — works on light header.
+              Height fixed at 36px; width auto-scales to preserve proportions.
+            */}
+            <img
+              src="/brand/Task Nexio Brand Reveal.png"
+              alt="Task Nexio"
+              className="tn-logo-full"
+              style={{
+                height: 36,
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                flexShrink: 0,
+                /* The PNG has smoke/glow on white — it blends with the ivory bg naturally */
+              }}
+            />
+
+            {/*
+              Mobile: symbol-only PNG to keep the hamburger accessible.
+              Cropped from the identity board "Symbol Only" panel.
+            */}
+            <img
+              src="/brand/symbol-only.png"
+              alt="Task Nexio"
+              className="tn-logo-symbol"
+              style={{
+                height: 34,
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'none',
+                flexShrink: 0,
+              }}
+            />
           </a>
 
           {/* ── Desktop nav ── */}
@@ -158,26 +184,19 @@ export function Navigation() {
         </div>
 
         <style>{`
-          /* Desktop: show full logo, hide symbol-only */
-          .tn-logo-full   { display: inline-flex !important; }
-          .tn-logo-symbol { display: none !important; }
-
           @media (max-width: 767px) {
-            .tn-desktop-nav { display: none !important; }
-            .tn-desktop-cta { display: none !important; }
-            .tn-hamburger   { display: flex !important; }
-            /* On mobile show symbol only so hamburger isn't pushed off */
-            .tn-logo-full   { display: none !important; }
-            .tn-logo-symbol { display: inline-flex !important; }
+            .tn-desktop-nav  { display: none !important; }
+            .tn-desktop-cta  { display: none !important; }
+            .tn-hamburger    { display: flex !important; }
+            .tn-logo-full    { display: none !important; }
+            .tn-logo-symbol  { display: block !important; }
           }
           @media (min-width: 768px) {
-            .tn-hamburger   { display: none !important; }
-            .tn-desktop-nav { display: flex !important; }
-            .tn-desktop-cta { display: block !important; }
-          }
-          /* Small mobile: shrink symbol a touch */
-          @media (max-width: 360px) {
-            .tn-logo-symbol svg { width: 28px !important; height: 28px !important; }
+            .tn-hamburger    { display: none !important; }
+            .tn-desktop-nav  { display: flex !important; }
+            .tn-desktop-cta  { display: block !important; }
+            .tn-logo-full    { display: block !important; }
+            .tn-logo-symbol  { display: none !important; }
           }
         `}</style>
       </header>

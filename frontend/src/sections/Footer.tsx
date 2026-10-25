@@ -1,6 +1,5 @@
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { BRAND_TAGLINE, PARENT_LABEL, CONTACT_EMAIL, NAV_LINKS } from '../lib/constants';
-import { LogoFull } from '../components/Logo';
 
 const BG   = '#171717';
 const T1   = '#FFFFFF';
@@ -26,11 +25,20 @@ export function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: 0 }}>
 
             {/*
-              Dark-variant logo: symbol (correct N mark) + "Task" white + "Nexio" blue.
-              LogoFull with variant="dark" renders white "Task" and #6B8FFF "Nexio"
-              on the dark #171717 footer background — always readable.
+              Dark-variant logo: cropped from the brand identity board dark panel.
+              White "Task", blue "Nexio", on the dark #171717 footer background.
             */}
-            <LogoFull variant="dark" symbolSize={32} />
+            <img
+              src="/brand/logo-clean-dark.png"
+              alt="Task Nexio"
+              style={{
+                height: 48,
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                maxWidth: 220,
+              }}
+            />
 
             <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontStyle: 'italic', color: T3, margin: 0 }}>
               {BRAND_TAGLINE}
