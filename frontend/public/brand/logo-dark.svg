@@ -1,29 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none" role="img" aria-label="Task Nexio">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 110" fill="none"
+     role="img" aria-label="Task Nexio — A Valen Labs Product">
+  <!--
+    Task Nexio horizontal lockup — DARK background variant
+    "Task" in white #FFFFFF, "Nexio" in lighter blue #6B8FFF
+    Same N mark geometry as light variant
+  -->
   <defs>
-    <linearGradient id="nGradD" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#294FFF"/>
-      <stop offset="55%"  stop-color="#6B4FFF"/>
-      <stop offset="100%" stop-color="#8B50FF"/>
+    <linearGradient id="ld-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#2563FF"/>
+      <stop offset="45%"  stop-color="#5B4FEE"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
     </linearGradient>
   </defs>
 
-  <path d="M8 62 L8 18 L22 18 L38 46 L38 18 L52 18 L52 62 L38 62 L22 34 L22 62 Z"
-        fill="url(#nGradD)"/>
-  <path d="M52 40 L64 32 L64 48 Z" fill="#294FFF"/>
-  <rect x="46" y="14" width="12" height="12" rx="2" fill="#D6FF66"/>
+  <g transform="translate(0,5)">
+    <polygon points="10,95  34,95  50,9   26,9"  fill="url(#ld-g)"/>
+    <polygon points="46,95  70,95  86,9   62,9"  fill="url(#ld-g)"/>
+    <polygon points="50,9   62,9   62,39  50,39" fill="url(#ld-g)"/>
+    <polygon points="62,9   86,9   62,39"         fill="#C4FF00"/>
+    <polygon points="4,65   24,81  4,97"           fill="url(#ld-g)"/>
+  </g>
 
-  <text x="84" y="52"
-        font-family="'Inter', system-ui, sans-serif"
-        font-size="34" font-weight="700" letter-spacing="-1"
+  <text x="110" y="72"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="60" font-weight="800"
+        letter-spacing="-2"
         fill="#FFFFFF">Task</text>
 
-  <text x="176" y="52"
-        font-family="'Inter', system-ui, sans-serif"
-        font-size="34" font-weight="700" letter-spacing="-1"
-        fill="#6B86FF">Nexio</text>
+  <text x="258" y="72"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="60" font-weight="800"
+        letter-spacing="-2"
+        fill="#6B8FFF">Nexio</text>
 
-  <text x="85" y="68"
-        font-family="'Inter', system-ui, sans-serif"
-        font-size="9" font-weight="500" letter-spacing="2.5"
-        fill="rgba(255,255,255,0.35)">A VALEN LABS PRODUCT.</text>
+  <text x="111" y="96"
+        font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="12" font-weight="400"
+        letter-spacing="3"
+        fill="rgba(255,255,255,0.42)">A VALEN LABS PRODUCT.</text>
 </svg>
