@@ -1,0 +1,14 @@
+{
+  "name": "task-nexio-root",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Task Nexio — monorepo root (frontend in /frontend, serverless API in /api)",
+  "scripts": {
+    "dev":   "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.0",
+    "typescript":  "^5.2.2"
+  }
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Task Nexio symbol">
+  <defs>
+    <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#294FFF"/>
+      <stop offset="55%"  stop-color="#6B4FFF"/>
+      <stop offset="100%" stop-color="#8B50FF"/>
+    </linearGradient>
+  </defs>
+  <path d="M6 56 L6 8 L18 8 L34 38 L34 8 L46 8 L46 56 L34 56 L18 26 L18 56 Z"
+        fill="url(#sg)"/>
+  <path d="M46 32 L56 25 L56 39 Z" fill="#294FFF"/>
+  <rect x="40" y="4" width="12" height="12" rx="2.5" fill="#D6FF66"/>
+</svg>

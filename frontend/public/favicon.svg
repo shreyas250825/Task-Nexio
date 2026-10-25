@@ -1,5 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Rounded square background -->
   <rect width="32" height="32" rx="7" fill="#171717"/>
-  <path d="M8 11h10M8 16h16M8 21h12" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
-  <circle cx="22" cy="11" r="3" fill="#D6FF66"/>
+  <!-- N mark (simplified for favicon size) -->
+  <defs>
+    <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#294FFF"/>
+      <stop offset="100%" stop-color="#8B50FF"/>
+    </linearGradient>
+  </defs>
+  <path d="M5 25 L5 7 L10 7 L18 19 L18 7 L23 7 L23 25 L18 25 L10 13 L10 25 Z"
+        fill="url(#fg)"/>
+  <!-- Chartreuse accent dot -->
+  <rect x="20" y="5" width="7" height="7" rx="1.5" fill="#D6FF66"/>
 </svg>

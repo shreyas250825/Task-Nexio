@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none" role="img" aria-label="Task Nexio">
+  <!-- N mark — gradient blue/violet with chartreuse accent -->
+  <defs>
+    <linearGradient id="nGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#294FFF"/>
+      <stop offset="55%"  stop-color="#6B4FFF"/>
+      <stop offset="100%" stop-color="#8B50FF"/>
+    </linearGradient>
+    <linearGradient id="nGrad2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#294FFF"/>
+      <stop offset="100%" stop-color="#5B3FFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- N left diagonal stroke -->
+  <path d="M8 62 L8 18 L22 18 L38 46 L38 18 L52 18 L52 62 L38 62 L22 34 L22 62 Z"
+        fill="url(#nGrad)"/>
+
+  <!-- Play arrow pointing right (part of N mark, brand detail) -->
+  <path d="M52 40 L64 32 L64 48 Z" fill="#294FFF"/>
+
+  <!-- Chartreuse accent corner square -->
+  <rect x="46" y="14" width="12" height="12" rx="2" fill="#D6FF66"/>
+
+  <!-- Wordmark: "Task" in black -->
+  <text x="84" y="52"
+        font-family="'Inter', system-ui, sans-serif"
+        font-size="34"
+        font-weight="700"
+        letter-spacing="-1"
+        fill="#171717">Task</text>
+
+  <!-- Wordmark: "Nexio" in blue -->
+  <text x="176" y="52"
+        font-family="'Inter', system-ui, sans-serif"
+        font-size="34"
+        font-weight="700"
+        letter-spacing="-1"
+        fill="#294FFF">Nexio</text>
+
+  <!-- Tagline -->
+  <text x="85" y="68"
+        font-family="'Inter', system-ui, sans-serif"
+        font-size="9"
+        font-weight="500"
+        letter-spacing="2.5"
+        fill="#A0A0A0">A VALEN LABS PRODUCT.</text>
+</svg>

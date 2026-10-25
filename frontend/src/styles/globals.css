@@ -257,3 +257,135 @@ body {
   border-radius: 9999px;
   vertical-align: middle;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE-FIRST FIXES
+   All grids/layouts that need responsive treatment are handled here
+   to avoid repeated inline <style> blocks inside components.
+   These are the authoritative breakpoints.
+═══════════════════════════════════════════════════════════════════ */
+
+/* Prevent ANY element from causing horizontal scroll */
+*, *::before, *::after { max-width: 100%; }
+
+/* Images never overflow */
+img, svg { max-width: 100%; height: auto; }
+
+/* ── Hero ── */
+@media (max-width: 767px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Hero headline: tighter on mobile so it fits 320px */
+  .text-hero {
+    font-size: clamp(2.5rem, 11vw, 3.5rem) !important;
+    line-height: 1 !important;
+  }
+
+  /* CTA buttons: stack vertically, full-width on very small screens */
+  .hero-cta-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .hero-cta-row .btn-primary,
+  .hero-cta-row .btn-secondary {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  /* Product windows: cap width so they don't overflow */
+  .hero-windows {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* ── Work section ── */
+@media (max-width: 767px) {
+  .work-grid0,
+  .work-grid1 {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  /* Always show visual first, copy second on mobile */
+  .work-grid0 > *,
+  .work-grid1 > * {
+    order: unset !important;
+  }
+  /* Valen Live's fixed-height sidebar makes it overflow — remove it on mobile */
+  .vl-sidebar { display: none !important; }
+  .vl-main    { width: 100% !important; }
+}
+
+/* ── Services ── */
+@media (max-width: 767px) {
+  .services-header { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  [class^="svc-row-"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  /* Hide oversized index number on tiny screens */
+  [class^="svc-row-"] .index-num {
+    display: none !important;
+  }
+}
+
+/* ── About/Studio ── */
+@media (max-width: 767px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+/* ── Process ── */
+@media (max-width: 767px) {
+  .process-desktop { display: none !important; }
+  .process-mobile  { display: flex !important; flex-direction: column; }
+}
+@media (min-width: 768px) {
+  .process-mobile { display: none !important; }
+}
+
+/* ── FAQ ── */
+@media (max-width: 767px) {
+  .faq-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
+
+/* ── Contact ── */
+@media (max-width: 767px) {
+  .contact-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .form-row     { grid-template-columns: 1fr !important; gap: 1rem !important; }
+}
+
+/* ── Footer ── */
+@media (max-width: 767px) {
+  .footer-grid { grid-template-columns: 1fr !important; gap: 1.75rem !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* ── Section padding: tighter on mobile ── */
+@media (max-width: 767px) {
+  section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+
+  /* Statement section */
+  .statement-section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+
+  /* Text-section heading: smaller on mobile */
+  .text-section {
+    font-size: clamp(1.875rem, 8vw, 2.5rem) !important;
+  }
+}
+
+/* ── Prevent Valen Live sidebar from blowing out container ── */
+@media (max-width: 900px) {
+  .vl-sidebar { width: 140px !important; }
+}
+@media (max-width: 640px) {
+  .vl-sidebar { display: none !important; }
+  .vl-main { padding: 14px !important; }
+}

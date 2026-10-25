@@ -112,7 +112,7 @@ function ValenLiveShowcase() {
       {/* App shell */}
       <div style={{ display: 'flex', background: '#FFFFFF', minHeight: 360 }}>
         {/* Sidebar */}
-        <div style={{ width: 196, borderRight: '1px solid #F0F0EE', background: '#FAFDF9', padding: '16px 12px', flexShrink: 0 }}>
+        <div className="vl-sidebar" style={{ width: 196, borderRight: '1px solid #F0F0EE', background: '#FAFDF9', padding: '16px 12px', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '0 4px', marginBottom: 20 }}>
             <div style={{ width: 22, height: 22, borderRadius: 5, background: TEAL }} />
             <div style={{ height: 10, width: 64, borderRadius: 3, background: 'rgba(13,148,136,0.3)' }} />
@@ -132,7 +132,7 @@ function ValenLiveShowcase() {
         </div>
 
         {/* Main */}
-        <div style={{ flex: 1, padding: '20px 20px', overflow: 'hidden' }}>
+        <div className="vl-main" style={{ flex: 1, padding: '20px 20px', overflow: 'hidden' }}>
           {/* Header */}
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
             <div>
