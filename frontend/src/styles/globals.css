@@ -2,32 +2,123 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design tokens ───────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — light mode (default)
+   All section components read from these CSS variables.
+   Dark mode simply overrides them under [data-theme="dark"].
+═══════════════════════════════════════════════════════════════════ */
 :root {
-  --ivory:      #F6F3EC;
-  --ivory-dark: #EDE9DF;
-  --ink:        #171717;
-  --ink-soft:   #444444;
-  --ink-muted:  #737373;
-  --ink-faint:  #A0A0A0;
-  --rule:       #D8D4CC;
-  --blue:       #294FFF;
-  --blue-dark:  #1A3AE0;
-  --blue-light: #6B86FF;
-  --chartreuse: #D6FF66;
-  --paper:      #FFFFFF;
+  /* Surfaces */
+  --bg-page:        #F6F3EC;   /* main page background */
+  --bg-page-alt:    #EDE9DF;   /* alternate sections (Services, FAQ) */
+  --bg-dark:        #171717;   /* Statement, About, Footer */
+  --bg-paper:       #FFFFFF;   /* cards, form, inputs */
+  --bg-engage:      #294FFF;   /* Engage CTA section — stays blue in both modes */
 
+  /* Text */
+  --text-primary:   #171717;
+  --text-secondary: #444444;
+  --text-muted:     #737373;
+  --text-faint:     #A0A0A0;
+
+  /* Rules & borders */
+  --rule:           #D8D4CC;
+  --rule-dark:      rgba(255,255,255,0.1); /* borders on dark sections */
+
+  /* Brand */
+  --blue:           #294FFF;
+  --blue-hover:     #1A3AE0;
+  --blue-light:     #6B86FF;
+  --chartreuse:     #D6FF66;
+
+  /* Dark-section text (text ON dark bg) — same in both modes */
+  --dark-text-1:    #FFFFFF;
+  --dark-text-2:    rgba(255,255,255,0.65);
+  --dark-text-3:    rgba(255,255,255,0.38);
+  --dark-text-4:    rgba(255,255,255,0.22);
+
+  /* Nav */
+  --nav-bg:         rgba(246,243,236,0.96);
+  --nav-link:       #737373;
+  --nav-ink:        #0D0D0D;
+
+  /* Input */
+  --input-bg:       #FFFFFF;
+  --input-border:   #D8D4CC;
+
+  /* Process node */
+  --node-bg:        #FFFFFF;
+  --node-border:    #D8D4CC;
+
+  /* Statement section text */
+  --stmt-text:      #FFFFFF;
+  --stmt-sub:       rgba(255,255,255,0.3);
+  --stmt-bg:        #171717;
+
+  /* Index numbers */
+  --index-color:    #EDE9DF;
+
+  /* Font stacks */
   --font-display: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
   --font-sans:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:    'JetBrains Mono', 'Fira Code', Menlo, monospace;
+
+  color-scheme: light;
 }
 
-/* ─── Base reset ──────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   DARK MODE OVERRIDES
+   Toggled by setting data-theme="dark" on <html>.
+═══════════════════════════════════════════════════════════════════ */
+[data-theme="dark"] {
+  /* Surfaces */
+  --bg-page:        #111318;   /* dark navy-black */
+  --bg-page-alt:    #191C24;   /* slightly lighter for alternating sections */
+  --bg-dark:        #0A0C12;   /* deeper dark for Statement/About/Footer */
+  --bg-paper:       #1C2030;   /* dark cards, form, inputs */
+
+  /* Text */
+  --text-primary:   #F0EEF8;
+  --text-secondary: #C4C0D4;
+  --text-muted:     #8A869A;
+  --text-faint:     #6A667A;
+
+  /* Rules & borders */
+  --rule:           #2A2D40;
+  --rule-dark:      rgba(255,255,255,0.08);
+
+  /* Input */
+  --input-bg:       #1C2030;
+  --input-border:   #2A2D40;
+
+  /* Nav */
+  --nav-bg:         rgba(17,19,24,0.96);
+  --nav-link:       #8A869A;
+  --nav-ink:        #F0EEF8;
+
+  /* Process node */
+  --node-bg:        #1C2030;
+  --node-border:    #2A2D40;
+
+  /* Statement */
+  --stmt-bg:        #0A0C12;
+  --stmt-text:      #F0EEF8;
+  --stmt-sub:       rgba(240,238,248,0.3);
+
+  /* Index numbers */
+  --index-color:    #1C2030;
+
+  color-scheme: dark;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  background: var(--ivory);
-  color: var(--ink);
+  background: var(--bg-page);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -35,13 +126,15 @@ html {
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body {
-  background: var(--ivory);
+  background: var(--bg-page);
   margin: 0;
   overflow-x: hidden;
   min-height: 100vh;
+  transition: background 0.3s ease;
 }
 
 :focus-visible {
@@ -52,15 +145,17 @@ body {
 
 ::selection {
   background: var(--chartreuse);
-  color: var(--ink);
+  color: #111;
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-track { background: var(--bg-page); }
 ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
 
-/* ─── Reduced motion ──────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -70,47 +165,37 @@ body {
   }
 }
 
-/* ─── Typography utilities ────────────────────────────────────────── */
-.font-display {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-style: normal;
-}
-.font-display-italic {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-style: italic;
-}
-.font-sans { font-family: var(--font-sans); }
-.font-mono { font-family: var(--font-mono); }
+/* ═══════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════════════════════════════ */
+.font-display        { font-family: var(--font-display); font-weight: 700; font-style: normal; }
+.font-display-italic { font-family: var(--font-display); font-weight: 700; font-style: italic; }
+.font-sans           { font-family: var(--font-sans); }
+.font-mono           { font-family: var(--font-mono); }
 
-/* Fluid display headline — primary hero size */
 .text-hero {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(3.25rem, 8.5vw, 7.5rem);
   line-height: 0.95;
   letter-spacing: -0.03em;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
-/* Section heading */
 .text-section {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(2.25rem, 5vw, 4rem);
   line-height: 1.05;
   letter-spacing: -0.025em;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
-/* ─── Brand motif — signature corner bracket ──────────────────────── */
-/* Used as a recurring framing device on product showcases */
-.bracket-frame {
-  position: relative;
-}
-.bracket-frame::before,
-.bracket-frame::after {
+/* ═══════════════════════════════════════════════════════════════════
+   BRAND MOTIF — corner bracket
+═══════════════════════════════════════════════════════════════════ */
+.bracket-frame { position: relative; }
+.bracket-frame::before, .bracket-frame::after {
   content: '';
   position: absolute;
   width: 20px;
@@ -118,274 +203,127 @@ body {
   border-color: var(--blue);
   border-style: solid;
 }
-.bracket-frame::before {
-  top: -1px;
-  left: -1px;
-  border-width: 2px 0 0 2px;
-}
-.bracket-frame::after {
-  bottom: -1px;
-  right: -1px;
-  border-width: 0 2px 2px 0;
-}
+.bracket-frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.bracket-frame::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-/* ─── Chartreuse dot status marker ───────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════════════════════════ */
 .status-dot::before {
   content: '';
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 6px; height: 6px; border-radius: 50%;
   background: var(--chartreuse);
   margin-right: 6px;
   vertical-align: middle;
-  position: relative;
-  top: -1px;
+  position: relative; top: -1px;
 }
 
-/* ─── Thin horizontal rule ────────────────────────────────────────── */
-.rule-x {
-  height: 1px;
-  background: var(--rule);
-  border: none;
-  margin: 0;
-}
+.rule-x { height: 1px; background: var(--rule); border: none; margin: 0; }
 
-/* ─── Nav CTA — always high contrast ────────────────────────────── */
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  background: var(--ink);
-  color: #fff;
-  padding: 0.5625rem 1.125rem;
-  border-radius: 4px;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  transition: background 0.15s ease, transform 0.1s ease;
-  cursor: pointer;
-  border: none;
-  white-space: nowrap;
-}
-.nav-cta:hover { background: var(--blue); }
-.nav-cta:active { transform: scale(0.97); }
-
-/* ─── Primary button ─────────────────────────────────────────────── */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--blue);
-  color: #fff;
-  padding: 0.875rem 1.75rem;
-  border-radius: 4px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  letter-spacing: 0.005em;
-  border: none;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.1s ease;
-  text-decoration: none;
-  white-space: nowrap;
-  min-height: 48px;
-}
-.btn-primary:hover { background: var(--blue-dark); }
-.btn-primary:active { transform: scale(0.98); }
-
-/* ─── Secondary button ───────────────────────────────────────────── */
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  color: var(--ink);
-  padding: 0.875rem 1.75rem;
-  border-radius: 4px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  border: 1.5px solid var(--rule);
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
-  text-decoration: none;
-  white-space: nowrap;
-  min-height: 48px;
-}
-.btn-secondary:hover { border-color: var(--ink-muted); background: var(--ivory-dark); }
-
-/* ─── Card lift ──────────────────────────────────────────────────── */
-.card-lift {
-  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
-}
-.card-lift:hover {
-  transform: translateY(-4px) scale(1.004);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
-}
-
-/* ─── Oversized index number ─────────────────────────────────────── */
 .index-num {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(5rem, 10vw, 9rem);
   line-height: 0.85;
   letter-spacing: -0.05em;
-  color: var(--ivory-dark);
+  color: var(--index-color);
   user-select: none;
   pointer-events: none;
 }
 
-/* ─── Section container ──────────────────────────────────────────── */
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+/* ═══════════════════════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════════════════════ */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--blue); color: #fff;
+  padding: 0.875rem 1.75rem; border-radius: 4px;
+  font-size: 0.9375rem; font-weight: 500;
+  border: none; cursor: pointer;
+  transition: background 0.15s ease;
+  font-family: var(--font-sans);
+  white-space: nowrap; min-height: 48px;
 }
-@media (min-width: 768px) {
-  .container { padding: 0 2.5rem; }
-}
-@media (min-width: 1024px) {
-  .container { padding: 0 3rem; }
-}
+.btn-primary:hover { background: var(--blue-hover); }
 
-/* ─── Chartreuse accent line ─────────────────────────────────────── */
-.accent-line {
-  display: inline-block;
-  width: 2rem;
-  height: 3px;
-  background: var(--chartreuse);
-  border-radius: 9999px;
-  vertical-align: middle;
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; color: var(--text-primary);
+  padding: 0.875rem 1.75rem; border-radius: 4px;
+  font-size: 0.9375rem; font-weight: 500;
+  border: 1.5px solid var(--rule); cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  font-family: var(--font-sans);
+  white-space: nowrap; min-height: 48px;
+}
+.btn-secondary:hover { border-color: var(--text-muted); background: var(--bg-page-alt); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CARD LIFT
+═══════════════════════════════════════════════════════════════════ */
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px) scale(1.004);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.08);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   MOBILE-FIRST FIXES
-   All grids/layouts that need responsive treatment are handled here
-   to avoid repeated inline <style> blocks inside components.
-   These are the authoritative breakpoints.
+   CONTAINER
+═══════════════════════════════════════════════════════════════════ */
+.container {
+  width: 100%; max-width: 1280px;
+  margin: 0 auto; padding: 0 1.5rem;
+}
+@media (min-width: 768px)  { .container { padding: 0 2.5rem; } }
+@media (min-width: 1024px) { .container { padding: 0 3rem; } }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK MODE — section-specific overrides via CSS classes
+   Sections add class="theme-section" and use CSS vars inline.
 ═══════════════════════════════════════════════════════════════════ */
 
-/* Prevent ANY element from causing horizontal scroll */
-*, *::before, *::after { max-width: 100%; }
+/* Smooth theme transition on all elements */
+section, footer, header, nav, div, p, span, h1, h2, h3, a, button, input, textarea, select, label {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
 
-/* Images never overflow */
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE LAYOUT OVERRIDES (preserved from previous build)
+═══════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { max-width: 100%; }
 img, svg { max-width: 100%; height: auto; }
 
-/* ── Hero ── */
 @media (max-width: 767px) {
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-
-  /* Hero headline: tighter on mobile so it fits 320px */
-  .text-hero {
-    font-size: clamp(2.5rem, 11vw, 3.5rem) !important;
-    line-height: 1 !important;
-  }
-
-  /* CTA buttons: stack vertically, full-width on very small screens */
-  .hero-cta-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  .hero-cta-row .btn-primary,
-  .hero-cta-row .btn-secondary {
-    justify-content: center !important;
-    width: 100% !important;
-  }
-
-  /* Product windows: cap width so they don't overflow */
-  .hero-windows {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-}
-
-/* ── Work section ── */
-@media (max-width: 767px) {
-  .work-grid0,
-  .work-grid1 {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  /* Always show visual first, copy second on mobile */
-  .work-grid0 > *,
-  .work-grid1 > * {
-    order: unset !important;
-  }
-  /* Valen Live's fixed-height sidebar makes it overflow — remove it on mobile */
-  .vl-sidebar { display: none !important; }
-  .vl-main    { width: 100% !important; }
-}
-
-/* ── Services ── */
-@media (max-width: 767px) {
-  .services-header { grid-template-columns: 1fr !important; gap: 1rem !important; }
-  [class^="svc-row-"] {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-  /* Hide oversized index number on tiny screens */
-  [class^="svc-row-"] .index-num {
-    display: none !important;
-  }
-}
-
-/* ── About/Studio ── */
-@media (max-width: 767px) {
-  .about-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-}
-
-/* ── Process ── */
-@media (max-width: 767px) {
-  .process-desktop { display: none !important; }
-  .process-mobile  { display: flex !important; flex-direction: column; }
+  .hero-grid          { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .text-hero          { font-size: clamp(2.5rem, 11vw, 3.5rem) !important; line-height: 1 !important; }
+  .hero-cta-row       { flex-direction: column !important; align-items: stretch !important; }
+  .hero-cta-row .btn-primary, .hero-cta-row .btn-secondary { justify-content: center !important; width: 100% !important; }
+  .work-grid0, .work-grid1 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .vl-sidebar         { display: none !important; }
+  .vl-main            { width: 100% !important; }
+  .services-header    { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  [class^="svc-row-"] { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  [class^="svc-row-"] .index-num { display: none !important; }
+  .about-grid         { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .process-desktop    { display: none !important; }
+  .process-mobile     { display: flex !important; flex-direction: column; }
+  .faq-grid           { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .contact-grid       { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .form-row           { grid-template-columns: 1fr !important; gap: 1rem !important; }
+  section             { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .text-section       { font-size: clamp(1.875rem, 8vw, 2.5rem) !important; }
 }
 @media (min-width: 768px) {
   .process-mobile { display: none !important; }
 }
-
-/* ── FAQ ── */
-@media (max-width: 767px) {
-  .faq-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-}
-
-/* ── Contact ── */
-@media (max-width: 767px) {
-  .contact-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-  .form-row     { grid-template-columns: 1fr !important; gap: 1rem !important; }
-}
-
-/* ── Footer ── */
+@media (max-width: 900px) { .vl-sidebar { width: 140px !important; } }
+@media (max-width: 640px) { .vl-sidebar { display: none !important; } .vl-main { padding: 14px !important; } }
 @media (max-width: 767px) {
   .footer-grid { grid-template-columns: 1fr !important; gap: 1.75rem !important; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .footer-grid { grid-template-columns: 1fr 1fr !important; }
-}
-
-/* ── Section padding: tighter on mobile ── */
-@media (max-width: 767px) {
-  section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
-
-  /* Statement section */
-  .statement-section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
-
-  /* Text-section heading: smaller on mobile */
-  .text-section {
-    font-size: clamp(1.875rem, 8vw, 2.5rem) !important;
-  }
-}
-
-/* ── Prevent Valen Live sidebar from blowing out container ── */
-@media (max-width: 900px) {
-  .vl-sidebar { width: 140px !important; }
-}
-@media (max-width: 640px) {
-  .vl-sidebar { display: none !important; }
-  .vl-main { padding: 14px !important; }
 }

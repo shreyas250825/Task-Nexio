@@ -10,7 +10,7 @@ const CHART = '#D6FF66';
 
 export function Process() {
   return (
-    <section id="process" style={{ background: IVORY, paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="process-heading">
+    <section id="process" style={{ background: 'var(--bg-page)', paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="process-heading">
       <div className="container">
 
         {/* Header */}
@@ -18,7 +18,7 @@ export function Process() {
           <div style={{ marginBottom: '4rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
               <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
-              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>How We Work</span>
+              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>How We Work</span>
             </div>
             <h2 id="process-heading" className="text-section" style={{ margin: 0 }}>
               A clear path from<br />idea to launch.
@@ -40,7 +40,7 @@ export function Process() {
                       position: 'relative', zIndex: 1,
                       width: 56, height: 56, borderRadius: '50%',
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                      background: i === 0 ? BLUE : '#FFFFFF',
+                      background: i === 0 ? '#294FFF' : 'var(--node-bg)',
                       border: `1.5px solid ${i === 0 ? BLUE : RULE}`,
                       boxShadow: i === 0 ? `0 0 0 4px ${BLUE}18, 0 4px 16px ${BLUE}30` : '0 2px 8px rgba(0,0,0,0.06)',
                       marginBottom: '1.5rem',
@@ -75,7 +75,7 @@ export function Process() {
                   <div style={{
                     width: 44, height: 44, borderRadius: '50%',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    background: i === 0 ? BLUE : '#FFFFFF',
+                    background: i === 0 ? '#294FFF' : 'var(--node-bg)',
                     border: `1.5px solid ${i === 0 ? BLUE : RULE}`,
                     boxShadow: i === 0 ? `0 4px 14px ${BLUE}30` : '0 2px 6px rgba(0,0,0,0.05)',
                     flexShrink: 0, position: 'relative',

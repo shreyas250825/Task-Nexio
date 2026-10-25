@@ -37,9 +37,9 @@ function buildMailto(d: FormData) {
 
 const inputStyle: React.CSSProperties = {
   width: '100%', display: 'block',
-  background: '#FFFFFF', border: `1.5px solid ${RULE}`,
+  background: 'var(--bg-paper)', border: `1.5px solid ${RULE}`,
   borderRadius: 5, padding: '0.8125rem 1rem',
-  fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.9375rem', color: INK,
+  fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.9375rem', color: 'var(--text-primary)',
   outline: 'none', transition: 'border-color 0.15s ease',
   boxSizing: 'border-box', minHeight: 48,
 };
@@ -47,10 +47,10 @@ const inputStyle: React.CSSProperties = {
 function Field({ id, label, required, error, children }: { id: string; label: string; required?: boolean; error?: string; children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <label htmlFor={id} style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontWeight: 500, color: '#2D2D2D' }}>
+      <label htmlFor={id} style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
         {label}
         {required && <span style={{ color: BLUE, marginLeft: 2 }}>*</span>}
-        {!required && <span style={{ color: MUTED, marginLeft: 6, fontSize: '0.75rem', fontWeight: 400 }}>(optional)</span>}
+        {!required && <span style={{ color: 'var(--text-muted)', marginLeft: 6, fontSize: '0.75rem', fontWeight: 400 }}>(optional)</span>}
       </label>
       {children}
       {error && (
@@ -128,7 +128,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" style={{ background: '#F6F3EC', paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="contact-heading">
+    <section id="contact" style={{ background: 'var(--bg-page)', paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="contact-heading">
       <div className="container">
         <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 'clamp(2rem, 5vw, 5rem)', alignItems: 'start' }}>
 
@@ -143,23 +143,23 @@ export function Contact() {
               <h2
                 id="contact-heading"
                 className="font-display"
-                style={{ fontSize: 'clamp(1.875rem, 4vw, 3.25rem)', lineHeight: 1.1, letterSpacing: '-0.03em', color: INK, margin: 0 }}
+                style={{ fontSize: 'clamp(1.875rem, 4vw, 3.25rem)', lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--text-primary)', margin: 0 }}
               >
                 Have a vision?<br />
                 <em className="font-display-italic" style={{ color: BLUE }}>Let's build it.</em>
               </h2>
 
-              <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '1rem', lineHeight: 1.7, color: MUTED, margin: 0, maxWidth: 380 }}>
+              <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '1rem', lineHeight: 1.7, color: 'var(--text-muted)', margin: 0, maxWidth: 380 }}>
                 Tell us what you're imagining. We'll help you shape the idea into a real digital product.
               </p>
 
               {/* Email card */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.25rem', background: '#FFFFFF', border: `1.5px solid ${RULE}`, borderRadius: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.25rem', background: 'var(--bg-paper)', border: `1.5px solid ${RULE}`, borderRadius: 8 }}>
                 <div style={{ width: 40, height: 40, borderRadius: 8, background: '#EFF2FF', border: '1px solid #BFC9FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Mail size={18} color={BLUE} />
                 </div>
                 <div style={{ minWidth: 0 }}>
-                  <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.75rem', color: MUTED, margin: '0 0 2px' }}>Email us directly</p>
+                  <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.75rem', color: 'var(--text-muted)', margin: '0 0 2px' }}>Email us directly</p>
                   <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontWeight: 600, color: BLUE, textDecoration: 'none', wordBreak: 'break-all' }}>
                     {CONTACT_EMAIL}
                   </a>
@@ -178,20 +178,20 @@ export function Contact() {
 
             {submitState === 'success' ? (
               /* ── Success ── */
-              <div style={{ background: '#FFFFFF', border: `1.5px solid ${RULE}`, borderRadius: 12, padding: 'clamp(2rem, 5vw, 3rem)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }}>
+              <div style={{ background: 'var(--bg-paper)', border: `1.5px solid ${RULE}`, borderRadius: 12, padding: 'clamp(2rem, 5vw, 3rem)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }}>
                 <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#F0FDF4', border: '1px solid #86EFAC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <CheckCircle size={26} color="#16A34A" />
                 </div>
-                <h3 style={{ fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, fontSize: '1.125rem', color: INK, margin: 0, letterSpacing: '-0.015em' }}>
+                <h3 style={{ fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, fontSize: '1.125rem', color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.015em' }}>
                   Enquiry sent successfully!
                 </h3>
-                <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.9375rem', lineHeight: 1.65, color: MUTED, margin: 0 }}>
+                <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.9375rem', lineHeight: 1.65, color: 'var(--text-muted)', margin: 0 }}>
                   We've received your message and will get back to you at{' '}
                   <strong style={{ color: INK }}>{form.email}</strong> shortly.
                 </p>
                 <button
                   onClick={() => { setSubmit('idle'); setForm(empty); }}
-                  style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontWeight: 500, color: MUTED, background: 'none', border: `1.5px solid ${RULE}`, borderRadius: 5, padding: '0.625rem 1.25rem', cursor: 'pointer', minHeight: 44 }}
+                  style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: `1.5px solid ${RULE}`, borderRadius: 5, padding: '0.625rem 1.25rem', cursor: 'pointer', minHeight: 44 }}
                 >
                   Send another enquiry
                 </button>
@@ -202,7 +202,7 @@ export function Contact() {
               <form
                 onSubmit={onSubmit}
                 noValidate
-                style={{ background: '#FFFFFF', border: `1.5px solid ${RULE}`, borderRadius: 12, padding: 'clamp(1.25rem, 4vw, 2.5rem)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                style={{ background: 'var(--bg-paper)', border: `1.5px solid ${RULE}`, borderRadius: 12, padding: 'clamp(1.25rem, 4vw, 2.5rem)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
                 aria-label="Project enquiry form"
               >
                 {/* Honeypot — hidden from real users */}

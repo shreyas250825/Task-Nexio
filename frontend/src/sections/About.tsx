@@ -10,7 +10,7 @@ export function About() {
     <section
       id="studio"
       aria-labelledby="studio-heading"
-      style={{ background: INK, paddingTop: '6rem', paddingBottom: '6rem', overflow: 'hidden', position: 'relative' }}
+      style={{ background: 'var(--bg-dark)', paddingTop: '6rem', paddingBottom: '6rem', overflow: 'hidden', position: 'relative' }}
     >
       {/* Chartreuse accent shape — top right */}
       <div

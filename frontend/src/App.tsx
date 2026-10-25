@@ -1,3 +1,4 @@
+import { ThemeProvider } from './lib/ThemeContext';
 import { Navigation } from './components/Navigation';
 import { Hero }       from './sections/Hero';
 import { Statement }  from './sections/Statement';
@@ -12,7 +13,7 @@ import { Footer }     from './sections/Footer';
 
 export default function App() {
   return (
-    <>
+    <ThemeProvider>
       <Navigation />
       <main id="main-content">
         <Hero />
@@ -26,6 +27,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </ThemeProvider>
   );
 }

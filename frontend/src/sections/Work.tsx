@@ -154,7 +154,7 @@ function ValenLiveShowcase() {
             ].map((s) => (
               <div key={s.l} style={{ borderRadius: 10, padding: '12px 14px', background: s.bg, border: `1px solid ${s.bd}` }}>
                 <div style={{ fontSize: 18, fontWeight: 700, color: s.c, fontFamily: 'Inter, sans-serif' }}>{s.v}</div>
-                <div style={{ fontSize: 9, color: MUTED, marginTop: 2 }}>{s.l}</div>
+                <div style={{ fontSize: 9, color: 'var(--text-muted)', marginTop: 2 }}>{s.l}</div>
               </div>
             ))}
           </div>
@@ -188,7 +188,7 @@ const visuals = [ValenLabsShowcase, ValenLiveShowcase];
 /* ─── Work section ───────────────────────────────────────────────── */
 export function Work() {
   return (
-    <section id="work" style={{ background: IVORY, paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="work-heading">
+    <section id="work" style={{ background: 'var(--bg-page)', paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="work-heading">
       <div className="container">
 
         {/* Header */}
@@ -237,7 +237,7 @@ export function Work() {
                       <span style={{ display: 'inline-block', fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '0.75rem' }}>
                         {product.category}
                       </span>
-                      <h3 className="font-display" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '-0.025em', color: INK, margin: 0 }}>
+                      <h3 className="font-display" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', lineHeight: 1.1, letterSpacing: '-0.025em', color: 'var(--text-primary)', margin: 0 }}>
                         {product.title}
                       </h3>
                     </div>
@@ -247,7 +247,7 @@ export function Work() {
                     </p>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <code style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: MUTED, background: '#EDE9DF', padding: '3px 8px', borderRadius: 3 }}>
+                      <code style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: 'var(--text-muted)', background: '#EDE9DF', padding: '3px 8px', borderRadius: 3 }}>
                         {product.displayUrl}
                       </code>
                       <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.75rem', color: '#22C55E', fontFamily: 'Inter, sans-serif' }}>

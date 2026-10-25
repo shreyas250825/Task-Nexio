@@ -111,7 +111,7 @@ export function Services() {
   };
 
   return (
-    <section id="services" style={{ background: IVORY_D, paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="services-heading">
+    <section id="services" style={{ background: 'var(--bg-page-alt)', paddingTop: '6rem', paddingBottom: '6rem' }} aria-labelledby="services-heading">
       <div className="container">
 
         {/* Header */}
@@ -120,7 +120,7 @@ export function Services() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
                 <span style={{ height: 3, width: 32, background: CHART, borderRadius: 9999, display: 'block' }} />
-                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: MUTED }}>Services</span>
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Services</span>
               </div>
               <h2 id="services-heading" className="text-section" style={{ margin: 0 }}>
                 What will you<br />build next?
