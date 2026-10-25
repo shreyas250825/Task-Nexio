@@ -1,4 +1,11 @@
+# robots.txt — Task Nexio (tasknexio.com)
+# A product of Valen Labs (valenlabs.in)
+
 User-agent: *
 Allow: /
 
+# Block access to source maps and build artifacts
+Disallow: /assets/*.map
+
+# Sitemap
 Sitemap: https://tasknexio.com/sitemap.xml
