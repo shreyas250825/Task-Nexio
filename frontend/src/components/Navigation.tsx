@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { NAV_LINKS } from '../lib/constants';
+import { NMark, LogoFull } from './Logo';
 
-const INK   = '#171717';
+const INK   = '#0D0D0D';
 const IVORY = '#F6F3EC';
 const RULE  = '#D8D4CC';
-const BLUE  = '#2563FF';
+const BLUE  = '#2563EB';
 const MUTED = '#737373';
 
 export function Navigation() {
@@ -63,7 +64,7 @@ export function Navigation() {
         <div style={{
           maxWidth: 1280, margin: '0 auto', padding: '0 1.5rem',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          height: 60, gap: 8,
+          height: 64, gap: 8,
         }}>
 
           {/* ── Logo ── */}
@@ -74,42 +75,19 @@ export function Navigation() {
             aria-label="Task Nexio — home"
           >
             {/*
-              Desktop: clean light logo at full native resolution.
-              845×220px source → rendered at height 40px.
-              Crisp at 1x and 2x (retina) — no blur.
+              Desktop: full SVG logo — transparent bg, matches any header colour.
+              Light variant: "Task" in #0D0D0D, "Nexio" in #2563EB.
             */}
-            <img
-              src="/brand/logo-clean-light.png"
-              alt="Task Nexio"
-              className="tn-logo-full"
-              width={845}
-              height={220}
-              style={{
-                height: 40,
-                width: 'auto',
-                objectFit: 'contain',
-                display: 'block',
-                flexShrink: 0,
-              }}
-            />
+            <span className="tn-logo-full">
+              <LogoFull variant="light" size={38} />
+            </span>
 
             {/*
-              Mobile: symbol-only PNG — 215×220px source → rendered at height 36px.
+              Mobile: symbol only — keeps hamburger accessible on narrow screens.
             */}
-            <img
-              src="/brand/symbol-only.png"
-              alt="Task Nexio"
-              className="tn-logo-symbol"
-              width={215}
-              height={220}
-              style={{
-                height: 36,
-                width: 'auto',
-                objectFit: 'contain',
-                display: 'none',
-                flexShrink: 0,
-              }}
-            />
+            <span className="tn-logo-symbol" style={{ display: 'none' }}>
+              <NMark size={36} />
+            </span>
           </a>
 
           {/* ── Desktop nav ── */}
@@ -152,17 +130,17 @@ export function Navigation() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5,
                 background: INK, color: '#fff',
-                padding: '0.5rem 1.125rem', borderRadius: 5,
+                padding: '0.5625rem 1.125rem', borderRadius: 6,
                 fontSize: '0.8125rem', fontWeight: 600,
                 border: 'none', cursor: 'pointer',
                 transition: 'background 0.15s ease',
                 fontFamily: 'Inter, system-ui, sans-serif',
-                whiteSpace: 'nowrap', minHeight: 36,
+                whiteSpace: 'nowrap', minHeight: 38,
               }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = BLUE; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = INK; }}
             >
-              Start a Project <ArrowUpRight size={13} />
+              Start a Project <ArrowUpRight size={14} />
             </button>
           </div>
 
@@ -191,13 +169,13 @@ export function Navigation() {
             .tn-desktop-cta  { display: none !important; }
             .tn-hamburger    { display: flex !important; }
             .tn-logo-full    { display: none !important; }
-            .tn-logo-symbol  { display: block !important; }
+            .tn-logo-symbol  { display: flex !important; }
           }
           @media (min-width: 768px) {
             .tn-hamburger    { display: none !important; }
             .tn-desktop-nav  { display: flex !important; }
             .tn-desktop-cta  { display: block !important; }
-            .tn-logo-full    { display: block !important; }
+            .tn-logo-full    { display: flex !important; }
             .tn-logo-symbol  { display: none !important; }
           }
         `}</style>
@@ -213,14 +191,20 @@ export function Navigation() {
           style={{ position: 'fixed', inset: 0, zIndex: 90 }}
         >
           <div
-            style={{ position: 'absolute', inset: 0, background: 'rgba(23,23,23,0.15)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
+            style={{
+              position: 'absolute', inset: 0,
+              background: 'rgba(23,23,23,0.15)',
+              backdropFilter: 'blur(4px)',
+              WebkitBackdropFilter: 'blur(4px)',
+            }}
             onClick={() => setMenuOpen(false)}
             aria-hidden="true"
           />
           <nav
             style={{
-              position: 'absolute', top: 60, left: 0, right: 0,
-              background: IVORY, borderBottom: `1px solid ${RULE}`,
+              position: 'absolute', top: 64, left: 0, right: 0,
+              background: IVORY,
+              borderBottom: `1px solid ${RULE}`,
               boxShadow: '0 12px 40px rgba(0,0,0,0.1)',
               animation: 'tnSlideDown 0.2s cubic-bezier(0.16,1,0.3,1) both',
             }}
@@ -242,7 +226,8 @@ export function Navigation() {
                     background: 'none', border: 'none', cursor: 'pointer',
                     padding: '0.9375rem 1rem',
                     fontSize: '1.0625rem', fontWeight: 500, color: INK,
-                    textAlign: 'left', borderRadius: 6, minHeight: 52, width: '100%',
+                    textAlign: 'left', borderRadius: 6,
+                    minHeight: 52, width: '100%',
                     transition: 'background 0.12s ease',
                     fontFamily: 'Inter, system-ui, sans-serif',
                     display: 'flex', alignItems: 'center',
@@ -257,10 +242,14 @@ export function Navigation() {
                 <button
                   onClick={() => go('#contact')}
                   style={{
-                    width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    background: INK, color: '#fff', padding: '1rem', borderRadius: 6,
-                    fontSize: '1rem', fontWeight: 600, border: 'none', cursor: 'pointer',
-                    minHeight: 52, fontFamily: 'Inter, system-ui, sans-serif',
+                    width: '100%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                    background: INK, color: '#fff',
+                    padding: '1rem', borderRadius: 6,
+                    fontSize: '1rem', fontWeight: 600,
+                    border: 'none', cursor: 'pointer',
+                    minHeight: 52,
+                    fontFamily: 'Inter, system-ui, sans-serif',
                     transition: 'background 0.15s ease',
                   }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = BLUE; }}

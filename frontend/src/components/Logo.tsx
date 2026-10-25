@@ -1,254 +1,175 @@
 /**
- * Task Nexio official logo components.
+ * Task Nexio Logo — faithful SVG reconstruction from official brand identity board.
  *
- * The N mark geometry is reconstructed from the brand identity board and
- * brand reveal reference images in frontend/public/brand/.
- *
- * Mark construction (viewBox 100×100):
- *   - Two thick diagonal parallelogram bars, leaning left→right (≈55°)
- *   - Gradient: bright blue #2563FF (top-left) → violet #7C3AED (bottom-right)
- *   - Right-pointing play triangle at bottom-left, same gradient
- *   - Chartreuse triangle #C4FF00 at top-right (the notch between the two bars)
+ * The N mark geometry (from the mark construction grid):
+ *   • Two thick diagonal rounded bars — gradient blue #2563EB → violet #7C3AED
+ *   • Chartreuse right-triangle accent #CAFF00 — top-right notch
+ *   • Right-pointing play arrow — bottom-left, same gradient
+ *   • Fully transparent background — works on any bg colour
  *
  * Wordmark:
- *   - "Task"  — extra-bold (800), near-black #111111 on light / #FFFFFF on dark
- *   - "Nexio" — extra-bold (800), bright blue #2563FF on light / #6B8FFF on dark
+ *   • "Task"  — Inter 800, #0D0D0D on light / #FFFFFF on dark
+ *   • "Nexio" — Inter 800, #2563EB on light / #6B8FFF on dark
+ *   • Tagline — Inter 400 spaced caps, grey
  */
 
-import React from 'react';
+import React, { useId } from 'react';
 
-/* ─── Unique gradient IDs per instance ───────────────────────────── */
-let _uid = 0;
-function uid() { return `tn-${++_uid}`; }
-
-/* ─────────────────────────────────────────────────────────────────
-   NMark — the stylised N symbol
-   Uses two thick diagonal parallelogram bands (not a zigzag N path).
-   ───────────────────────────────────────────────────────────────── */
-export function NMark({
-  size = 40,
-  className = '',
-  style = {},
-}: {
-  size?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  const gid = React.useMemo(() => uid(), []);
+/* ─── The N Mark ────────────────────────────────────────────────── */
+export function NMark({ size = 48 }: { size?: number }) {
+  const id = useId().replace(/:/g, '');
 
   return (
     <svg
-      viewBox="0 0 100 100"
+      viewBox="0 0 100 110"
       fill="none"
       aria-hidden="true"
-      style={{ width: size, height: size, flexShrink: 0, ...style }}
-      className={className}
+      style={{ width: size, height: Math.round(size * 1.1), display: 'block', flexShrink: 0 }}
     >
       <defs>
-        {/*
-          The reference shows a clear left-to-right blue→violet gradient
-          applied across the entire mark horizontally.
-        */}
-        <linearGradient id={`${gid}-g`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stopColor="#2563FF" />
-          <stop offset="45%"  stopColor="#5B4FEE" />
+        {/* Main blue→violet gradient — horizontal matches the brand image direction */}
+        <linearGradient id={`${id}a`} x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#2563EB" />
           <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
+
+        {/* Clip for the left bar rounded ends */}
+        <clipPath id={`${id}cl`}>
+          <rect x="0" y="0" width="100" height="110" />
+        </clipPath>
       </defs>
 
       {/*
-        ── LEFT DIAGONAL BAR ──────────────────────────────────────
-        A thick parallelogram rising steeply from bottom-left to top-right.
-        This is the left stroke of the N.
+        ── LEFT DIAGONAL BAR ─────────────────────────────────────────
+        Thick rounded-end bar, angled ~60° from bottom-left to top-right.
+        In the brand image the bar goes from bottom-left to upper-right
+        and is visually about 22 units wide.
 
-        Viewing the mark construction grid in the reference:
-          Bottom-left of bar:  x≈10, y≈96
-          Bottom-right of bar: x≈34, y≈96
-          Top-right of bar:    x≈50, y≈10
-          Top-left of bar:     x≈26, y≈10
-        The bar is ~24 units wide and spans the full height.
+        Using a rotated rounded rectangle for the rounded-end look.
+        Centre of bar: from (20, 95) to (44, 12)
+        Width of bar: 22 units
       */}
-      <polygon
-        points="10,96  34,96  50,10  26,10"
-        fill={`url(#${gid}-g)`}
+      <rect
+        x="-11" y="0"
+        width="22" height="96"
+        rx="11"
+        transform="rotate(-30 35 55)"
+        fill={`url(#${id}a)`}
       />
 
       {/*
-        ── RIGHT DIAGONAL BAR ────────────────────────────────────
-        Parallel to the left bar, offset ~36px right.
-        This is the right stroke of the N.
-
-          Bottom-left:  x≈46, y≈96
-          Bottom-right: x≈70, y≈96
-          Top-right:    x≈86, y≈10
-          Top-left:     x≈62, y≈10
+        ── RIGHT DIAGONAL BAR ────────────────────────────────────────
+        Parallel to the left bar, offset right.
+        Same angle and width.
+        Centre: from (56, 95) to (80, 12)
       */}
-      <polygon
-        points="46,96  70,96  86,10  62,10"
-        fill={`url(#${gid}-g)`}
+      <rect
+        x="-11" y="0"
+        width="22" height="96"
+        rx="11"
+        transform="rotate(-30 71 55)"
+        fill={`url(#${id}a)`}
       />
 
       {/*
-        ── TOP CONNECTOR ─────────────────────────────────────────
-        Bridges the two bars at the top, filling the gap between
-        them and creating the readable N shape.
-
-        Left bar's top-right corner:  (50, 10)
-        Right bar's top-left corner:  (62, 10)
-        These two bars are only ~12 units apart at the top.
-        The connector fills that gap as a flat horizontal bridge.
-
-        It also creates the diagonal cross-bar visually:
-        From (50,10)-(62,10) at top, down to (50,38)-(62,38)
-        where the bars diverge enough to show a gap.
+        ── TOP CONNECTOR ─────────────────────────────────────────────
+        The bridge at the top between the two bars that makes the N
+        readable. Fills the gap between the bars at the top section.
       */}
       <polygon
-        points="50,10  62,10  62,40  50,40"
-        fill={`url(#${gid}-g)`}
+        points="45,10  59,10  59,36  45,36"
+        fill={`url(#${id}a)`}
       />
 
       {/*
-        ── CHARTREUSE ACCENT ─────────────────────────────────────
-        Yellow-green triangle in the top-right notch.
-        From the reference: it's a right triangle sitting between
-        the two bars at the top, with its hypotenuse on the diagonal
-        of the right bar's top-left edge.
-
-        Top-left vertex:   (62, 10) — right bar's top-left
-        Top-right vertex:  (86, 10) — right bar's top-right
-        Bottom vertex:     (62, 40) — where connector ends
+        ── CHARTREUSE TRIANGLE ───────────────────────────────────────
+        Top-right notch between the two diagonal bars.
+        A clear yellow-green right triangle.
       */}
       <polygon
-        points="62,10  86,10  62,40"
-        fill="#C4FF00"
+        points="59,10  82,10  59,36"
+        fill="#CAFF00"
       />
 
       {/*
-        ── PLAY ARROW ────────────────────────────────────────────
-        A right-pointing triangle at bottom-left.
-        From the reference: sits clearly separated and to the left
-        of the left bar's bottom, pointing right.
-
-        Left apex (back of arrow):   (4, 66)
-        Right tip:                   (22, 82)
-        Left bottom:                 (4, 98)
+        ── PLAY ARROW ────────────────────────────────────────────────
+        Right-pointing solid triangle at bottom-left.
+        Same gradient as the N bars.
       */}
       <polygon
-        points="4,66  24,82  4,98"
-        fill={`url(#${gid}-g)`}
+        points="4,68  26,82  4,96"
+        fill={`url(#${id}a)`}
       />
     </svg>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────
-   LogoFull — Symbol + Wordmark side by side
-   variant: 'light' (dark text on light bg) | 'dark' (white text on dark bg)
-   ───────────────────────────────────────────────────────────────── */
-export function LogoFull({
-  variant = 'light',
-  symbolSize = 36,
-  className = '',
-  style = {},
-}: {
+/* ─── Full Logo ─────────────────────────────────────────────────── */
+interface LogoFullProps {
   variant?: 'light' | 'dark';
-  symbolSize?: number;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  const taskColor  = variant === 'dark' ? '#FFFFFF' : '#111111';
-  const nexioColor = variant === 'dark' ? '#6B8FFF' : '#2563FF';
+  size?: number; // symbol height in px
+  showTagline?: boolean;
+}
+
+export function LogoFull({ variant = 'light', size = 40, showTagline = false }: LogoFullProps) {
+  const taskColor  = variant === 'dark' ? '#FFFFFF' : '#0D0D0D';
+  const nexioColor = variant === 'dark' ? '#6B8FFF' : '#2563EB';
   const tagColor   = variant === 'dark' ? 'rgba(255,255,255,0.42)' : '#888888';
+
+  const fs  = Math.round(size * 0.82);   // font size relative to symbol
+  const tfs = Math.round(size * 0.22);   // tagline font size
+  const gap = Math.round(size * 0.3);    // gap between symbol and wordmark
 
   return (
     <div
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: Math.round(symbolSize * 0.28),
-        ...style,
-      }}
-      className={className}
+      style={{ display: 'inline-flex', alignItems: 'center', gap }}
       role="img"
       aria-label="Task Nexio"
     >
-      {/* Symbol */}
-      <NMark size={symbolSize} />
+      <NMark size={size} />
 
-      {/* Wordmark */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-        {/* "Task Nexio" on one line */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 0, lineHeight: 1 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: showTagline ? 2 : 0 }}>
+        {/* Wordmark row */}
+        <div style={{ display: 'flex', alignItems: 'baseline', lineHeight: 1, gap: 0 }}>
           <span style={{
             fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
             fontWeight: 800,
-            fontSize: Math.round(symbolSize * 0.72),
-            letterSpacing: '-0.035em',
+            fontSize: fs,
+            letterSpacing: '-0.03em',
             color: taskColor,
             lineHeight: 1,
+            whiteSpace: 'nowrap',
           }}>
             Task&nbsp;
           </span>
           <span style={{
             fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
             fontWeight: 800,
-            fontSize: Math.round(symbolSize * 0.72),
-            letterSpacing: '-0.035em',
+            fontSize: fs,
+            letterSpacing: '-0.03em',
             color: nexioColor,
             lineHeight: 1,
+            whiteSpace: 'nowrap',
           }}>
             Nexio
           </span>
         </div>
-      </div>
-    </div>
-  );
-}
 
-/* ─────────────────────────────────────────────────────────────────
-   LogoFullWithTag — includes the tagline beneath the wordmark
-   ───────────────────────────────────────────────────────────────── */
-export function LogoFullWithTag({
-  variant = 'light',
-  symbolSize = 40,
-}: {
-  variant?: 'light' | 'dark';
-  symbolSize?: number;
-}) {
-  const taskColor  = variant === 'dark' ? '#FFFFFF' : '#111111';
-  const nexioColor = variant === 'dark' ? '#6B8FFF' : '#2563FF';
-  const tagColor   = variant === 'dark' ? 'rgba(255,255,255,0.42)' : '#888888';
-  const fs         = Math.round(symbolSize * 0.72);
-  const tagFs      = Math.round(symbolSize * 0.22);
-
-  return (
-    <div
-      style={{ display: 'inline-flex', alignItems: 'center', gap: Math.round(symbolSize * 0.28) }}
-      role="img"
-      aria-label="Task Nexio — A Valen Labs Product"
-    >
-      <NMark size={symbolSize} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <div style={{ display: 'flex', alignItems: 'baseline' }}>
-          <span style={{ fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 800, fontSize: fs, letterSpacing: '-0.035em', color: taskColor, lineHeight: 1 }}>
-            Task&nbsp;
+        {/* Optional tagline */}
+        {showTagline && (
+          <span style={{
+            fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+            fontWeight: 400,
+            fontSize: tfs,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color: tagColor,
+            lineHeight: 1,
+            whiteSpace: 'nowrap',
+          }}>
+            A Valen Labs Product.
           </span>
-          <span style={{ fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 800, fontSize: fs, letterSpacing: '-0.035em', color: nexioColor, lineHeight: 1 }}>
-            Nexio
-          </span>
-        </div>
-        <span style={{
-          fontFamily: "'Inter', system-ui, sans-serif",
-          fontWeight: 400,
-          fontSize: tagFs,
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: tagColor,
-          lineHeight: 1,
-          marginTop: 2,
-        }}>
-          A Valen Labs Product.
-        </span>
+        )}
       </div>
     </div>
   );

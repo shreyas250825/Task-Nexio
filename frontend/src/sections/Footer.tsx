@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { BRAND_TAGLINE, PARENT_LABEL, CONTACT_EMAIL, NAV_LINKS } from '../lib/constants';
+import { LogoFull } from '../components/Logo';
 
 const BG   = '#171717';
 const T1   = '#FFFFFF';
@@ -24,24 +25,8 @@ export function Footer() {
           {/* ── Brand ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: 0 }}>
 
-            {/*
-              Dark-variant logo: cropped from the brand identity board dark panel.
-              425×118px source → rendered at height 52px.
-              White "Task", blue "Nexio", always readable on dark background.
-            */}
-            <img
-              src="/brand/logo-clean-dark.png"
-              alt="Task Nexio"
-              width={425}
-              height={118}
-              style={{
-                height: 52,
-                width: 'auto',
-                objectFit: 'contain',
-                display: 'block',
-                maxWidth: '100%',
-              }}
-            />
+            {/* Dark variant SVG logo — transparent bg, white Task, blue Nexio */}
+            <LogoFull variant="dark" size={38} />
 
             <p style={{ fontFamily: 'Inter, system-ui, sans-serif', fontSize: '0.875rem', fontStyle: 'italic', color: T3, margin: 0 }}>
               {BRAND_TAGLINE}
