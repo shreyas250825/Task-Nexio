@@ -74,29 +74,29 @@ export function Navigation() {
             aria-label="Task Nexio — home"
           >
             {/*
-              Desktop: "Task Nexio Gradient Tech Logo.png"
-              Ivory/cream background matches the site header exactly.
-              2012×782px source at h=44px — crisp, never blurry.
+              Desktop: transparent full logo — works on any background colour.
+              1728×418px source at h=44px → ~182px wide, sharp on all screens.
             */}
             <img
-              src="/brand/Task Nexio Gradient Tech Logo.png"
+              src="/brand/task_nexio_full_logo_transparent_exact.png"
               alt="Task Nexio"
-              width={2012}
-              height={782}
+              width={1728}
+              height={418}
               className="tn-logo-full"
               style={{ height: 44, width: 'auto', display: 'block', flexShrink: 0, objectFit: 'contain' }}
             />
 
             {/*
-              Mobile: same PNG at h=34px — full wordmark still readable.
+              Mobile: transparent symbol only — 437×418px at h=36px.
+              Square format fits neatly beside the hamburger button.
             */}
             <img
-              src="/brand/Task Nexio Gradient Tech Logo.png"
+              src="/brand/task_nexio_symbol_transparent_exact.png"
               alt="Task Nexio"
-              width={2012}
-              height={782}
+              width={437}
+              height={418}
               className="tn-logo-symbol"
-              style={{ height: 34, width: 'auto', display: 'none', flexShrink: 0, objectFit: 'contain' }}
+              style={{ height: 36, width: 'auto', display: 'none', flexShrink: 0, objectFit: 'contain' }}
             />
           </a>
 
